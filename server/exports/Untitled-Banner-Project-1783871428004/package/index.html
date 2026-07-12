@@ -1,0 +1,2388 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>970x250_MASTER</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="ad.size" content="width=970,height=250">
+  <meta name="“description”" content="Craft Boilerplate">
+
+
+  <meta name="ad.size" content="width=970,height=250">
+  <meta name="“description”" content="Craft Boilerplate">
+  <style media="screen, projection">
+/* https://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+*,
+:before,
+:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  overflow: hidden;
+}
+
+.centerMe {
+  margin: auto;
+}
+
+.abs-pos, #click_through, #wrapper {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 970px;
+  height: 250px;
+  overflow: hidden;
+}
+
+.abs-pos-retina {
+  position: absolute;
+  width: 1940px;
+  height: 500px;
+  overflow: hidden;
+  top: -125px;
+  left: -485px;
+  -webkit-transform: scale(0.5);
+  -moz-transform: scale(0.5);
+  -ms-transform: scale(0.5);
+  transform: scale(0.5);
+}
+
+.gpu {
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  transform: rotate(0.1deg);
+  will-change: transform;
+}
+
+.set_scroll {
+  overflow: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.set_scroll::-webkit-scrollbar {
+  display: none;
+}
+
+#wrapper {
+  position: relative;
+  visibility: hidden;
+}
+#wrapper.show {
+  visibility: visible;
+}
+#wrapper {
+  background-color: #000000;
+  text-align: center;
+}
+
+#click_through {
+  visibility: hidden;
+}
+#click_through.show {
+  visibility: visible;
+}
+#click_through {
+  cursor: pointer;
+  border: 1px solid #d8dada;
+  z-index: 9999;
+}
+
+#zoomTxt,
+#stillTxt,
+#revealTxt,
+#txtHolder {
+  position: absolute;
+  white-space: nowrap;
+}
+
+#details_btn,
+#close_btn {
+  position: absolute;
+  cursor: pointer;
+  display: none;
+}
+
+#tooltip {
+  position: absolute;
+  display: none;
+}
+
+#overlay {
+  position: absolute;
+  top: 0px;
+  width: 970px;
+  height: 250px;
+  object-fit: cover;
+}
+
+#overlay img {
+  width: 100%;
+  height: auto;
+}
+
+@font-face {
+  font-family: "NHG75";
+  src: url("./ITCCharterCom-Bold.woff2");
+}
+.NHG75 {
+  font-family: "NHG75";
+  font-weight: normal;
+  font-style: normal;
+  user-select: none;
+  font-smooth: antialiased;
+  -webkit-font-smoothing: antialiased;
+}
+
+em {
+  opacity: 0;
+}
+
+.d1 {
+  object-fit: contain;
+}
+
+#staticImg2,
+#staticImg1,
+#staticImg3 {
+  width: 100%;
+  height: 100%;
+}
+
+#staticImg2 img,
+#staticImg1 img,
+#staticImg3 img,
+#staticImg4 img {
+  width: 100%;
+}
+
+#d6 {
+  z-index: 20;
+}
+
+.animate {
+  position: absolute;
+  top: 75px;
+  left: 406px;
+}
+
+.container {
+  width: 270px;
+  overflow: hidden;
+  clip-path: polygon(14% 0%, 100% 0%, 86% 100%, 0% 100%);
+}
+
+.left-half {
+  position: relative;
+  left: 270px;
+}
+
+.box,
+.box2 {
+  height: 59px;
+  background-color: #ea5e2c;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.active .box {
+  animation: reveal 0.8s ease-out forwards;
+}
+
+.active .box2 {
+  animation: reveal 0.8s ease-out forwards 0.8s;
+}
+
+@keyframes reveal {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+#d1::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.1);
+  pointer-events: none;
+  /* important if div has interactions */
+}
+
+#d4 {
+  position: absolute;
+  left: 0px;
+}
+
+#d6 {
+  z-index: 20;
+  height: 250px;
+  width: 970px;
+  display: block;
+  transform: matrix(2.6, 0, 0, 2.6, -768, 160);
+}
+
+#color-overlay {
+  position: absolute;
+  top: 0px;
+  width: 970px;
+  height: 250px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+</style>
+</head>
+
+<body class="__versions">
+  <!-- Frame content Divs are dynamically crated and added to this div -->
+  <div id="wrapper">
+    <div id="auto_divs"></div>
+    <div id="custom_content"></div>
+
+    <div class="animate">
+      <div class="container left-half">
+        <div class="box2"></div>
+      </div>
+      <div class="container">
+        <div class="box"></div>
+      </div>
+    </div>
+  </div>
+  <!-- Div for overlay image to check accuracy of creative -->
+  <div id="overlay"></div>
+
+  <!-- ========================================================================================== -->
+  <!-- any elements requiring user interactions should go below the click_through -->
+  <!-- ========================================================================================== -->
+  <!-- <div id="color-overlay"></div> -->
+  <!-- Interactive Elements -->
+  <div id="click_through"></div>
+
+  <!-- Div for Tooltip graphic -->
+  <div id="tooltip"></div>
+  <div id="details_btn"></div>
+
+  <!-- ========================================================================================== -->
+  <!-- U N C O M M E N T   F O R   D O U B L E C L I C K   B A N N E R S  -->
+  <!-- ========================================================================================== -->
+  <!-- GSAP Imports. Note: do not remove call to GSAP Textplugin -->
+  <!-- ========================================================= -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.5/TweenMax.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/plugins/TextPlugin.min.js"></script>
+
+  <!-- Uncomment this line if your banner is to be a Doubleclick Dynamic banner -->
+  <!-- <script type="text/javascript" src="https://s0.2mdn.net/ads/studio/Enabler.js"></script> -->
+
+  <!-- ========================================================================================== -->
+  <!-- U N C O M M E N T   F O R   S I Z M E K   B A N N E R S  -->
+  <!-- ========================================================================================== -->
+
+  <!-- Uncomment this line if your banner is to be a Sizmek banner, standard or dynamic -->
+  <!-- ================================================================================ -->
+  <!-- <script type="text/javascript" src="https://secure-ds.serving-sys.com/BurstingScript/adKit/adkit.js"></script> -->
+
+  <!-- GSAP Imports. Note: do not remove call to GSAP Textplugin -->
+  <!-- ========================================================= -->
+  <!-- <script type="text/javascript" src="https://s0.2mdn.net/ads/studio/cached_libs/tweenmax_1.18.0_499ba64a23378545748ff12d372e59e9_min.js"></script> -->
+  <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/plugins/TextPlugin.min.js"></script> -->
+
+  <!-- ========================================================================================== -->
+  <!-- D O   N O T   E D I T   C O D E   B E L O W   T H I S   P O I N T  -->
+  <!-- ========================================================================================== -->
+  <!-- <script type="text/javascript" src="js/IEfallback.js"></script> -->
+  <script type="text/javascript">
+/*!
+ * VERSION: 0.1.4
+ * DATE: 2017-06-19
+ * UPDATES AND DOCS AT: https://greensock.com
+ *
+ * @license Copyright (c) 2008-2017, GreenSock. All rights reserved.
+ * DrawSVGPlugin is a Club GreenSock membership benefit; You must have a valid membership to use
+ * this code without violating the terms of use. Visit https://greensock.com/club/ to sign up or get more details.
+ * This work is subject to the software agreement that was issued with your membership.
+ * 
+ * @author: Jack Doyle, jack@greensock.com
+ */
+var _gsScope="undefined"!=typeof module&&module.exports&&"undefined"!=typeof global?global:this||window;(_gsScope._gsQueue||(_gsScope._gsQueue=[])).push(function(){"use strict";function a(a,b,c,d,e,f){return c=(parseFloat(c||0)-parseFloat(a||0))*e,d=(parseFloat(d||0)-parseFloat(b||0))*f,Math.sqrt(c*c+d*d)}function b(a){return"string"!=typeof a&&a.nodeType||(a=_gsScope.TweenLite.selector(a),a.length&&(a=a[0])),a}function c(a,b,c){var d,e,f=a.indexOf(" ");return-1===f?(d=void 0!==c?c+"":a,e=a):(d=a.substr(0,f),e=a.substr(f+1)),d=-1!==d.indexOf("%")?parseFloat(d)/100*b:parseFloat(d),e=-1!==e.indexOf("%")?parseFloat(e)/100*b:parseFloat(e),d>e?[e,d]:[d,e]}function d(c){if(!c)return 0;c=b(c);var d,e,f,g,h,j,k,l=c.tagName.toLowerCase(),m=1,n=1;"non-scaling-stroke"===c.getAttribute("vector-effect")&&(n=c.getScreenCTM(),m=n.a,n=n.d);try{e=c.getBBox()}catch(o){}if(e&&(e.width||e.height)||"rect"!==l&&"circle"!==l&&"ellipse"!==l||(e={width:parseFloat(c.getAttribute("rect"===l?"width":"circle"===l?"r":"rx")),height:parseFloat(c.getAttribute("rect"===l?"height":"circle"===l?"r":"ry"))},"rect"!==l&&(e.width*=2,e.height*=2)),"path"===l)g=c.style.strokeDasharray,c.style.strokeDasharray="none",d=c.getTotalLength()||0,m!==n&&console.log("Warning: <path> length cannot be measured accurately when vector-effect is non-scaling-stroke and the element isn't proportionally scaled."),d*=(m+n)/2,c.style.strokeDasharray=g;else if("rect"===l)d=2*e.width*m+2*e.height*n;else if("line"===l)d=a(c.getAttribute("x1"),c.getAttribute("y1"),c.getAttribute("x2"),c.getAttribute("y2"),m,n);else if("polyline"===l||"polygon"===l)for(f=c.getAttribute("points").match(i)||[],"polygon"===l&&f.push(f[0],f[1]),d=0,h=2;h<f.length;h+=2)d+=a(f[h-2],f[h-1],f[h],f[h+1],m,n)||0;else("circle"===l||"ellipse"===l)&&(j=e.width/2*m,k=e.height/2*n,d=Math.PI*(3*(j+k)-Math.sqrt((3*j+k)*(j+3*k))));return d||0}function e(a,c){if(!a)return[0,0];a=b(a),c=c||d(a)+1;var e=h(a),f=e.strokeDasharray||"",g=parseFloat(e.strokeDashoffset),i=f.indexOf(",");return 0>i&&(i=f.indexOf(" ")),f=0>i?c:parseFloat(f.substr(0,i))||1e-5,f>c&&(f=c),[Math.max(0,-g),Math.max(0,f-g)]}var f,g=_gsScope.document,h=g.defaultView?g.defaultView.getComputedStyle:function(){},i=/(?:(-|-=|\+=)?\d*\.?\d*(?:e[\-+]?\d+)?)[0-9]/gi,j=-1!==((_gsScope.navigator||{}).userAgent||"").indexOf("Edge");f=_gsScope._gsDefine.plugin({propName:"drawSVG",API:2,version:"0.1.4",global:!0,overwriteProps:["drawSVG"],init:function(a,b,f,g){if(!a.getBBox)return!1;var i,k,l,m,n=d(a)+1;return this._style=a.style,"function"==typeof b&&(b=b(g,a)),b===!0||"true"===b?b="0 100%":b?-1===(b+"").indexOf(" ")&&(b="0 "+b):b="0 0",i=e(a,n),k=c(b,n,i[0]),this._length=n+10,0===i[0]&&0===k[0]?(l=Math.max(1e-5,k[1]-n),this._dash=n+l,this._offset=n-i[1]+l,this._addTween(this,"_offset",this._offset,n-k[1]+l,"drawSVG")):(this._dash=i[1]-i[0]||1e-6,this._offset=-i[0],this._addTween(this,"_dash",this._dash,k[1]-k[0]||1e-5,"drawSVG"),this._addTween(this,"_offset",this._offset,-k[0],"drawSVG")),j&&(m=h(a),k=m.strokeLinecap,"butt"!==k&&k!==m.strokeLinejoin&&(k=parseFloat(m.strokeMiterlimit),this._addTween(a.style,"strokeMiterlimit",k,k+1e-4,"strokeMiterlimit"))),!0},set:function(a){this._firstPT&&(this._super.setRatio.call(this,a),this._style.strokeDashoffset=this._offset,1===a||0===a?this._style.strokeDasharray=this._offset<.001&&this._length-this._dash<=10?"none":this._offset===this._dash?"0px, 999999px":this._dash+"px,"+this._length+"px":this._style.strokeDasharray=this._dash+"px,"+this._length+"px")}}),f.getLength=d,f.getPosition=e}),_gsScope._gsDefine&&_gsScope._gsQueue.pop()(),function(a){"use strict";var b=function(){return(_gsScope.GreenSockGlobals||_gsScope)[a]};"undefined"!=typeof module&&module.exports?(require("../TweenLite.min.js"),module.exports=b()):"function"==typeof define&&define.amd&&define(["TweenLite"],b)}("DrawSVGPlugin");
+</script>
+  <script type="text/javascript">
+var width;
+var height;
+var rTxtNum = 1;
+var wsTxtNum = 1;
+var rStatImgNum = 1;
+var rImgNum = 1;
+var rSpriteNum = 1;
+var scrlData = [];
+var cTxtTopNum = 1;
+var cTxtBotNum = 1;
+
+function setModuleProps(w, h) {
+  width = w;
+  height = h;
+}
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// - - - - - - - - - - - - - - - - - - - F R A M E   M O D U L E S - - - - - - - - - - - - - - - - - - - -
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// ======================================================================================================
+// D E B U G
+// ======================================================================================================
+// Description: Adds colored border to the selected div. Color can be chosen by the user. 
+// ------------------------------------------------------------------------------------------------------
+// Params = [div, color]
+// .call(debug, [d2, "red"], null, tDelay)
+// ------------------------------------------------------------------------------------------------------
+// Note: The color parameter can be simple colors such as "red", "blue", "green" etc.. or you can use a 
+//       hex value to set the desired color.
+
+function debug(div, colr) {
+  var dg = new TimelineMax();
+  dg.set(div, {borderStyle:"solid", borderWidth:1, borderColor:colr}, 0);
+}
+
+// ======================================================================================================
+// O V E R L A Y   I M A G E
+// ======================================================================================================
+// Description: Adds an overlay image you can use to help position elements in your ad.
+// ------------------------------------------------------------------------------------------------------
+// Params = [div, image, opacity]
+// .call(overlay_img, [overlay, "./trace.png", 0.5], null, tDelay)
+// ------------------------------------------------------------------------------------------------------
+
+function overlay_img(div, img, opac) {
+  var si = new TimelineMax();
+  div.innerHTML = "<img src=" + img + "></img>"
+
+  // Set Props
+  si.set(div, {opacity:opac, display:"block"}, 0);
+
+}
+
+// ======================================================================================================
+// S T A T I C   T E X T
+// ======================================================================================================
+// Description: Adds static text to your banner.
+// ------------------------------------------------------------------------------------------------------
+// Params = [div, text, text style, text size, text color, text position]
+// .call(static_text, [d1, ban_1_Txt[0], "NHG75", 16, colorArry[0], "center"], null, tDelay)
+// ------------------------------------------------------------------------------------------------------
+// Note: 	The text "position" parameter can be set to "center" to center text both horizontally and vertically,
+// 				to set custom x and y positions for the text use an array such as [10, 100], or [10, "center"].
+
+function static_text(div, val, styl, size, colr, pos) {
+    var st = new TimelineMax();
+    st.set(div, {className:("+=" + styl)}, 0);
+    st.set(div, {fontSize:size}, 0);
+    st.set(div, {overflow:"hidden"}, 0);
+
+
+    div.innerHTML = val;
+    align_text(div, pos);
+
+    // Set text color
+    st.set(div, {color:colr});
+}
+
+// ======================================================================================================
+// S T A T I C   I M A G E
+// ======================================================================================================
+// Description: Adds an image to your banner.
+// ------------------------------------------------------------------------------------------------------
+// Params = [div, image, scale(enter 1 for 1x, 2 for 2x), dimensions, position]
+// .call(static_img, [d1, ban_1_Imgs[0], 1, [300, 250], "center"], null, tDelay)
+// ------------------------------------------------------------------------------------------------------
+
+function static_img(div, img, scl, dim, pos) {
+  var si = new TimelineMax();
+  si.set(div, {overflow:"hidden"}, 0);
+
+  var imgDiv = "<div id='staticImg" + rStatImgNum + "'><img src=" + img + "></div></div>";
+  div.innerHTML = imgDiv;
+  // div.innerHTML = "<img src=" + img + "></div>";
+
+  var rImg = eval("staticImg" + rStatImgNum);
+  rStatImgNum++;
+
+  // Set scale if 2x
+  if(scl === 2) {
+    si.set(rImg, {scale:0.5, transformOrigin:"left top"}, 0);
+    // si.set(div, {scale:0.5, transformOrigin:"left top"}, 0);
+  }
+
+  // Set position
+  if(pos === "center") {
+    si.set(div, {left:0, top:0}, 0);
+  } else {
+    si.set(div, {left:pos[0], top:pos[1]}, 0);
+  }
+
+  // Set dimensions
+  if(dim != null) {
+    si.set([div], {width:dim[0], height:dim[1]});
+  }
+
+  // Animate
+  si.set(div, {display:"block"}, 0);
+
+}
+
+// ======================================================================================================
+// T E X T   S L I D E   I N
+// ======================================================================================================
+// Description: Adds text to your banner, then animates it sliding in from the side you dictate.
+// ------------------------------------------------------------------------------------------------------
+// Params = [div, text, text style, text size, text position, text color, speed]
+// .call(slide_in_text, [d1, ban_1_Txt[0], "NHG75", 26, colorArry[0], "center", 0.6, "up"], null, tDelay)
+// ------------------------------------------------------------------------------------------------------
+// Note: 	The text position parameter can be set to "center" to center text both horizontally and vertically,
+// 				to set custom x and y positions for the text use an array such as [10, 100], or [10, "center"].
+
+function slide_in_text(div, val, styl, size, colr, pos, speed, dir) {
+  var ts = new TimelineMax();
+  ts.set(div, {className:("+=" + styl)}, 0);
+  ts.set(div, {className:("+=gpu")}, 0);
+  ts.set(div, {fontSize:size}, 0);
+  var startPos = 0;
+
+  if(dir === "left") {
+    startPos = -width - 5;
+  } else if(dir === "right") {
+    startPos = width + 5;
+  } else if(dir === "up") {
+    startPos = height + 5;
+  } else if(dir === "down") {
+    startPos = -height - 5;
+  }
+
+  div.innerHTML = val;
+  align_text(div, pos);
+
+  // Set text color
+  ts.set(div, {color:colr});
+
+  // Animate
+  if(dir === "left" || dir === "right") {
+  ts.set(div, {display:"block"}, 0)
+    ts.from(div, speed, {x:startPos, ease:Power3.easeOut}, 0);
+  } else if(dir === "up" || dir === "down") {
+    ts.from(div, speed, {y:startPos, ease:Power3.easeOut}, 0);
+  }
+
+}
+
+// ======================================================================================================
+// I M A G E   S L I D E   I N
+// ======================================================================================================
+// Description: Adds an image to your banner, then animates it sliding in from the side you dictate.
+// ------------------------------------------------------------------------------------------------------
+// Params = [div, image, scale(enter 1 for 1x, 2 for 2x), speed, slide direction, position]
+// .call(slide_in_img, [d1, ban_1_Imgs[0], 1, "center", 0.6, "left"], null, tDelay)
+// ------------------------------------------------------------------------------------------------------
+// Note:  The "position" is optional, but if entered, it must be an array of the following values [left, top].
+//        If ignored, the image will sit top left. Use this paremeter for special imagry that's not full frame.
+//
+//        The "slide direction" option can be one of 4 types, "up", "down", "left", or "right".
+
+function slide_in_img(div, img, scl, pos, speed, dir) {
+  var sli = new TimelineMax();
+  var startPos = 0;
+
+  if(dir === "left") {
+    startPos = -width - 5;
+  } else if(dir === "right") {
+    startPos = width + 5;
+  } else if(dir === "up") {
+    startPos = height + 5;
+  } else if(dir === "down") {
+    startPos = -height - 5;
+  }
+
+  if(pos === "center") {
+    sli.set(div, {left:0, top:0}, 0);
+  } else {
+    sli.set(div, {left:pos[0], top:pos[1]}, 0);
+  }
+
+  if(scl === 2) {
+    sli.set(div, {className:("+=abs-pos-retina")}, 0);
+    // add background image
+    sli.set(div, {scale:0.5, transformOrigin:"left top", backgroundImage:'url(' + img + ')'});
+  } else {
+    // add background image
+    sli.set(div, {width:width, height:height, backgroundImage:'url(' + img + ')'});
+  }
+
+  // Animate
+  if(dir === "left" || dir === "right") {
+    sli.set(div, {display:"block"}, 0)
+    sli.from(div, speed, {x:startPos, ease:Power3.easeOut}, 0);
+  } else if(dir === "up" || dir === "down") {
+    sli.from(div, speed, {y:startPos, ease:Power3.easeOut}, 0);
+  }
+
+}
+
+// ======================================================================================================
+// T Y P E  W R I T E R   A N I M
+// ======================================================================================================
+// Description: Adds text to your banner, then animates it by typing it out letter by letter. 
+// ------------------------------------------------------------------------------------------------------
+// Params = [div, text, text style, text size, text color, text position, speed]
+// .call(typewriter, [d1, ban_1_Txt[0], "NHG75", 26, colorArry[0], "center", 0.35], null, tDelay)
+// ------------------------------------------------------------------------------------------------------
+// Note: 	The "text position" parameter can be set to "center" to center text both horizontally and vertically,
+// 				to set custom x and y positions for the text use an array such as [10, 100], or [10, "center"].
+// 
+// IMPORTANT NOTE:  Typing animation only works on one line. To animate multiple lines of typing, use two or more 
+//                  calls to this frame module and adjust the vertical posiitioning of the text to create your text 
+//                 block. Also, add a delay to your "tDelay" variable to animate one line at a time.
+
+function typewriter(div, val, styl, size, colr, pos, speed) {
+  var tw = new TimelineMax();
+  tw.set(div, {className:("+=" + styl)}, 0);
+  tw.set(div, {fontSize:size}, 0);
+
+  div.innerHTML = val;
+  align_text(div, pos);
+
+  // Set text color
+  tw.set(div, {color:colr});
+
+  var txtBase = val.substr(0, 1);
+
+  val = String(val);
+
+  tw.set(div, {innerHTML:txtBase}, 0)
+    .to(div, speed, {text:val, ease:Linear.easeNone});
+}
+
+// ======================================================================================================
+// W O R D  W R I T E R   A N I M
+// ======================================================================================================
+// Description: Adds text to your banner, then animates it by typing it out one word at a time. 
+// ------------------------------------------------------------------------------------------------------
+// Params = [div, text, text style, text size, text color, text position, speed, delimiter]
+// .call(wordwriter, [d1, ban_1_Txt[0], "NHG75", 26, colorArry[0], "center", 0.35, " "], null, tDelay)
+// ------------------------------------------------------------------------------------------------------
+// Note: 	The "text position" parameter can be set to "center" to center text both horizontally and vertically,
+// 				to set custom x and y positions for the text use an array such as [10, 100], or [10, "center"].
+// 
+// IMPORTANT NOTE:  Typing animation only works on one line. To animate multiple lines of typing, use two or more 
+//                  calls to this frame module and adjust the vertical posiitioning of the text to create your text 
+//                 block. Also, add a delay to your "tDelay" variable to animate one line at a time.
+
+function wordwriter(div, val, styl, size, colr, pos, speed, del) {
+  var ww = new TimelineMax();
+  ww.set(div, {className:("+=" + styl)}, 0);
+  ww.set(div, {fontSize:size}, 0);
+
+  div.innerHTML = val;
+  align_text(div, pos);
+
+  // Set text color
+  ww.set(div, {color:colr});
+
+  // NOTE: This takes care of text where ther first word has a "-" in it
+  var txtBase;
+  if(val.indexOf("-") !== -1) {
+    txtBase = val.slice(0, val.indexOf("-"));
+  } else {
+    txtBase = val.slice(0, val.indexOf(del));
+  }
+
+  ww.set(div, {innerHTML:txtBase}, 0)
+    .to(div, speed, {autoAlpha:1, text:{value:val,  delimiter:del}, ease:Linear.easeNone});
+}
+
+// ======================================================================================================
+// T E X T   R E V E A L   A N I M
+// ======================================================================================================
+// Description: Adds text to your banner, then animates it in your chosen direction. Text animates in from 
+//              outside a parent div of the same size as the text you've added.
+// ------------------------------------------------------------------------------------------------------
+// Params = [div, text, text style, text size, text color, text position, speed, direction]
+// .call(text_reveal, [d1, ban_1_Txt[0], "NHG75", 26, colorArry[0], "center", 0.35, "up"], null, tDelay)
+// ------------------------------------------------------------------------------------------------------
+// Note: 	The text position parameter can be set to "center" to center text both horizontally and vertically,
+// 				to set custom x and y positions for the text use an array such as [10, 100], or [10, "center"].
+
+function renderTextReveal(div, val, pos) {
+  div._textRevealValue = String(val);
+
+  // Create new div for text
+  var txtDiv = "<div id='revealTxt" + rTxtNum + "' style='position: absolute;  white-space: nowrap;'><p>" + val + "</p></div>";
+  div.innerHTML = txtDiv;
+
+  var rTxt = eval("revealTxt" + rTxtNum);
+  rTxtNum++;
+
+  var txtW = rTxt.clientWidth + 3;
+  var txtH = rTxt.clientHeight + 3;
+  
+  // Set widht and height of div then set alignment
+  TweenMax.set(div, {width:(Number(txtW) + 3), height:(Number(txtH) + 1)});
+  align_text(div, pos);
+
+  return {txt: rTxt, txtW: txtW, txtH: txtH};
+}
+
+function updateTextReveal(div, val, pos) {
+  if(typeof div === "string") {
+    div = document.getElementById(div) || document.querySelector("." + div);
+  }
+
+  if(!div) {
+    return false;
+  }
+
+  if(pos === undefined && div._textRevealPos === undefined) {
+    div.textContent = val;
+    div._textRevealValue = String(val);
+    return true;
+  }
+
+  if(div._textRevealValue === String(val)) {
+    return true;
+  }
+
+  if(pos === undefined) {
+    pos = div._textRevealPos;
+  }
+
+  renderTextReveal(div, val, pos);
+  return true;
+}
+
+window.updateTextReveal = updateTextReveal;
+
+function text_reveal(div, val, styl, size, colr, pos, speed, dir) {
+  var tr = new TimelineMax();
+  tr.set(div, {className:("+=" + styl)}, 0);
+  tr.set(div, {fontSize:size}, 0);
+  tr.set(div, {overflow:"hidden"}, 0);
+  div._textRevealPos = pos;
+
+  var reveal = renderTextReveal(div, val, pos);
+  var rTxt = reveal.txt;
+  var txtW = reveal.txtW;
+  var txtH = reveal.txtH;
+
+  // Set text color
+  tr.set(div, {color:colr});
+
+  // Set direction text moves
+  if(dir === "up") {
+    txtW = txtH;
+  } else if(dir === "down") {
+    txtW = -txtH;
+  } else if(dir === "left") {
+    txtH = txtW;
+  } else if(dir === "right") {
+    txtH = -txtW;
+  }
+
+  // Animation
+  tr.set(div, {display:"block"}, 0);
+  // tr.set(rTxt, {className:("+=gpu")}, 0);
+
+  if(dir === "up" || dir === "down") {
+    tr.from(rTxt, speed, {y:txtW, z:-100, force3D:false, ease:Power3.easeOut}, 0);
+  }
+
+  if(dir === "left" || dir === "right") {
+    tr.from(rTxt, speed, {x:txtH, z:-100, force3D:false, ease:Power3.easeOut}, 0);
+  }
+
+}
+
+// ======================================================================================================
+// I M A G E   R E V E A L   A N I M
+// ======================================================================================================
+// Description: Adds an image to your banner, then animates it in your chosen direction. The image animates 
+//              in from outside a parent div of the same size that is set in the dimensions property.
+// ------------------------------------------------------------------------------------------------------
+// Params = [div, image, scale, dimensions, position, speed, direction]
+// .call(image_reveal, [d1, ban_1_Imgs[0], 1, [100, 100], [20, 20], 0.35, "up"], null, tDelay)
+// ------------------------------------------------------------------------------------------------------
+
+function image_reveal(div, img, scl, dim, pos, speed, dir) {
+  var ir = new TimelineMax();
+  // ir.set(div, {className:("+=gpu")}, 0);
+  ir.set(div, {overflow:"hidden"}, 0);
+
+  var imgDiv = "<div id='revealImg" + rImgNum + "'><img src=" + img + "></div></div>";
+  div.innerHTML = imgDiv;
+
+  var rImg = eval("revealImg" + rImgNum);
+  rImgNum++;
+
+  // Set position
+  ir.set(div, {left:pos[0], top:pos[1]}, 0);
+
+  // Set scale if 2x
+  if(scl === 2) {
+    ir.set(rImg, {scale:0.5, transformOrigin:"left top"}, 0);
+  }
+
+  // Set dimensions
+  if(dim != null) {
+    ir.set([div], {width:dim[0], height:dim[1]});
+  }
+
+  // Animate
+  ir.set(div, {display:"block"}, 0);
+
+  // Set direction text moves
+  if(dir === "up") {
+    imgX = dim[1];
+  } else if(dir === "down") {
+    imgX = -dim[1];
+  } else if(dir === "left") {
+    imgY = dim[0];
+  } else if(dir === "right") {
+    imgY = -dim[0];
+  }
+
+  // // Animation
+  if(dir === "up" || dir === "down") {
+    ir.from(rImg, speed, {y:imgX, ease:Power3.easeOut}, 0);
+  }
+
+  if(dir === "left" || dir === "right") {
+    ir.from(rImg, speed, {x:imgY, ease:Power3.easeOut}, 0);
+  }
+
+}
+
+// ======================================================================================================
+// T E X T   D I V   O P E N   A N I M
+// ======================================================================================================
+// Description: Adds text to your banner, then animates it in your chosen direction by expanding it's 
+//              container div to reveal the text
+// ------------------------------------------------------------------------------------------------------
+// Params = [div, text, text style, text size, text color, text position, speed, direction]
+// .call(text_div_open, [d1, ban_1_Txt[0], "NHG75", 26, colorArry[0], "center", 0.35, "up"], null, tDelay)
+// ------------------------------------------------------------------------------------------------------
+// Note: 	The text position parameter can be set to "center" to center text both horizontally and vertically,
+// 				to set custom x and y positions for the text use an array such as [10, 100], or [10, "center"].
+
+function text_div_open(div, val, styl, size, colr, pos, speed, dir) {
+  var tr = new TimelineMax();
+  tr.set(div, {className:("+=" + styl)}, 0);
+  tr.set(div, {fontSize:size}, 0);
+  tr.set(div, {overflow:"hidden"}, 0);
+
+  // Create new div for text
+  var txtDiv = "<div id='revealTxt" + rTxtNum + "' style='position: absolute;  white-space: nowrap;'><p>" + val + "</p></div>";
+  div.innerHTML = txtDiv;
+
+  var rTxt = eval("revealTxt" + rTxtNum);
+  rTxtNum++;
+
+  var txtW = rTxt.clientWidth + 3;
+  var txtH = rTxt.clientHeight + 3;
+  
+  // Set widht and height of div then set alignment
+  tr.set(div, {width:(Number(txtW) + 3), height:(Number(txtH) + 1)}, 0);
+  align_text(div, pos);
+
+  // Set text color
+  tr.set(div, {color:colr});
+
+  // Set direction text moves
+  if(dir === "up") {
+    txtW = txtW;
+  } else if(dir === "down") {
+    txtW = -txtW;
+  } else if(dir === "left") {
+    txtH = txtH;
+  } else if(dir === "right") {
+    txtH = -txtH;
+  }
+
+  // Animation
+  tr.set(div, {display:"block"}, 0);
+  // tr.set(rTxt, {className:("+=gpu")}, 0);
+
+  if(dir === "down") {
+    tr.from(div, speed, {height:0, z:-100, force3D:false, ease:Power3.easeOut}, 0);
+  }
+  
+  if(dir === "up") {
+    tr.from(div, speed, {y:txtH, height:0, z:-100, force3D:false, ease:Power3.easeOut}, 0);
+    tr.from(rTxt, speed, {y:-txtH, z:-100, force3D:false, ease:Power3.easeOut}, 0);
+  }
+
+  if(dir === "left") {
+    tr.from(div, speed, {x:txtW, width:0, z:-100, force3D:false, ease:Power3.easeOut}, 0);
+    tr.from(rTxt, speed, {x:-txtW, z:-100, force3D:false, ease:Power3.easeOut}, 0);
+  }
+
+  if(dir === "right") {
+    tr.from(div, speed, {width:0, z:-100, force3D:false, ease:Power3.easeOut}, 0);
+  }
+
+}
+
+// ======================================================================================================
+// T E X T   Z O O M   A N I M
+// ======================================================================================================
+// Description: Adds text to your banner, then animates it in from your chosen scale. Text fades in as it animates.
+// ------------------------------------------------------------------------------------------------------
+// Params = [div, text, text style, text size, text color, text position, speed, starting scale, starting opacity]
+// .call(text_zoom, [d1, ban_1_Txt[0], "NHG75", 90, colorArry[0], "center", 0.35, 0, 0], null, tDelay)
+// ------------------------------------------------------------------------------------------------------
+// Note: 	The "text position" parameter can be set to "center" to center text both horizontally and vertically,
+// 				to set custom x and y positions for the text use an array such as [10, 100], or [10, "center"].
+//
+//        The "starting scale" parameter dictates the starting scale of your text. To scale up, make the value 
+//        less than 1, to scale down, make the value greater than one. The text always fades in during the animation.*
+
+function text_zoom(div, val, styl, size, colr, pos, speed, scale, opac) {
+  var btz = new TimelineMax();
+  btz.set(div, {className:("+=" + styl)}, 0);
+  btz.set(div, {fontSize:size}, 0);
+  // btz.set(div, {className:("+=gpu")}, 0);
+
+  div.innerHTML = val;
+  align_text(div, pos);
+
+  // Set text color
+  btz.set(div, {color:colr});
+
+  btz.set(div, {display:"block"}, 0)
+     .from(div, speed, {scale:scale, autoAlpha:opac, force3D:false, ease:Power3.easeOut}, 0)
+     // .set(div, {className:"-=gpu"}, 0.55)
+     ;
+
+}
+
+// ======================================================================================================
+// C L I P P E D   T E X T
+// ======================================================================================================
+// Description: Adds text to your banner, and allows you to modify its parent div so only part of the text
+//              is showing.
+// ------------------------------------------------------------------------------------------------------
+// Params = [div, text, text style, text size, text color, text position, speed, direction]
+// .call(clip_text, [d1, ban_1_Txt[0], "NHG75", 26, colorArry[0], "center", "top", 10], null, tDelay)
+// ------------------------------------------------------------------------------------------------------
+// Note: 	The text position parameter can be set to "center" to center text both horizontally and vertically,
+// 				to set custom x and y positions for the text use an array such as [10, 100], or [10, "center"].
+
+function clip_text_anim(div, val, styl, size, colr, pos, speed, dir, cut, dist) {
+  var ct = new TimelineMax();
+  ct.set(div, {className:("+=" + styl)}, 0);
+  ct.set(div, {fontSize:size}, 0);
+
+  // Create new div for text
+  var txtDiv1Holder = "<div id='clipTxt" + cTxtTopNum + "HolderTop' style='position: absolute; overflow:hidden'></div>";
+  var txtDiv1 = "<div id='clipTxtTop" + cTxtTopNum + "' style='position: absolute;  white-space: nowrap;'><p>" + val + "</p></div>";
+  div.innerHTML = txtDiv1Holder;
+  var cTxtHolderTop = eval("clipTxt" + cTxtTopNum + "HolderTop");
+  cTxtHolderTop.innerHTML = txtDiv1;
+  var cTxtTop = eval("clipTxtTop" + cTxtTopNum);
+  var cTxtTopW = eval("clipTxtTop" + cTxtTopNum).clientWidth;
+  var cTxtTopH = eval("clipTxtTop" + cTxtTopNum).clientHeight;
+  ct.set(cTxtHolderTop, {width:cTxtTopW + 3, height:cTxtTopH + 1}, 0);
+
+  // Create new div for text
+  var txtDiv2Holder = "<div id='clipTxt" + cTxtBotNum + "HolderBot' style='position: absolute; overflow:hidden'></div>";
+  var txtDiv2 = "<div id='clipTxtBot" + cTxtBotNum + "' style='position: absolute;  white-space: nowrap;'><p>" + val + "</p></div>";
+  div.innerHTML+= txtDiv2Holder;
+  var cTxtHolderBot = eval("clipTxt" + cTxtBotNum + "HolderBot");
+  cTxtHolderBot.innerHTML = txtDiv2;
+  var cTxtBot = eval("clipTxtBot" + cTxtBotNum);
+  ct.set(cTxtBot, {y:-(cTxtTopH - cut)}, 0);
+  
+  // // Set widht and height of div then set alignment
+  ct.set(div, {width:cTxtTopW + 3, height:cTxtTopH + 1}, 0);
+  align_text(div, pos);
+
+  // Set text color
+  ct.set(div, {color:colr});
+  
+  var cTxtHolderTop = eval("clipTxt" + cTxtTopNum + "HolderTop");
+  var cTxtHolderTop = eval("clipTxt" + cTxtTopNum + "HolderTop");
+
+  ct.set(cTxtHolderTop, {height:(cTxtTopH - (cut - 1))}, 0);
+  ct.set(cTxtHolderBot, {width:cTxtTopW + 3, height:cTxtTopH + 1}, 0);
+  ct.set(cTxtHolderBot, {y:(cTxtTopH - cut), height:(cTxtTopH - (cTxtTopH - cut))}, 0);
+  // Set text and enclosing dicv properties
+  if(dir == "LR") {
+    ct.from(cTxtHolderTop, speed, {x:-dist, ease:Power3.easeOut}, 0);
+    ct.from(cTxtHolderBot, speed, {x:dist, ease:Power3.easeOut}, 0);
+  } else {
+    ct.from(cTxtHolderTop, speed, {x:dist, ease:Power3.easeOut}, 0);
+    ct.from(cTxtHolderBot, speed, {x:-dist, ease:Power3.easeOut}, 0);
+  }
+
+  cTxtTopNum++;
+  cTxtBotNum++;
+
+}
+
+// ==================================================================================================================================================================================================================================================================================================================
+// ======================================================================================================
+// W I N D O W   S H A D E   T E X T   A N I M
+// ======================================================================================================
+
+function window_shade(div, val, styl, size, colr, pos, speed, dir) {
+  var tr = new TimelineMax();
+  tr.set(div, {className:("+=" + styl)}, 0);
+  tr.set(div, {fontSize:size}, 0);
+  tr.set(div, {overflow:"hidden"}, 0);
+
+  // Create new div for text
+  var txtDiv1 = "<div id='wShadeTxt" + wsTxtNum + "' style='position: absolute;  white-space: nowrap;'><p>" + val + "</p></div>";
+  div.innerHTML = txtDiv1;
+  var wsTxt1 = eval("wShadeTxt" + wsTxtNum);
+  wsTxtNum++;
+
+  var txtDiv2 = "<div id='wShadeTxt" + wsTxtNum + "' style='position: absolute;  white-space: nowrap;'><p>" + val + "</p></div>";
+  div.innerHTML+= txtDiv2;
+  var wsTxt2 = eval("wShadeTxt" + wsTxtNum);
+  wsTxtNum++;
+
+  // var txtDiv3 = "<div id='wShadeTxt" + wsTxtNum + "_3' style='position: absolute;  white-space: nowrap;'><p>" + val + "</p></div>";
+  // div.innerHTML+= txtDiv3;
+  // var wsTxt3 = eval("wShadeTxt" + wsTxtNum + "_3");
+  // wsTxtNum++;
+
+
+
+
+
+
+
+
+
+
+
+  var txtW = wsTxt2.clientWidth + 3;
+  var txtH = wsTxt2.clientHeight + 3;
+
+
+
+  
+  
+  // Set widht and height of div then set alignment
+  tr.set(div, {width:(Number(txtW) + 3), height:(Number(txtH) + 1)}, 0);
+  align_text(div, pos);
+
+  // Set text color
+  tr.set(div, {color:colr});
+
+  // Set direction text moves
+  if(dir === "up") {
+    txtW = txtW;
+  } else if(dir === "down") {
+    txtW = -txtW;
+  } else if(dir === "left") {
+    txtH = txtH;
+  } else if(dir === "right") {
+    txtH = -txtH;
+  }
+
+  // Animation
+  tr.set(div, {display:"block"}, 0);
+  // tr.set(rTxt, {className:("+=gpu")}, 0);
+
+
+
+  
+
+  if(dir === "up" || dir === "down") {
+    tr.staggerFrom([wShadeTxt1, wShadeTxt2], speed, {y:txtW, z:-100, force3D:false, ease:Power3.easeOut}, 0.15, 0);
+  }
+
+  if(dir === "left" || dir === "right") {
+    tr.from(wsTxt1, speed, {x:txtH, z:-100, force3D:false, ease:Power3.easeOut}, 0);
+  }
+
+}
+
+// ======================================================================================================
+// S P R I T E   A N I M
+// ======================================================================================================
+// Description: Animates a film strip style sprite sheet. Sprites can be animated both forward and backward and 
+//              in a horizontal and vertical aspect ratio.
+// ------------------------------------------------------------------------------------------------------
+// Params = [div, image, length / height of sprite, position[x, y], window[w, h], speed, frames, play direction, sprite aspect ratio]
+// .call(sprite_anim, [d1, ban_1_Imgs[0], 19200, [0, 0], [300, 250], 1.5, 64, "reverse", "horizontal"], null, tDelay)
+// ------------------------------------------------------------------------------------------------------
+// Note: The "length / height of sprite" parameter should be the longest side of the sprite sheet image you are trying to animate
+// The "window" parameter is the visable area of the animation. It's best to make this the width and height of a single frame of your sprite
+// The "play direction" parameter is to choose wether the sprite plays forward or backward
+// The "sprite aspect ratio" parameter is used to dictate the aspect ratio of your sprite
+
+function sprite_anim(div, img, imgSize, pos, dim, speed, frames, dir, aspect) {
+  var sa = new TimelineMax();
+  sa.set(div, {overflow:"hidden"}, 0);
+  sa.set(div, {left:pos[0], top:pos[1], width:(dim[0] - 1), height:(dim[1] - 1)})
+
+  // Create new div for sprite img
+  var imgDiv = "<img id='spriteAnim" + rSpriteNum + "' src=" + img + "></div>";
+  div.innerHTML = imgDiv;
+  
+  var rSprite = eval("spriteAnim" + rSpriteNum);
+  rSpriteNum++;
+  
+
+  if(aspect === "horizontal") {
+
+    if(dir === "forward") {
+
+      // Set dist and frame vars
+      var moveDist = (imgSize - dim[0]);
+      var framesMove = frames - 1;
+
+      // Anim
+      sa.to(rSprite, speed, {x:-moveDist, ease:SteppedEase.config(framesMove)});
+
+    } else {
+
+      // Set dist and frame vars
+      var moveDist = (imgSize - dim[0]);
+      var framesMove = frames - 1;
+      
+      // Anim
+      sa.set(rSprite, {x:-moveDist});
+      sa.to(rSprite, speed, {x:0, ease:SteppedEase.config(framesMove)});
+
+    }
+
+  } else {
+
+    if(dir === "forward") {
+
+      // Set dist and frame vars
+      var moveDist = (imgSize - dim[1]);
+      var framesMove = frames - 1;
+
+      // Anim
+      sa.to(rSprite, speed, {y:-moveDist, ease:SteppedEase.config(framesMove)});
+
+    } else {
+
+      // Set dist and frame vars
+      var moveDist = (imgSize - dim[1]);
+      var framesMove = frames - 1;
+      
+      // Anim
+      sa.set(rSprite, {y:-moveDist});
+      sa.to(rSprite, speed, {y:0, ease:SteppedEase.config(framesMove)});
+
+    }
+
+  }
+  
+}
+
+// ======================================================================================================
+// A D D   A N I M A T E D   C H E C K   M A R K   L O G O
+// ======================================================================================================
+// Description:  Adds Verizon logo check mark and animates it in as if it's being drawn in. 
+// ------------------------------------------------------------------------------------------------------
+// Params = [div, image dimensions [w, h], position [x, y], speed]
+// .call(logo_check, [d1, [24, 30], [15, 205], 0.5], null, tDelay)
+// ------------------------------------------------------------------------------------------------------
+
+function logo_check(div, dim, pos, speed) {
+  var cml = new TimelineMax();
+  cml.set(div, {overflow:"hidden"}, 0);
+  
+  var origW = 24;
+  var origH = 30;
+  var img = "<svg id='check'><defs><style>.cls-1 {fill: #EE0000; fill-rule: evenodd;}</style></defs><polygon id='Fill-1-Copy' class='cls-1' points='19.56 0 8.61 24.17 4.47 15 0 15 6.79 30 10.41 30 24 0 19.56 0'/></svg>";
+ 
+  // Create check mark objs
+  var checkLeft = "<div id='check_left' style='position:absolute; overflow:hidden; backgroundSize:contain;'>" + img + "</div>";
+  var checkRight = "<div id='check_right' style='position:absolute; overflow:hidden; backgroundSize:contain;'></div>";
+  var checkRightMark = "<div id='check_right_mark' style='position:absolute; overflow:hidden; backgroundSize:contain;'>" + img + "</div>";
+
+  // Add check mark parts to main div
+  div.innerHTML = checkLeft;
+  div.innerHTML += checkRight;
+  check_right.innerHTML += checkRightMark;
+  
+  // debug(check_left, "blue")
+  // debug(check_right, "red")
+  // debug(div, "green")
+
+  // Set vars
+  var leftSize = origW * 0.33;
+  var heightSize = origW * 1.25;
+  var newScale;
+
+  if(dim[0] != origW) {
+    newScale = dim[0] / origW;
+  } else {
+    newScale = 1.01; // Strange Chrome bug fix
+  }
+  
+  // Set DIV props
+  cml.set(check_left, {width:leftSize, height:heightSize}, 0);
+  cml.set([check_right, check_right_mark], {width:origW, height:heightSize}, 0);
+  cml.set(div, {display:"block", left:pos[0], top:pos[1], width:origW, height:origH}, 0);
+  cml.set(div, {scale:newScale, transformOrigin:"top left", }, 0);
+
+  // Animation
+  cml.from(check_left, speed, {height:0}, speed);
+  cml.from(check_right, speed, {y:heightSize, force3D:false, ease:Strong.easeOut}, speed+speed);
+  cml.from(check_right_mark, speed, {y:-heightSize, force3D:false, ease:Strong.easeOut}, speed+speed);
+}
+
+// ======================================================================================================
+// R E V E R S E   R E V E A L   A N I M A T I O N 
+// ======================================================================================================
+// Description:  This module will reverse reveal any object that has ben created using the Text Reveal, Image Reveal, and Animated Check Mark modules. 
+// ------------------------------------------------------------------------------------------------------
+// Params = [div, image, direction]
+// .call(reverse_reveal, [d1, 0.5, "left"], null, tDelay)
+// ------------------------------------------------------------------------------------------------------
+// The "direction" option can be one of 4 types, "up", "down", "left", or "right".
+
+function reverse_reveal(div, speed, dir) {
+  var cmo = new TimelineMax();
+  var chkParts = div.childNodes;
+
+  var dWidth = div.clientWidth;
+  var dHeight = div.clientHeight;
+
+  var posX;
+  var posY;
+  
+  // Set direction text moves
+  if(dir === "up") {
+    // posY = -dim[1];
+    posY = -(dHeight + 1);
+  } else if(dir === "down") {
+    // posY = dim[1];
+    posY = (dHeight + 1);
+  } else if(dir === "left") {
+    // posX = -dim[0];
+    posX = -(dWidth + 1);
+  } else if(dir === "right") {
+    // posX = dim[0];
+    posX = (dWidth + 1);
+  }
+
+  // // Animation
+  if(dir === "up" || dir === "down") {
+    cmo.to(chkParts, speed, {y:posY, ease:Power3.easeOut}, 0);
+  }
+
+  if(dir === "left" || dir === "right") {
+    cmo.to(chkParts, speed, {x:posX, ease:Power3.easeOut}, 0);
+  }
+
+}
+
+// ======================================================================================================
+// C R E A T E   S C R O L L I N G   L E G A L   T O O L T I P
+// ======================================================================================================
+// Description:  Adds a scrolling legal tooltip to your banner. 
+// ------------------------------------------------------------------------------------------------------
+// Params = [tooltip, image, legal text, text style, text size, dimensions [w, h]], position [x, y], arrow on, arrow position, buffer array [x, y], arrow position offset]
+// .call(auto_tooltip, [tooltip, ban_1_Txt[8], "NHG55ROMEN", 8, true, [141, 104], [140, 140], "bottom", [0, 0], 0], null, tDelay)
+// ------------------------------------------------------------------------------------------------------
+function auto_tooltip(div, txt, styl, size, dim, pos, arwOn, arwPos, arwPos2, offset, arrowOffset) {
+  var stp = new TimelineMax();
+  stp.set(div, {className:("+=" + styl)}, 0);
+  stp.set(div, {fontSize:size}, 0);
+  stp.set(div, {display:"block"});
+
+  // debug(div, "blue");
+
+  // ------------------------------------------------------------------------------------------------------
+  // Spacing Vars
+  var txtLeftSpacing = 10,
+      txtRightSpacing = 10,
+      txtTopSpacing = 10,
+      txtBotSpacing = 10,
+      scrlLeftSpacing = 10,
+      scrlRightSpacing = 11,
+      scrlTopSpacing = 5;
+
+  // Arrow Vars
+  var arrwTop = 0,
+      arrwLeft = 0,
+      arrwDims = 8,
+      arrwSize = 6, // How far the arrow graphics sticks out past the main tooltip
+      arrwRotate = 0;
+
+  // Active Buffer Vars
+  var topBuff = 0,
+      leftBuff = 0,
+      rightBuff = 0,
+      bottomBuff = 0;
+
+  // Text W - H Buffer Vars
+  var txtHeightBuff = 0, 
+      txtWidthBuff = 0,
+      txtScrollBuff = 5; // Adds a few pixels to text height for scroll distange purposes
+
+  // Close X Buffer Vars
+  var closeDims = 6,
+      closeWBuff = 6,
+      closeXBuff = 10,
+      closeBtnDims = 12;
+
+  // Scrollbar Vars
+  var scrlWidth = 4;
+
+  // ------------------------------------------------------------------------------------------------------
+  // Set Arrow buffers
+  if(arwOn) {
+
+    // Arrow on TOP
+    if(arwPos === "top") { 
+      topBuff = arrwSize;
+      txtHeightBuff = arrwSize;
+      
+      // Set arrow secondary position
+      if(arwPos2 === "left") { 
+        arrwLeft = arrwSize + arrowOffset;
+      } else {
+        arrwLeft = dim[0] - ((arrwSize + arrowOffset) + arrwDims);
+      }
+
+    }
+
+    // Arrow on LEFT
+    if(arwPos === "left") { 
+      leftBuff = arrwSize; 
+      txtWidthBuff = arrwSize;
+      arrwRotate = -90;
+      
+      // Set arrow secondary position
+      if(arwPos2 === "top") { 
+        arrwTop = arrwSize + arrowOffset;
+      } else {
+        arrwTop = dim[1] - ((arrwSize + arrowOffset) + arrwDims);
+      }
+    }
+
+    // Arrow on RIGHT
+    if(arwPos === "right") { 
+      arrwLeft = dim[0] - arrwDims;
+      rightBuff = arrwSize;
+      txtWidthBuff = arrwSize;
+      arrwRotate = 90;
+      
+      // Set arrow secondary position
+      if(arwPos2 === "top") { 
+        arrwTop = arrwSize + arrowOffset;
+      } else {
+        arrwTop = dim[1] - ((arrwSize + arrowOffset) + arrwDims);
+      }
+    }
+
+    // // Arrow on BOTTOM
+    if(arwPos === "bottom") {
+      bottomBuff = arrwSize;
+      txtHeightBuff = arrwSize;
+      arrwTop = dim[1] - arrwDims;
+      arrwRotate = 180;
+      
+      // Set arrow secondary position
+      if(arwPos2 === "left") { 
+        arrwLeft = arrwSize + arrowOffset;
+      } else {
+        arrwLeft = dim[0] - ((arrwSize + arrowOffset) + arrwDims);
+      }
+    }
+
+  }
+
+  // ------------------------------------------------------------------------------------------------------
+  // Create Tooltip Elements
+  var arrow = "<svg id='arrow' style='position:absolute; top:" + arrwTop + "px; left:" + arrwLeft + "px; width:" + arrwDims + "px; height:" + arrwDims + "px; transform: rotate(" + arrwRotate + "deg);'> <defs> <style> .cls-2a, .cls-2b { fill: #ffffff; } .cls-2b { stroke: #000; stroke-width: 0.5px; fill-rule: evenodd; } </style> </defs> <rect class='cls-2a' x='0.08' y='6' width='8' height='1'/> <path id='tooltip_box' data-name='tooltip box' class='cls-2b' d='M8.87,7.25,5,1.45,1.13,7.25' transform='translate(-0.92 -1)'/> </svg>"
+  var closeX = "<svg id='close' style='position:absolute; top:" + (closeXBuff + topBuff) + "px; left:" + (Number(dim[0]) - (closeWBuff + closeXBuff + rightBuff)) + "px; width:" + closeDims + "px; height:" + closeDims + "px;'> <polygon id='close' points='6 0.29 5.71 0 3 2.71 0.29 0 0 0.29 2.71 3 0 5.71 0.29 6 3 3.29 5.71 6 6 5.71 3.29 3 6 0.29'/> </svg>";
+  var imgDiv = "<div id='tooltipImg' style='position:relative; top:" + topBuff + "px; left:" + leftBuff + "px; width:" + (dim[0] - (leftBuff + rightBuff)) + "px; height:" + (dim[1] - (topBuff + bottomBuff)) + "px; background-color:#fff; border:0.5px solid black; display:block;'></div>";
+  var txtHolder = "<div id='legalTextHolder' style='position:absolute; overflow:hidden;'></div>";
+  var txtDiv = "<div id='legalText' style='position:absolute; text-align:left'>" + txt + "</div>";
+  var thumbBkg = "<div id='scrlWdgtBKG' style='position:absolute;'></div>";
+  var thumb = "<div id='scrlWdgt' style='position:absolute;'></div>";
+  var closeBtn = "<div id='close_btn'></div>"
+    
+  // Add Elements to Main Div
+  div.innerHTML = imgDiv;
+  div.innerHTML+= closeX;
+  div.innerHTML+= txtHolder;
+  legalTextHolder.innerHTML+= txtDiv;
+  div.innerHTML+= thumbBkg;
+  div.innerHTML+= thumb;
+  div.innerHTML+= closeBtn;
+
+  // Add Arrow
+  if(arwOn) {
+    div.innerHTML+= arrow;
+  }
+
+  // ------------------------------------------------------------------------------------------------------
+  // Set Text Holder and text box props
+  var txtHolderWidth = dim[0] - (35 + txtWidthBuff);
+  var txtHolderHeight = dim[1] - ((txtTopSpacing + txtBotSpacing) + txtHeightBuff);
+  stp.set(legalTextHolder, {left:(txtLeftSpacing + leftBuff + offset[0]), top:(10 + topBuff + offset[1]), width:txtHolderWidth, height:txtHolderHeight}, 0);
+  
+  // Set legal text width
+  stp.set(legalText, {width:txtHolderWidth}, 0);
+
+  // Set scroll widget vars
+  var scrlTxtH = legalText.clientHeight + txtScrollBuff;
+  var txtScaleDiff = txtHolderHeight / scrlTxtH;
+
+  // ------------------------------------------------------------------------------------------------------
+  // Set Scroll Bar ON / OFF Toggle
+  if(legalText.clientHeight  > (txtHolderHeight)) {
+
+    scrlON = true;
+
+    // Set Scroll Bar Vars
+    var wdgtTop = (txtTopSpacing + closeDims + scrlTopSpacing) + topBuff;
+    var wdgtTrackHeight = txtHolderHeight - (closeDims + scrlTopSpacing);
+    var wdgtHeight = wdgtTrackHeight * txtScaleDiff;
+    var scrollOffset = (scrlTxtH - txtHolderHeight) / (wdgtTrackHeight - wdgtHeight);
+
+    if(arwPos === "right") {
+      leftBuff = arrwSize; 
+    } else {
+      leftBuff = 0; 
+    }
+    
+    // Set scroll widget props
+    stp.set(scrlWdgtBKG, {right:(scrlRightSpacing + leftBuff), top:wdgtTop, width:scrlWidth, height:wdgtTrackHeight, display:"block", backgroundColor:"#F6F6F6"}, 0);
+    stp.set(scrlWdgt, {right:(scrlRightSpacing + leftBuff), top:wdgtTop, width:scrlWidth, height:wdgtHeight, display:"block", backgroundColor:"#DAD8D8", cursor:"pointer"}, 0);
+
+    stp.set(legalText, {className:("+=set_scroll")}, 0);
+
+    // Activate Mouse Wheel Scroll
+    scrlData = [scrlTxtH, txtHolderHeight, wdgtTop, wdgtTrackHeight];
+    legalText.addEventListener('scroll', resetScrollPos);
+
+    // Activate Scollbar Drag
+    dragElement(document.getElementById("scrlWdgt"), wdgtHeight, wdgtTop, wdgtTrackHeight, scrollOffset);
+
+  }
+
+  // Set legal text height ( set after above variables are calcualted )
+  stp.set(legalText, {height:txtHolderHeight}, 0);
+
+  // Set close button props
+  stp.set(close_btn, {left:(dim[0] - (((scrlLeftSpacing + scrlRightSpacing + scrlWidth) - closeDims) + rightBuff)), top:(((txtTopSpacing - (closeBtnDims - closeDims) / 2)) + topBuff), width:closeBtnDims, height:closeBtnDims}, 0);
+  
+  // Set Tooltip Position
+  stp.set(div, {left:pos[0], top:pos[1], width:dim[0], height:(dim[1] + txtHeightBuff), display:"none"}, 0);
+
+  // Activate Toolip Controls
+  stp.call(tooltipControlsON, [], 0)
+
+}
+
+function resetScrollPos () {
+
+  var scrlTxtH = scrlData[0];
+  var txtHolderHeight = scrlData[1];
+  var wdgtTop = scrlData[2];
+  var wdgtTrackHeight = scrlData[3];
+
+  var scrlPerc = legalText.scrollTop / ((scrlTxtH - txtHolderHeight) - 5);
+  scrlWdgt.style.top = (wdgtTop + ((wdgtTrackHeight - scrlWdgt.clientHeight) * scrlPerc)) + "px";
+  
+}
+
+// Make the DIV element draggable:
+function dragElement(elmnt, elemHeight, trackTop, trackHeight, scrollOffset) {
+  var pos1 = 0;
+  var pos2 = 0;
+
+  elmnt.onmousedown = dragMouseDown;
+
+  function dragMouseDown(e) {
+    
+    e = e || window.event;
+    e.preventDefault();
+
+    // get the mouse cursor position at startup:
+    pos2 = e.clientY;
+
+    document.onmouseup = closeDragElement;
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+
+    legalText.removeEventListener('scroll', resetScrollPos);
+
+    // calculate the new cursor position:
+    pos1 = pos2 - e.clientY;
+    pos2 = e.clientY;
+
+    elmnt.style.top = (elmnt.offsetTop - pos1) + "px";
+    
+    // Stop at top of scroll channel
+    if(elmnt.offsetTop < trackTop) {
+      elmnt.style.top = trackTop + "px";
+    }
+
+    // Stop at bottom of scroll channel
+    if(elmnt.offsetTop > (trackTop + (trackHeight - elemHeight))) {
+      elmnt.style.top = (trackTop + (trackHeight - elemHeight)) + "px";
+    }
+    
+    legalText.scrollTop = ((elmnt.offsetTop - trackTop) * scrollOffset);
+    
+    
+  }
+
+  function closeDragElement() {
+    // stop moving when mouse button is released:
+    document.onmouseup = null;
+    document.onmousemove = null;
+    legalText.addEventListener('scroll', resetScrollPos);
+  }
+}
+
+// ------------------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------------------
+//  - - - - - - - - - - - - - -    H E L P E R   F U N C T I O N S   - - - - - - - - - - - - - - - - - -
+// ------------------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------------------
+// C E N T E R   T E X T
+// ------------------------------------------------------------------------------------------------------
+function align_text(div, pos) {
+  var ct = new TimelineMax();
+
+  
+  var txtXPos = ((width - div.clientWidth) / 2 + 3);
+  var txtYPos = ((height - div.clientHeight) / 2);
+
+  if(pos != "center") {
+    if(pos[0] != "center") { txtXPos = pos[0]; }
+    if(pos[1] != "center") { txtYPos = pos[1]; }
+  }
+
+  ct.set(div, {left:txtXPos, top:txtYPos}, 0);
+
+}
+
+// ------------------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------------------
+
+</script>
+
+  <!-- This js script contains all the helper scripts that control the overall construction of the banner -->
+  <script type="text/javascript">
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// B A N N E R   V A R S
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// --- SET TOTAL #s OF DIVS NEEDED ----
+var totalDivs = 200;
+
+// --- CHOOSE ONE ----
+var adType = "standard";
+// var adType = "dynamic";
+
+// --- CHOOSE ONE ----
+var adPlatform = "DoubleClick";
+// var adPlatform = "Sizmek";
+
+// --- SET TO TRUE or FALSE ----
+var dyanmicText = false;
+
+// --- CHOOSE ONE ----
+var fonts = ["NHG75"];
+// var fonts = [ 'NHG75'];
+
+// --- SHOW TOOLTIP BUTTONS ---
+var showTooltipBtns = false;
+
+// --- SET TOOLTIP PROPERTIES ---
+var tooltip_position = [213, 155]; // [x, y]
+var tooltip_dimensions = [46, 12]; // [w, h]
+
+// JS FF / FEATURE SNIFFER
+function ff_sniffer() {
+  var ff_support;
+  try {
+    ff_support = CSS.supports("(-moz-appearance: none)");
+    return ff_support;
+  } catch (err) {
+    ff_support = false;
+    return ff_support;
+
+  } finally {
+
+  }
+}
+
+
+
+// ======================================================================================================
+// F R A M E   C O N T E N T   D A T A
+// ======================================================================================================
+
+var colorArry = ["#000", "#fff", "#f6f6f6"];
+
+// B A N N E R   1  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+var ban_1_Txt = [""];
+
+var ban_1_Imgs = ["./logo_white.svg", "./mainbg.jpg"];
+
+// B A N N E R   2  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+var ban_2_Txt = [];
+var ban_2_Imgs = [];
+
+// ======================================================================================================
+// B A N N E R   T I M E L I N E S
+// ======================================================================================================
+
+function banner_1() {
+  var logo_black = d191;
+  var check_mark = d192;
+  var width = 970;
+  var height = 250;
+
+  var timeline = new TimelineMax();
+  var tDelay = 0;
+  var wrapper = document.getElementById("wrapper");
+
+  timeline
+    // .call(overlay_img, [overlay, "../overlays/2.jpg", 0.5], null, tDelay)
+
+    .set(wrapper, { backgroundColor: "#ffffff" }, tDelay -= 0.09)
+    .call(static_img, [logo_black, "./logo_white.svg", 1, [136, 70], [5, -2], 0], null, tDelay)
+    .set([logo_black], { className: "+= gpu" }, tDelay)
+    .set(d190, {fontFamily: "Arial, sans-serif", x: 751, y: 222, textAlign: "left", zIndex: 999, opacity: 0.7})
+    .call(text_reveal, [d190, "Humans depicted in this image are AI-generated", "NHG75", 9, "#FFFFFF", 0.6, ""], null, tDelay)
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    // Add main image at tDelay + 0.3s
+    .call(static_img, [d1, "./mainbg.jpg", 1, [width, height], 0], null, tDelay + 0.3)
+    .call(static_img, [d6, "./silo.png", 1, null, [0, 0]], null)
+    .set(d1, { width: width, height: height, scale: 2.6, x: -768, y: 160 }, tDelay + 0.3)
+    .to([d1], 2.15, { width: width, height: height, scale: 1.05, x: 23, y: 7, ease: "0.42, 0, 0.58, 1", }, tDelay + 0.6)
+    .to([d6], 2.15, { width: width, height: height, scale: 1.05, x: 23, y: 7, ease: "0.42, 0, 0.58, 1", }, "<-=2.15")
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+
+    .call(text_reveal, [d2, "We unite tech and industry expertise", "NHG75", 19, "#FFFFFF", 0.6, ""], null, tDelay + 0.8)
+    .set(d2, { x: 20, y: 88, opacity: 0, letterSpacing: "0.2px" }, tDelay)
+    .to(d2, 0.3, { x: 25, y: 83, opacity: 1, ease: "0.2, 0.83, 0.31, 1", }, tDelay + 1)
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    .call(text_reveal, [d4, "so you can", "NHG75", 61, "#FFFFFF", 0.6, ""], null, tDelay + 1)
+    .set(d4, { letterSpacing: "-0.5px" }, tDelay)
+    .fromTo(d4, 0.9, { scale: 2, x: -150, y: 95, opacity: 0 }, { scale: 1, x: 24, y: 95, opacity: 1, ease: "0.42, 0, 0.58, 1" }, tDelay + 1.5)
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    .call(() => { wrapper.classList.add("active"); }, null, null, tDelay + 1.5)
+    .call(text_reveal, [d5, "outthink, outpace, and outperform", "NHG75", 19, "#FFFFFF", 0.6, ""], null, tDelay + 2.5)
+    .set(d5, { x: 20, y: 166, opacity: 0, letterSpacing: "0.2px" }, tDelay + 2.5)
+    .to(d5, 0.3, { x: 25, y: 161, opacity: 1, ease: "0.2, 0.83, 0.31, 1", }, tDelay + 2.5)
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    .call(static_img, [d8, "./cta.png", 1, [84, 42], [26, 202], 0], null, tDelay + 3.5)
+    .set([d8], { className: "+= gpu" }, tDelay);
+
+  // Log duration of timeline
+
+}
+
+function banner_2() {
+
+}
+
+// ======================================================================================================
+// D A D   F A C E   F U N C T I O N S
+// ======================================================================================================
+
+// // FACE ANIMATIONS
+
+// ======================================================================================================
+// A N I M A T I O N   C O M P L E T E
+// ======================================================================================================
+
+function tooltipControlsON() {
+  detailsTL = new TimelineMax();
+
+  detailsTL.set(
+    details_btn, {
+    left: tooltip_position[0],
+    top: tooltip_position[1],
+    width: tooltip_dimensions[0],
+    height: tooltip_dimensions[1],
+    display: "block",
+    autoAlpha: 1,
+  },
+    0
+  );
+
+  detailsTL.set(tooltip, {
+    opacity: 0,
+    display: "none"
+  });
+
+  if (showTooltipBtns) {
+    detailsTL.call(debug, [details_btn, "red"]);
+  }
+
+  close_btn.addEventListener(
+    "click",
+    function () {
+
+      detailsTL.set(this, {
+        display: "none"
+      });
+      detailsTL.to(tooltip, 0.25, {
+        autoAlpha: 0,
+        display: "none"
+      });
+      detailsTL.set(details_btn, {
+        display: "block"
+      });
+    },
+    false
+  );
+
+  details_btn.addEventListener(
+    "click",
+    function () {
+
+      detailsTL.set(close_btn, {
+        display: "block"
+      });
+      detailsTL.to(tooltip, 0.25, {
+        autoAlpha: 1,
+        display: "block"
+      });
+      detailsTL.set(this, {
+        display: "none"
+      });
+    },
+    false
+  );
+
+  click_through.onmouseover = function () { };
+  click_through.onmouseout = function () { };
+}
+
+/*
+
+  ======================================================================================================
+  ------------------------------------------------------------------------------------------------------
+  F R A M E   M O D U L E S  -  D O C U M E N T A T I O N
+  ------------------------------------------------------------------------------------------------------
+  ======================================================================================================
+  The documentation below lists all available preprogrammed modules. Each module has a description of what
+  it does, a list of it's parameters, the code you will use to implement each module and additional notes
+  if needed.
+
+  To implement the selected module, copy the code that begins with ".call(".
+
+
+  ======================================================================================================
+  O V E R L A Y   I M A G E
+  Description: Adds an overlay image you can use to help position elements in your ad.
+
+  Params = [div, image, opacity]
+  ------------------------------------------------------------------------------------------------------
+  .call(overlay_img, [overlay, "./trace.png", 0.5], null, tDelay)
+  ------------------------------------------------------------------------------------------------------
+
+  ======================================================================================================
+  S T A T I C   T E X T
+  Description: Adds static text to your banner.
+
+  Params = [div, text, text style, text size, text color, text position]
+  ------------------------------------------------------------------------------------------------------
+  .call(static_text, [d1, ban_1_Txt[0], "NHG75", 16, colorArry[0], "center"], null, tDelay)
+  ------------------------------------------------------------------------------------------------------
+  Note: 	The text "position" parameter can be set to "center" to center text both horizontally and vertically,
+          to set custom x and y positions for the text use an array such as [10, 100], or [10, "center"].
+
+  ======================================================================================================
+  S T A T I C   I M A G E
+  Description: Adds an image to your banner.
+
+  Params = [div, image, scale(enter 1 for 1x, 2 for 2x), dimensions, position]
+  ------------------------------------------------------------------------------------------------------
+  .call(static_img, [d1, ban_1_Imgs[0], 1, [300, 250], "center"], null, tDelay)
+  ------------------------------------------------------------------------------------------------------
+
+  ======================================================================================================
+  T E X T   S L I D E   I N
+  Description: Adds text to your banner, then animates it sliding in from the side you dictate.
+
+  Params = [div, text, text style, text size, text position, text color, speed]
+  ------------------------------------------------------------------------------------------------------
+  .call(slide_in_text, [d1, ban_1_Txt[0], "NHG75", 26, colorArry[0], "center", 0.6, "up"], null, tDelay)
+  ------------------------------------------------------------------------------------------------------
+  Note: 	The text position parameter can be set to "center" to center text both horizontally and vertically,
+          to set custom x and y positions for the text use an array such as [10, 100], or [10, "center"].
+
+  ======================================================================================================
+  I M A G E   S L I D E   I N
+  Description: Adds an image to your banner, then animates it sliding in from the side you dictate.
+
+  Params = [div, image, scale(enter 1 for 1x, 2 for 2x), speed, slide direction, position]
+  ------------------------------------------------------------------------------------------------------
+  .call(slide_in_img, [d1, ban_1_Imgs[0], 1, "center", 0.6, "left"], null, tDelay)
+  ------------------------------------------------------------------------------------------------------
+  Note:  The "position" is optional, but if entered, it must be an array of the following values [left, top].
+        If ignored, the image will sit top left. Use this parameter for special imagery that's not full frame.
+
+        The "slide direction" option can be one of 4 types, "up", "down", "left", or "right".
+
+  ======================================================================================================
+  T Y P E  W R I T E R   A N I M
+  Description: Adds text to your banner, then animates it by typing it out letter by letter.
+
+  Params = [div, text, text style, text size, text color, text position, speed]
+  ------------------------------------------------------------------------------------------------------
+  .call(typewriter, [d1, ban_1_Txt[0], "NHG75", 26, colorArry[0], "center", 0.35], null, tDelay)
+  ------------------------------------------------------------------------------------------------------
+  Note: 	The "text position" parameter can be set to "center" to center text both horizontally and vertically,
+          to set custom x and y positions for the text use an array such as [10, 100], or [10, "center"].
+
+  IMPORTANT NOTE:  Typing animation only works on one line. To animate multiple lines of typing, use two or more
+                  calls to this frame module and adjust the vertical positioning of the text to create your text
+                  block. Also, add a delay to your "tDelay" variable to animate one line at a time.
+
+  ======================================================================================================
+  W O R D  W R I T E R   A N I M
+  Description: Adds text to your banner, then animates it by typing it out one word at a time.
+
+  Params = [div, text, text style, text size, text color, text position, speed, delimiter]
+  ------------------------------------------------------------------------------------------------------
+  .call(wordwriter, [d1, ban_1_Txt[0], "NHG75", 26, colorArry[0], "center", 0.35, " "], null, tDelay)
+  ------------------------------------------------------------------------------------------------------
+  Note: 	The "text position" parameter can be set to "center" to center text both horizontally and vertically,
+          to set custom x and y positions for the text use an array such as [10, 100], or [10, "center"].
+
+  IMPORTANT NOTE:  Typing animation only works on one line. To animate multiple lines of typing, use two or more
+                  calls to this frame module and adjust the vertical positioning of the text to create your text
+                  block. Also, add a delay to your "tDelay" variable to animate one line at a time.
+
+  ======================================================================================================
+  T E X T   R E V E A L   A N I M
+  Description: Adds text to your banner, then animates it in your chosen direction. Text animates in from
+              outside a parent div of the same size as the text you've added.
+
+  Params = [div, text, text style, text size, text color, text position, speed, direction]
+  ------------------------------------------------------------------------------------------------------
+  .call(text_reveal, [d1, ban_1_Txt[0], "NHG75", 26, colorArry[0], "center", 0.5, "up"], null, tDelay)
+  ------------------------------------------------------------------------------------------------------
+  Note: 	The text position parameter can be set to "center" to center text both horizontally and vertically,
+          to set custom x and y positions for the text use an array such as [10, 100], or [10, "center"].
+
+  ======================================================================================================
+  I M A G E   R E V E A L   A N I M
+  Description: Adds an image to your banner, then animates it in your chosen direction. The image animates
+              in from outside a parent div of the same size that is set in the dimensions property.
+
+  Params = [div, image, scale, dimensions, position, speed, direction]
+  ------------------------------------------------------------------------------------------------------
+  .call(image_reveal, [d1, ban_1_Imgs[0], 1, [100, 100], [20, 20], 0.5, "up"], null, tDelay)
+  ------------------------------------------------------------------------------------------------------
+
+  ======================================================================================================
+  T E X T   D I V   O P E N   A N I M
+  Description: Adds text to your banner, then animates it in your chosen direction by expanding it's
+  container div to reveal the text
+
+  Params = [div, text, text style, text size, text color, text position, speed, direction]
+  ------------------------------------------------------------------------------------------------------
+  .call(text_div_open, [d1, ban_1_Txt[0], "NHG75", 26, colorArry[0], "center", 0.5, "up"], null, tDelay)
+  ------------------------------------------------------------------------------------------------------
+
+  ======================================================================================================
+  R E V E R S E   R E V E A L   A N I M
+  Description:  This module will reverse reveal any object that has ben created using the Text Reveal,
+  Image Reveal, and Animated Check Mark modules.
+
+  Params = [div, image, direction]
+  ------------------------------------------------------------------------------------------------------
+  .call(reverse_reveal, [d1, 0.5, "left"], null, tDelay)
+  ------------------------------------------------------------------------------------------------------
+
+  ======================================================================================================
+  T E X T   Z O O M   A N I M
+  Description: Adds text to your banner, then animates it in from your chosen scale. Text fades in as it animates.
+
+  Params = [div, text, text style, text size, text color, text position, speed, starting scale]
+  ------------------------------------------------------------------------------------------------------
+  .call(text_zoom, [d1, ban_1_Txt[0], "NHG75", 90, colorArry[0], "center", 0.35, 0], null, tDelay)
+  ------------------------------------------------------------------------------------------------------
+  Note: 	The "text position" parameter can be set to "center" to center text both horizontally and vertically,
+          to set custom x and y positions for the text use an array such as [10, 100], or [10, "center"].
+
+        The "starting scale" parameter dictates the starting scale of your text. To scale up, make the value
+        less than 1, to scale down, make the value greater than one. The text always fades in during the animation.
+
+
+
+  ======================================================================================================
+  C L I P P E D   T E X T
+  Description: Adds text to your banner, and allows you to modify its parent div so only part of the text
+              is showing.
+  Params = [div, text, text style, text size, text color, text position, speed, direction, cut distance, move distance]
+  ------------------------------------------------------------------------------------------------------
+  .call(clip_text_anim, [d1, ban_1_Txt[0], "NHG75", 82, colorArry[1], "center", 1.5, "LR", 39, 40], null, tDelay)
+  ------------------------------------------------------------------------------------------------------
+  Note: 	The text position parameter can be set to "center" to center text both horizontally and vertically,
+          to set custom x and y positions for the text use an array such as [10, 100], or [10, "center"].
+
+
+  ======================================================================================================
+  S P R I T E   A N I M
+  Description: Animates a film strip style sprite sheet. Sprites can be animated both forward and backward and
+              in a horizontal and vertical aspect ratio.
+
+  Params = [div, image, length / height of sprite, position[x, y], window[w, h], speed, frames, play direction, sprite aspect ratio]
+  ------------------------------------------------------------------------------------------------------
+  .call(sprite_anim, [d1, ban_1_Imgs[0], 19200, [0, 0], [300, 250], 1.5, 64, "reverse", "horizontal"], null, tDelay)
+  ------------------------------------------------------------------------------------------------------
+  Note: The "length / height of sprite" parameter should be the longest side of the sprite sheet image you are trying to animate
+  The "window" parameter is the visible area of the animation. It's best to make this the width and height of a single frame of your sprite
+  The "play direction" parameter is to choose wether the sprite plays forward or backward
+  The "sprite aspect ratio" parameter is used to dictate the aspect ratio of your sprite, vertical or horizontal.
+
+  ======================================================================================================
+  A D D   A N I M A T E D   C H E C K   M A R K   L O G O
+  Description:  Adds logo check mark and animates it in as if it's being drawn in.
+
+  Params = [div, image dimensions [w, h], position [x, y], speed]
+  ------------------------------------------------------------------------------------------------------
+  .call(logo_check, [d1, [24, 30], [15, 205], 0.5], null, tDelay)
+  ------------------------------------------------------------------------------------------------------
+
+  ======================================================================================================
+  A U T O   L E G A L   T O O L T I P
+  ======================================================================================================
+  Description:  Adds a smart legal tooltip to your banner.
+
+  Params = [tooltip, image, legal text, text style, text size, dimensions [w, h]], position [x, y], arrow on, arrow position, buffer array [x, y], arrow position offset]
+  ------------------------------------------------------------------------------------------------------
+  .call(auto_tooltip, [tooltip, ban_1_Txt[8], "NHG55ROMEN", 8, [130, 82], [50, 167], true, "top", "left", [0, 0], 0], null, tDelay)
+  ------------------------------------------------------------------------------------------------------
+
+
+
+
+  ======================================================================================================
+  ------------------------------------------------------------------------------------------------------
+  H E L P E R   C O D E  -  D O C U M E N T A T I O N
+  ------------------------------------------------------------------------------------------------------
+  ======================================================================================================
+
+  ======================================================================================================
+  B A C K G R O U N D   C O L O R   S W A P S
+  Description: Use the following line of code to swap the color of the background.
+
+  ------------------------------------------------------------------------------------------------------
+  .set(wrapper, {backgroundColor:colorArry[0]})
+  ------------------------------------------------------------------------------------------------------
+
+  ======================================================================================================
+  T U R N   O F F   D I V S   A T   E N D   O F   F R A M E
+  Description: Use the following line of code to turn off the chosen divs before the next frame. Use the
+               delay setting to dictate the length of the frame.
+
+  ------------------------------------------------------------------------------------------------------
+  .set(d1, {display:"none"}, tDelay+=1.3)
+  ------------------------------------------------------------------------------------------------------
+
+  Additional: Use an array to turn off multiple divs at once.
+  ------------------------------------------------------------------------------------------------------
+  .set([d1, d2, d3], {display:"none"}, tDelay+=1.3)
+  ------------------------------------------------------------------------------------------------------
+
+  ======================================================================================================
+  S E E   T O O L T I P   B U T T O N S
+  Description: To see the hotspot to activate and close the tooltip, change the variable "showTooltipBtns"
+               listed below to TRUE, then replay the banner. This will put a red border around the tooltip
+               open button and a blue border around the tooltip close button. Once satisfied with the
+               positioning and sizing of the tooltip buttons, change the variable "showTooltipBtns" back
+               to FALSE.
+
+  ------------------------------------------------------------------------------------------------------
+  var showTooltipBtns = false;
+  ------------------------------------------------------------------------------------------------------
+
+  ======================================================================================================
+  S E T   T O O L T I P   B U T T O N  P R O P E R T I E S
+  Description: To set the size and position of the tooltip open button, modify the following
+               variables listed above.
+
+  ------------------------------------------------------------------------------------------------------
+  // --- SET TOOLTIP PROPERTIES ---
+  var tooltip_position    = [13, 157];  // [x, y]
+  var tooltip_dimensions  = [78, 12];   // [w, h]
+  ------------------------------------------------------------------------------------------------------
+
+// ======================================================================================================
+// D E B U G
+// Description: Adds colored border to the selected div. Color can be chosen by the user.
+
+// Params = [div, color]
+// ------------------------------------------------------------------------------------------------------
+// .call(debug, [d2, "red"], null, tDelay)
+// ------------------------------------------------------------------------------------------------------
+// Note: The color parameter can be simple colors such as "red", "blue", "green" etc.. or you can use a
+//       hex value to set the desired color.
+
+*/
+
+</script>
+
+  <!-- This js script contains all the frame build modules. This is needed for the template to function properly -->
+  <!--<script type="text/javascript" src="js/dynamic_data.js"></script>-->
+
+  <script type="text/javascript">
+var initBanner = (function() {
+	"use strict";
+	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	// B A S E   V A R S
+	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	var ids = [];
+	var imageLoadedCount = 0;
+	var width = 970;
+	var height = 250;
+	var banImgs = ban_1_Imgs;
+	var banTxt = [];
+	var conceptNum = 1;
+
+	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	// S E T T E R S
+	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	// Pass properties into Frame Module js doc.
+	setModuleProps(width, height);
+
+	// ======================================================================================================
+	// C O R E   F U N S T I O N S - [DO NOT EDIT]
+	// ======================================================================================================
+	function initBanner() {
+
+		// Assign any variables here
+		// takes all DOM els with ids and assigns them to a global var with the name of the id
+		idsToVars();
+
+		// Create frame divs for banners
+		createDivs();
+
+		// Initializes clicktag code
+		initClickTag();
+
+		// Import / Parse Dyanmic Data
+		if(adType == "standard"){
+			setStandardBan();
+		} else {
+			setDyanmicBan();
+		}
+
+		if (window.location.href.indexOf("mccannny") != -1) {
+
+			wrapper.className += ' centerMe ';
+			wrapper.appendChild(click_through);
+			wrapper.appendChild(tooltip);
+			wrapper.appendChild(details_btn);
+		}
+
+	}
+
+	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	// S E T   B A N N E R   T Y P E S
+	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	// Set standard banner CTAs and data
+	function setStandardBan() {
+		waitForWebfonts(fonts);
+	}
+
+	// Set dynamic banner CTAs and data
+	function setDyanmicBan() {
+
+		switch (adPlatform) {
+			case "Sizmek":
+				adkit.onReady(handleSizmekData);
+				break;
+			case "DoubleClick":
+				Enabler.addEventListener(studio.events.StudioEvent.INIT, handleDoubleClickData);
+				break;
+			default:
+		}
+
+	}
+
+	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	// P A R S E   D Y A N M I C   D A T A
+	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	function handleSizmekData() {
+		setSizmekData(adkit);
+		waitForWebfonts(fonts);
+	}
+
+	function handleDoubleClickData() {
+		setDoubleClickData();
+		waitForWebfonts(fonts);
+	}
+
+	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	// C R E A T E   D I V S
+	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	// Create frame divs for banners
+	function createDivs() {
+		for(var i = 1; i <= totalDivs; i++){
+			auto_divs.innerHTML = auto_divs.innerHTML + "<div id='d" + i + "' style='position: absolute'></div>";
+		}
+	}
+
+	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	// S T A R T   A N I M A T I O N
+	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	function startAnimation() {
+
+		wrapper.className += 'show';
+		click_through.className += 'show';
+		eval("banner_" + conceptNum + "()");
+	}
+
+	// Create vars from IDs
+	function idsToVars() {
+
+		[].forEach.call(document.querySelectorAll('*'), function(el) {
+			if (el.id) {
+				window[el.id] = el;
+				ids.push(el.id);
+			}
+		});
+	}
+
+	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	// I N I T   C L I C K T A G   A N D   B A C K U P
+	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	// Initialize Clickthrough
+	function initClickTag() {
+
+		click_through.onclick = function() {
+			switch (adPlatform) {
+				case "Sizmek":
+					adkit.clickthrough();
+					break;
+				case "DoubleClick":
+					if(adType === "standard"){
+						window.open(window.clickTag);
+					} else {
+			      Enabler.exit(dcDCOExitURL);
+					}
+					break;
+				default:
+
+			}
+		};
+	}
+
+
+	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	// P R E L O A D   F O N T S
+	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	function waitForWebfonts(fonts) {
+
+
+			// waitForWebfonts with IntvervalArray
+			// Use array to maintain multiple intervals in a loop
+			// use timeoutInterval to continue after n seconds (for IE11 bug)
+
+			var loadedFonts = 0;
+			var intervalArray = new Array(fonts.length);
+			var timeoutInterval;
+			timeoutInterval = setTimeout(continueFontTimeout, 1000);
+
+			for(var i = 0, l = fonts.length; i < l; ++i) {
+
+				var font = fonts[i];
+
+				var tempSpan = document.createElement('span');
+				// Characters that vary significantly among different fonts
+				tempSpan.innerHTML = 'giItT1WQy@!-/#';
+				// Visible - so we can measure it - but not on the screen
+				tempSpan.style.position      = 'absolute';
+				tempSpan.style.left          = '-10000px';
+				tempSpan.style.top           = '-10000px';
+				// Large font size makes even subtle changes obvious
+				tempSpan.style.fontSize      = '970px';
+				// Reset any font properties
+				tempSpan.style.fontFamily    = 'Times New Roman';
+				tempSpan.style.fontVariant   = 'normal';
+				tempSpan.style.fontStyle     = 'normal';
+				tempSpan.style.fontWeight    = 'normal';
+				tempSpan.style.letterSpacing = '0';
+				document.body.appendChild(tempSpan);
+
+				// Remember width with no applied web font
+				var width = tempSpan.offsetWidth;
+
+				tempSpan.style.fontFamily = font;
+
+
+
+				if(!checkFont()) {
+						intervalArray[i] = setInterval(checkFont, 50);
+				}
+			}
+
+			function checkFont() {
+					// Compare current width with original width
+
+					if(tempSpan && tempSpan.offsetWidth != width) {
+							loadedFonts++;
+
+							tempSpan.parentNode.removeChild(tempSpan);
+							tempSpan = null;
+					}
+
+					// If all fonts have been loaded
+					if(loadedFonts == fonts.length) {
+						// clear timeoutInterval...intervalArray cleared in continueInit()
+						clearInterval(timeoutInterval);
+						continueInit();
+						return true;
+					}
+					else
+					{
+						return false;
+					}
+			}
+
+			function continueInit() {
+
+				// fininish init, clear intervals and start animation
+				for(var i = 0, l = fonts.length; i < l; ++i) {
+					if(intervalArray[i]) {
+						clearInterval(intervalArray[i]);
+					}
+				}
+				
+				// startAnimsation();
+				loadImages();
+			
+			}
+
+			function continueFontTimeout() {
+				continueInit();
+			}
+	}
+
+	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	// P R E L O A D   I M A G E S
+	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+	function imageLoaded() {	
+
+		imageLoadedCount++;
+
+		if (imageLoadedCount == banImgs.length){
+			startAnimation();
+		}
+	}
+
+	function loadImages() {		
+
+		var count = 0;
+
+		banImgs.forEach(function(element) {
+			var imgLoader = new Image();
+			imgLoader.onload = function(){	imageLoaded();	}
+			imgLoader.src = banImgs[count];
+			count++;
+		});
+		
+	}
+
+	return initBanner;
+})();
+
+</script>
+  <script type="text/javascript">
+    var clickTag = "https://google.com";
+    window.onload = function () {
+      initBanner();
+    };
+  </script>
+<script>
+window.__BANNER_BACKGROUND_STATE__={"x":37,"y":0,"scale":1};
+window.__BANNER_IMAGE_ADJUSTMENTS__={"mainbg.jpg":{"x":37,"y":0,"scale":1}};
+window.__BANNER_HIDDEN_IMAGES__={};
+window.__BANNER_SHAPE_DEFINITIONS__={"orangeStrip":[".container.left-half",".container"]};
+window.__BANNER_SHAPE_ADJUSTMENTS__={};
+(function(){
+  function findTarget(key){
+    var imageName=key.indexOf(".")===-1?key:key.split(".")[0];
+    var keyed=document.querySelector('[data-banner-image-key="'+key+'"]');
+    var image=(keyed&&keyed.tagName==="IMG"?keyed:keyed&&keyed.querySelector("img"))||document.querySelector('img[src*="'+key+'"], img[src*="'+imageName+'"]');
+    var layer=(keyed&&keyed.closest('div[id^="d"]'))||(image&&image.closest('div[id^="d"]'));
+    if(image){image.dataset.bannerImageKey=key;}
+    if(layer){layer.dataset.bannerImageKey=key;}
+    return{image:image,layer:layer||image||document.getElementById(imageName)||document.getElementById(key)||document.querySelector("."+imageName)||document.querySelector("."+key)};
+  }
+  function baseNumber(el,key){
+    if(!el)return 0;
+    var dataKey="bannerBase"+key.charAt(0).toUpperCase()+key.slice(1);
+    if(el.dataset[dataKey]===undefined){
+      var computed=window.getComputedStyle(el);
+      var raw=el.style[key]||computed[key]||"0";
+      el.dataset[dataKey]=String(parseFloat(raw)||0);
+    }
+    return Number(el.dataset[dataKey]||0);
+  }
+  function baseTransform(el){
+    if(!el)return "";
+    if(el.dataset.bannerBaseTransform===undefined){
+      var transform=el.style.transform||"";
+      el.dataset.bannerBaseTransform=transform==="none"?"":transform;
+    }
+    return el.dataset.bannerBaseTransform||"";
+  }
+  function baseDisplay(el){
+    if(!el)return "";
+    if(el.dataset.bannerBaseDisplay===undefined){
+      var display=el.style.display||window.getComputedStyle(el).display||"";
+      el.dataset.bannerBaseDisplay=display==="none"?"":display;
+    }
+    return el.dataset.bannerBaseDisplay||"";
+  }
+  function apply(target,s,key){
+    if(!target||!target.layer||!s)return false;
+    if(Number(s.x||0)===0&&Number(s.y||0)===0&&Number(s.scale||1)===1)return false;
+    var x=Number(s.x||0);
+    var y=Number(s.y||0);
+    var scale=Number(s.scale||1);
+    if(key==="mainbg.jpg"&&target.image){
+      target.image.style.width="100%";
+      target.image.style.height="100%";
+      target.image.style.objectFit="cover";
+      target.image.style.transformOrigin="center center";
+      target.image.style.transform="translate("+x+"px, "+y+"px) scale("+scale+")";
+      return true;
+    }
+    var layer=target.layer;
+    var scaleEl=target.image||target.layer;
+    layer.style.left=baseNumber(layer,"left")+x+"px";
+    layer.style.top=baseNumber(layer,"top")+y+"px";
+    scaleEl.style.transformOrigin="center center";
+    scaleEl.style.transform=baseTransform(scaleEl)+" scale("+scale+")";
+    return true;
+  }
+  function normalizeShape(s){
+    s=s||{};
+    return{x:Number(s.x||0),y:Number(s.y||0),scale:Number(s.scale||1),rotation:Number(s.rotation||0),visible:s.visible!==false};
+  }
+  function shapeSelectors(key,definition){
+    if(Array.isArray(definition)){return definition.concat('[data-shape="'+key+'"]');}
+    if(typeof definition==="string"&&definition){return[definition,'[data-shape="'+key+'"]'];}
+    return['[data-shape="'+key+'"]'];
+  }
+  function shapeTargets(key){
+    var targets=[];
+    shapeSelectors(key,window.__BANNER_SHAPE_DEFINITIONS__[key]).forEach(function(selector){
+      document.querySelectorAll(selector).forEach(function(target){
+        if(targets.indexOf(target)===-1){targets.push(target);}
+      });
+    });
+    return targets;
+  }
+  function applyShape(key){
+    var targets=shapeTargets(key);
+    if(!targets.length)return false;
+    var s=normalizeShape(window.__BANNER_SHAPE_ADJUSTMENTS__[key]);
+    targets.forEach(function(target){
+      target.style.display=s.visible?baseDisplay(target):"none";
+      target.style.transformOrigin=target.style.transformOrigin||"center center";
+      target.style.transform=baseTransform(target)+" translate("+s.x+"px, "+s.y+"px) scale("+s.scale+") rotate("+s.rotation+"deg)";
+    });
+    return true;
+  }
+  function applyAll(){
+    apply(findTarget("mainbg.jpg"),window.__BANNER_BACKGROUND_STATE__,"mainbg.jpg");
+    Object.keys(window.__BANNER_IMAGE_ADJUSTMENTS__||{}).forEach(function(key){
+      apply(findTarget(key),window.__BANNER_IMAGE_ADJUSTMENTS__[key],key);
+    });
+    Object.keys(window.__BANNER_HIDDEN_IMAGES__||{}).forEach(function(key){
+      var target=findTarget(key);
+      if(target.layer){target.layer.style.display=window.__BANNER_HIDDEN_IMAGES__[key]?"none":"block";}
+    });
+    Object.keys(window.__BANNER_SHAPE_DEFINITIONS__||{}).forEach(applyShape);
+  }
+  window.addEventListener("load",applyAll);
+  if("MutationObserver" in window){
+    new MutationObserver(applyAll).observe(document.documentElement,{childList:true,subtree:true});
+  }
+  var attempts=0;
+  var interval=setInterval(function(){
+    applyAll();
+    attempts+=1;
+    if(attempts>160){clearInterval(interval);}
+  },50);
+})();
+</script>
+</body>
+
+</html>

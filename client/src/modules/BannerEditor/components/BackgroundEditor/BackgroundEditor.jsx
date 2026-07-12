@@ -60,7 +60,7 @@ function BackgroundEditor({
           type="number"
           value={value.scale}
         />
-        {/* {showRotation && (
+        {showRotation && (
           <Input
             id="background-rotation"
             label="Rotation"
@@ -68,7 +68,7 @@ function BackgroundEditor({
             type="number"
             value={value.rotation || 0}
           />
-        )} */}
+        )}
       </div>
       {showVisibility && (
         <Button onClick={handleVisibilityChange} size="sm" type="button" variant="secondary">

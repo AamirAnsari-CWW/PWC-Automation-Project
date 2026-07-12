@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { FaChevronDown, FaEye, FaEyeSlash, FaImage, FaPen, FaShapes, FaUpload } from "react-icons/fa";
 
 import Button from "../../../../components/Button/Button";
 import Card from "../../../../components/Card/Card";
@@ -26,6 +27,7 @@ function PropertyPanel({
   template,
   textValues,
 }) {
+  const [activeSection, setActiveSection] = useState("text");
   const [activeImageName, setActiveImageName] = useState(null);
   const [activeShapeName, setActiveShapeName] = useState(null);
 
@@ -68,29 +70,54 @@ function PropertyPanel({
     onShapeAdjustmentChange(activeShapeName, nextAdjustment);
   };
 
+  const renderSection = (sectionId, title, icon, children) => {
+    const isOpen = activeSection === sectionId;
+
+    return (
+      <section className={`property-panel__section ${isOpen ? "is-open" : ""}`}>
+        <button
+          aria-expanded={isOpen}
+          className="property-panel__section-toggle"
+          onClick={() => setActiveSection(sectionId)}
+          type="button"
+        >
+          <span className="property-panel__section-title">
+            {icon}
+            {title}
+          </span>
+          <FaChevronDown aria-hidden="true" />
+        </button>
+        {isOpen && <div className="property-panel__section-body">{children}</div>}
+      </section>
+    );
+  };
+
   return (
     <Card className="property-panel">
-      <section className="property-panel__section">
-        <h2>Template Rules</h2>
-        <p>
-          Only fields listed in template.json are editable. Animation and GSAP
-          timelines stay locked.
-        </p>
-      </section>
+      <div className="property-panel__header">
+        <div>
+          <span>Properties</span>
+          <h2>Banner Controls</h2>
+        </div>
+        <p>Template fields stay editable while animation and timeline behavior remain locked.</p>
+      </div>
 
-      <div className="property-panel__editable-row">
-        <TextEditor
-          fields={template.editableTexts}
-          onChange={onTextChange}
-          values={textValues}
-        />
+      <div className="property-panel__sections">
+        {renderSection(
+          "text",
+          "Text",
+          <FaPen aria-hidden="true" />,
+          <TextEditor fields={template.editableTexts} onChange={onTextChange} values={textValues} />
+        )}
 
-        <section className="property-panel__section">
-          <h2>Editable Images</h2>
+        {renderSection(
+          "images",
+          "Images",
+          <FaImage aria-hidden="true" />,
           <div className="property-panel__images">
             {template.editableImages.map((imageName) => (
               <label className="property-panel__image-control" key={imageName}>
-                <span>{imageName}</span>
+                <span>{imageName === MAIN_BACKGROUND_NAME ? "Background" : imageName}</span>
                 <input
                   accept="image/*"
                   onChange={(event) =>
@@ -110,6 +137,7 @@ function PropertyPanel({
                     type="button"
                     variant="secondary"
                   >
+                    <FaUpload aria-hidden="true" />
                     {imageName === MAIN_BACKGROUND_NAME
                       ? "Edit Background"
                       : "Edit Image"}
@@ -127,39 +155,39 @@ function PropertyPanel({
                       type="button"
                       variant="ghost"
                     >
+                      {hiddenImages[imageName] ? <FaEye aria-hidden="true" /> : <FaEyeSlash aria-hidden="true" />}
                       {hiddenImages[imageName] ? "Show" : "Hide"}
                     </Button>
                   )}
                 </div>
               </label>
             ))}
-          </div>
-          <section className="property-panel__section">
-            <div className="property-panel__images">
-              <label>
-              <div>
-                <h2> Logo</h2>
-                <p>Adjust logo position over the banner frame.</p>
-              </div>
+            <article className="property-panel__image-control">
+              <span>Logo</span>
+              <small>Adjust logo position over the banner frame.</small>
               <Button
                 onClick={() => setActiveImageName(LOGO_IMAGE_NAME)}
                 size="sm"
                 type="button"
                 variant="secondary"
               >
+                <FaUpload aria-hidden="true" />
                 Edit Logo
               </Button>
-              </label>
-            </div>
-          </section>
-          {Object.keys(shapeDefinitions).length > 0 && (
-        <section className="property-panel__section">
-          <h2>Orange Strip</h2>
-          <div className="property-panel__images">
+            </article>
+          </div>
+        )}
+
+        {Object.keys(shapeDefinitions).length > 0 &&
+          renderSection(
+            "shapes",
+            "Shapes",
+            <FaShapes aria-hidden="true" />,
+            <div className="property-panel__images">
             {Object.entries(shapeDefinitions).map(([shapeName, selector]) => (
               <label className="property-panel__image-control" key={shapeName}>
-                {/* <span>{shapeName}</span> */}
-                <small>Adjust Orange Strip From Here</small>
+                <span>Orange Strip</span>
+                <small>{selector} X, Y, scale, rotation, and visibility</small>
                 <div className="property-panel__image-actions">
                   <Button
                     onClick={(event) => {
@@ -171,6 +199,7 @@ function PropertyPanel({
                     type="button"
                     variant="secondary"
                   >
+                    <FaShapes aria-hidden="true" />
                     Edit Strip
                   </Button>
                   <Button
@@ -189,6 +218,11 @@ function PropertyPanel({
                     type="button"
                     variant="ghost"
                   >
+                    {shapeAdjustments[shapeName]?.visible === false ? (
+                      <FaEye aria-hidden="true" />
+                    ) : (
+                      <FaEyeSlash aria-hidden="true" />
+                    )}
                     {shapeAdjustments[shapeName]?.visible === false
                       ? "Show"
                       : "Hide"}
@@ -196,10 +230,9 @@ function PropertyPanel({
                 </div>
               </label>
             ))}
-          </div>
-        </section>
-      )}
-        </section>
+            </div>
+          )}
+
       </div>
 
       {activeImageName && editableImageNames.includes(activeImageName) && (
@@ -218,7 +251,7 @@ function PropertyPanel({
 
       {activeShapeName && shapeDefinitions[activeShapeName] && (
         <BackgroundEditor
-          description={`${shapeDefinitions[activeShapeName]} position, scale, and visibility`}
+          description={`${shapeDefinitions[activeShapeName]} position, scale, rotation, and visibility`}
           imageName={activeShapeName}
           onChange={handleShapeAdjustmentChange}
           onClose={() => setActiveShapeName(null)}

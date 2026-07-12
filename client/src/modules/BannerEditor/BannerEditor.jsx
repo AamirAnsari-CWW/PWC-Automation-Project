@@ -55,6 +55,8 @@ function BannerEditor() {
 function BannerEditorWorkspace({ bannerSize, template }) {
   const { dispatch, state } = useEditor();
   const editableTexts = bannerSize.editableTexts || template.editableTexts;
+  const bannerOrientation =
+    bannerSize.height > bannerSize.width ? "portrait" : bannerSize.width > bannerSize.height ? "landscape" : "square";
 
   const projectPayload = useMemo(
     () => ({
@@ -140,7 +142,7 @@ function BannerEditorWorkspace({ bannerSize, template }) {
         sizeLabel={bannerSize.id}
         templateName={template.name}
       />
-      <div className="banner-editor__workspace">
+      <div className={`banner-editor__workspace banner-editor__workspace--${bannerOrientation}`}>
         <PropertyPanel
           backgroundState={state.background}
           hiddenImages={state.hiddenImages}

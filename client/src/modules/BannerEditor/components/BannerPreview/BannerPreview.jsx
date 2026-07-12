@@ -45,7 +45,9 @@ function BannerPreview({
     return () => resizeObserver.disconnect();
   }, [size.height, size.width]);
 
+  const aspectRatio = `${size.width} / ${size.height}`;
   const previewFrameStyle = {
+    aspectRatio,
     height: `${size.height * previewScale}px`,
     width: `${size.width * previewScale}px`,
   };
@@ -80,8 +82,11 @@ function BannerPreview({
   return (
     <Card className="banner-preview">
       <div className="section-title">
-        <h2>Real HTML5 Preview</h2>
-        <span className="status-pill">Live Iframe</span>
+        <div>
+          <h2>Preview</h2>
+          <p>{size.width} x {size.height}px HTML5 banner</p>
+        </div>
+        <span className="status-pill">Live</span>
       </div>
       <div className="banner-preview__stage" ref={stageRef}>
         <div className="banner-preview__frame" style={previewFrameStyle}>
@@ -101,10 +106,6 @@ function BannerPreview({
           </div>
         </div>
       </div>
-      <p>
-        This iframe loads the approved HTML5 banner package from the backend and preserves its CSS, fonts, images,
-        clickTags, JavaScript, and GSAP timeline.
-      </p>
     </Card>
   );
 }
