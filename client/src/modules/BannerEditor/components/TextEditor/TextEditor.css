@@ -1,0 +1,13 @@
+.text-editor {
+  display: grid;
+  gap: 14px;
+}
+
+.text-editor h2 {
+  font-size: 16px;
+}
+
+.text-editor__fields {
+  display: grid;
+  gap: 12px;
+}

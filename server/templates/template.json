@@ -1,0 +1,38 @@
+{
+  "id": "energy-campaign",
+  "name": "Energy Campaign",
+  "sizes": [
+    "160x600",
+    "300x250",
+    "300x600",
+    "728x90",
+    "970x250"
+  ],
+  "editableTexts": [
+    "d2",
+    "d3",
+    "d5",
+    "d7",
+    "d190"
+  ],
+  "sizeEditableTexts": {
+    "160x600": [
+      "d3",
+      "d4",
+      "d7",
+      "d8",
+      "d190"
+    ]
+  },
+  "editableImages": [
+    "mainbg.jpg",
+    "silo.png"
+  ],
+  "shapeDefinitions": {
+    "orangeStrip": [
+      ".container.left-half",
+      ".container"
+    ]
+  },
+  "animationFile": "src/js/main.js"
+}

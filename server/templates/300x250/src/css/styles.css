@@ -1,0 +1,266 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+*,
+:before,
+:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  overflow: hidden;
+}
+
+.centerMe {
+  margin: auto;
+}
+
+.abs-pos, #click_through, #wrapper {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 300px;
+  height: 250px;
+  overflow: hidden;
+}
+
+.abs-pos-retina {
+  position: absolute;
+  width: 600px;
+  height: 500px;
+  overflow: hidden;
+  top: -125px;
+  left: -150px;
+  -webkit-transform: scale(0.5);
+  -moz-transform: scale(0.5);
+  -ms-transform: scale(0.5);
+  transform: scale(0.5);
+}
+
+.gpu {
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  transform: rotate(0.1deg);
+  will-change: transform;
+}
+
+.set_scroll {
+  overflow: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.set_scroll::-webkit-scrollbar {
+  display: none;
+}
+
+#wrapper {
+  position: relative;
+  visibility: hidden;
+}
+#wrapper.show {
+  visibility: visible;
+}
+#wrapper {
+  background-color: #000000;
+  text-align: center;
+}
+
+#click_through {
+  visibility: hidden;
+}
+#click_through.show {
+  visibility: visible;
+}
+#click_through {
+  cursor: pointer;
+  border: 1px solid #d8dada;
+  z-index: 9999;
+}
+
+#zoomTxt,
+#stillTxt,
+#revealTxt,
+#txtHolder {
+  position: absolute;
+  white-space: nowrap;
+}
+
+#details_btn,
+#close_btn {
+  position: absolute;
+  cursor: pointer;
+  display: none;
+}
+
+#tooltip {
+  position: absolute;
+  display: none;
+}
+
+#overlay {
+  position: absolute;
+  top: 0px;
+  width: 300px;
+  height: 250px;
+  object-fit: cover;
+}
+
+#overlay img {
+  width: 100%;
+  height: auto;
+}
+
+@font-face {
+  font-family: "NHG75";
+  src: url("../fonts/ITCCharterCom-Bold.woff2");
+}
+.NHG75 {
+  font-family: "NHG75";
+  font-weight: normal;
+  font-style: normal;
+  user-select: none;
+  font-smooth: antialiased;
+  -webkit-font-smoothing: antialiased;
+}
+
+em {
+  opacity: 0;
+}
+
+.d1 {
+  object-fit: contain;
+}
+
+#staticImg2,
+#staticImg1,
+#staticImg3 {
+  width: 100%;
+  height: 100%;
+}
+
+#staticImg2 img,
+#staticImg1 img,
+#staticImg3 img,
+#staticImg4 img {
+  width: 100%;
+}
+
+#d6 {
+  z-index: 20;
+}
+
+.animate {
+  position: absolute;
+  top: 134px;
+  left: 14px;
+}
+
+.container {
+  width: 138px;
+  overflow: hidden;
+  clip-path: polygon(12% 0%, 100% 0%, 87% 100%, 0% 100%);
+}
+
+.left-half {
+  position: relative;
+  left: 138px;
+}
+
+.box,
+.box2 {
+  height: 29px;
+  background-color: #ea5e2c;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.active .box {
+  animation: reveal 0.8s ease-out forwards;
+}
+
+.active .box2 {
+  animation: reveal 0.8s ease-out forwards 0.8s;
+}
+
+@keyframes reveal {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+#d1::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.2);
+  pointer-events: none;
+  /* important if div has interactions */
+}
+
+#d4 {
+  position: absolute;
+  left: 0px;
+}
+
+#d6 {
+  z-index: 20;
+  height: 250px;
+  width: 300px;
+  display: block;
+  transform: matrix(2.8, 0, 0, 2.8, -201, 23);
+}
+
+#color-overlay {
+  position: absolute;
+  top: 0px;
+  width: 300px;
+  height: 250px;
+  background-color: rgba(0, 0, 0, 0.5);
+}

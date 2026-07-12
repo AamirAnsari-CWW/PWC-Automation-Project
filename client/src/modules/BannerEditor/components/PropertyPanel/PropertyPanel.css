@@ -1,0 +1,223 @@
+.property-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding: 28px;
+  background: #f5f7fb;
+}
+
+/* ---------------- Rules Card ---------------- */
+
+.property-panel__section {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
+}
+
+.property-panel__section h2 {
+  margin: 0 0 8px;
+  font-size: 24px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.property-panel__section p {
+  margin: 0;
+  color: #64748b;
+  line-height: 1.7;
+  font-size: 15px;
+}
+
+/* ---------------- Main Layout ---------------- */
+
+.property-panel__editable-row {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) 420px;
+  gap: 30px;
+  align-items: start;
+}
+
+/* ---------------- Left Side ---------------- */
+
+.property-panel__editable-row > :first-child {
+  background: white;
+  border-radius: 18px;
+  border: 1px solid #e5e7eb;
+  padding: 26px;
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
+}
+
+/* ---------------- Right Side ---------------- */
+
+.property-panel__editable-row > :last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  position: sticky;
+  top: 20px;
+}
+
+/* ---------------- Assets Card ---------------- */
+
+.property-panel__images {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.property-panel__image-control {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 18px;
+  transition: .25s;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.property-panel__image-control:hover {
+  border-color: #2563eb;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(37, 99, 235, .08);
+}
+
+.property-panel__image-control span {
+  font-size: 20px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.property-panel__image-control small {
+  color: #64748b;
+  font-size: 13px;
+  word-break: break-all;
+}
+
+/* ---------------- File Upload ---------------- */
+
+.property-panel__image-control input[type=file] {
+  width: 100%;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+/* ---------------- Badge ---------------- */
+
+.property-panel__image-control strong {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: #dcfce7;
+  color: #15803d;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* ---------------- Buttons ---------------- */
+
+.property-panel__image-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.property-panel__image-actions .button {
+  flex: 1;
+  min-width: 120px;
+}
+
+/* ---------------- Logo ---------------- */
+
+.logo-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-card h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.logo-card p {
+  margin-top: 6px;
+  color: #64748b;
+  font-size: 14px;
+}
+
+/* ---------------- Inputs ---------------- */
+
+input[type="text"],
+textarea {
+  width: 100%;
+  border: 1px solid #d0d5dd;
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 15px;
+  transition: .2s;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 4px rgba(37,99,235,.12);
+}
+
+/* ---------------- Section Titles ---------------- */
+
+.property-panel h2 {
+  letter-spacing: -.3px;
+}
+
+/* ---------------- Scroll ---------------- */
+
+.property-panel::-webkit-scrollbar {
+  width: 8px;
+}
+
+.property-panel::-webkit-scrollbar-thumb {
+  background: #d0d5dd;
+  border-radius: 20px;
+}
+
+/* ---------------- Responsive ---------------- */
+
+@media (max-width: 1200px) {
+  .property-panel__editable-row {
+    grid-template-columns: 1fr;
+  }
+
+  .property-panel__editable-row > :last-child {
+    position: static;
+  }
+}
+
+@media (max-width: 768px) {
+  .property-panel {
+    padding: 16px;
+  }
+
+  .property-panel__section,
+  .property-panel__editable-row > :first-child {
+    padding: 18px;
+  }
+
+  .property-panel__image-actions {
+    flex-direction: column;
+  }
+
+  .property-panel__image-actions .button {
+    width: 100%;
+  }
+}

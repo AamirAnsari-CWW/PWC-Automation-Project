@@ -1,0 +1,288 @@
+// ======================================================================================================
+// I M P O R T S + M I X I N S
+// ======================================================================================================
+@use "reset";
+
+@mixin size($width: auto, $height: auto) {
+  width: $width;
+  height: $height;
+}
+
+@mixin position($top: auto, $right: auto, $bottom: auto, $left: auto) {
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+
+// ======================================================================================================
+// V A R S
+// ======================================================================================================
+// set up variables
+$width: 160px;
+$height: 600px;
+$retinaWidth: (
+  2 * $width
+);
+$retinaHeight: (
+  2 * $height
+);
+
+// set all elements to be box-sizing: border box to include any border, padding and content, but not margin.
+*,
+:before,
+:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  overflow: hidden;
+}
+
+// ======================================================================================================
+// C L A S S E S - Sizing and Image Quality
+// ======================================================================================================
+
+// Center on staging
+.centerMe {
+  margin: auto;
+}
+
+// 100% width and height elements that can be positioned easily absolutely
+.abs-pos {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: $width;
+  height: $height;
+  overflow: hidden;
+}
+
+.abs-pos-retina {
+  position: absolute;
+  width: $retinaWidth;
+  height: $retinaHeight;
+  overflow: hidden;
+  top: calc($height / -2);
+  left: calc($width / -2);
+  -webkit-transform: scale(0.5);
+  -moz-transform: scale(0.5);
+  -ms-transform: scale(0.5);
+  transform: scale(0.5);
+}
+
+.gpu {
+  backface-visibility: hidden; // this by itself will only effect the current element
+  transform: translateZ(0); // adding this will cause child elements also get GPU acceleration
+  transform: rotate(0.1deg); // this will smooth jittery animation
+  will-change: transform; // optimizes animations by letting the browser know a transform is just about to be used, potentially increasing performance
+}
+
+.set_scroll {
+  overflow: scroll;
+  -ms-overflow-style: none; // IE 10+
+  scrollbar-width: none; // Firefox
+}
+
+.set_scroll::-webkit-scrollbar {
+  display: none;
+  // Safari and Chrome
+}
+
+// ======================================================================================================
+// P A G E   E L E M E N T S
+// ======================================================================================================
+
+#wrapper {
+  @extend .abs-pos;
+
+  position: relative;
+  visibility: hidden;
+
+  &.show {
+    visibility: visible;
+  }
+
+  background-color: #000000;
+
+  // CENTER ALL TEXT
+  text-align: center;
+}
+
+#click_through {
+  visibility: hidden;
+
+  &.show {
+    visibility: visible;
+  }
+
+  @extend .abs-pos;
+  cursor: pointer;
+  border: 1px solid #d8dada;
+  z-index: 9999;
+
+}
+
+// Used for text layout modules - [DO NOT EDIT]
+#zoomTxt,
+#stillTxt,
+#revealTxt,
+#txtHolder {
+  position: absolute;
+  white-space: nowrap;
+}
+
+// P A G E   E L E M E N T S - [DO NOT EDIT]
+#details_btn,
+#close_btn {
+  position: absolute;
+  cursor: pointer;
+  display: none;
+}
+
+#tooltip {
+  position: absolute;
+  display: none;
+}
+
+#overlay {
+  position: absolute;
+  top: 0px;
+  width: $width;
+  height: $height;
+  object-fit: cover;
+}
+
+#overlay img {
+  width: 100%;
+  height: auto;
+}
+
+// ======================================================================================================
+// F O N T S
+// ======================================================================================================
+
+// ------------------------------------------------------------------------------------------------------
+// F O N T   I M P O R T S  /  C L A S S E S
+// ------------------------------------------------------------------------------------------------------
+@font-face {
+  font-family: "NHG75";
+  src: url("../fonts/ITCCharterCom-Bold.woff2");
+}
+
+.NHG75 {
+  font-family: "NHG75";
+  font-weight: normal;
+  font-style: normal;
+  user-select: none;
+  font-smooth: antialiased;
+  -webkit-font-smoothing: antialiased;
+}
+
+// ======================================================================================================
+// C U S T O M   C S S   [ place custom css below ]
+// ======================================================================================================
+
+em {
+  opacity: 0;
+}
+
+.d1 {
+  object-fit: contain;
+}
+
+#staticImg2,
+#staticImg1,
+#staticImg3 {
+  width: 100%;
+  height: 100%;
+}
+
+#staticImg2 img,
+#staticImg1 img,
+#staticImg3 img,
+#staticImg4 img {
+  width: 100%;
+}
+
+#d6 {
+  z-index: 20;
+}
+
+// Animation
+
+.animate {
+  position: absolute;
+  top: 361px;
+  left: 4px;
+}
+
+.container {
+  width: 76px;
+  overflow: hidden;
+  clip-path: polygon(12% 0%, 100% 0%, 87% 100%, 0% 100%);
+
+}
+
+.left-half {
+  position: relative;
+  left: 76px;
+}
+
+.box,
+.box2 {
+  height: 17px;
+  background-color: #ea5e2c;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.active .box {
+  animation: reveal 0.8s ease-out forwards;
+}
+
+.active .box2 {
+  animation: reveal 0.8s ease-out forwards 0.8s;
+}
+
+@keyframes reveal {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+#d1::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.1);
+  pointer-events: none;
+  /* important if div has interactions */
+}
+
+#d4 {
+  position: absolute;
+  left: 0px;
+}
+
+#d6 {
+  z-index: 20;
+  height: $height;
+  width: $width;
+  display: block;
+  transform: matrix(3.5, 0, 0, 3.5, -145, -297);
+}
+
+#color-overlay {
+  position: absolute;
+  top: 0px;
+  width: $width;
+  height: $height;
+  background-color: rgba(0, 0, 0, 0.5);
+}

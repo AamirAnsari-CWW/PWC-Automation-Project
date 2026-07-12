@@ -1,0 +1,37 @@
+.recent-projects {
+  padding: 20px;
+}
+
+.recent-projects__rows {
+  display: grid;
+  gap: 12px;
+}
+
+.recent-projects__row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.recent-projects__row:last-child {
+  border-bottom: 0;
+}
+
+.recent-projects__row h3 {
+  font-size: 15px;
+}
+
+.recent-projects__row p,
+.recent-projects__row span {
+  margin-top: 4px;
+  color: var(--text-light);
+  font-size: 13px;
+}
+
+.recent-projects__empty {
+  color: var(--text-light);
+  font-size: 14px;
+  padding: 14px 0;
+}

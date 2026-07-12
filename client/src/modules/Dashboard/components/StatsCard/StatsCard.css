@@ -1,0 +1,42 @@
+.stats-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+}
+
+.stats-card__icon {
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-sm);
+  font-size: 20px;
+}
+
+.stats-card__icon--blue {
+  background: var(--primary-soft);
+  color: var(--primary);
+}
+
+.stats-card__icon--green {
+  background: #e8f8ef;
+  color: var(--success);
+}
+
+.stats-card__icon--orange {
+  background: #fff4e5;
+  color: var(--warning);
+}
+
+.stats-card span {
+  color: var(--text-light);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.stats-card strong {
+  display: block;
+  margin-top: 6px;
+  font-size: 26px;
+}

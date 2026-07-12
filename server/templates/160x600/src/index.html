@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>160x600_MASTER</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <meta name="ad.size" content="width=160,height=600" />
+  <meta name="“description”" content="Craft Boilerplate" />
+
+
+  <meta name="ad.size" content="width=160,height=600" />
+  <meta name="“description”" content="Craft Boilerplate" />
+  <link type="text/css" rel="stylesheet" media="screen, projection" href="css/styles.css" />
+</head>
+
+<body class="__versions">
+  <!-- Frame content Divs are dynamically crated and added to this div -->
+  <div id="wrapper">
+    <div id="auto_divs"></div>
+    <div id="custom_content"></div>
+
+    <div class="animate">
+      <div class="container left-half">
+        <div class="box2"></div>
+      </div>
+      <div class="container">
+        <div class="box"></div>
+      </div>
+    </div>
+  </div>
+  <!-- Div for overlay image to check accuracy of creative -->
+  <div id="overlay"></div>
+
+  <!-- ========================================================================================== -->
+  <!-- any elements requiring user interactions should go below the click_through -->
+  <!-- ========================================================================================== -->
+  <!-- <div id="color-overlay"></div> -->
+  <!-- Interactive Elements -->
+  <div id="click_through"></div>
+
+  <!-- Div for Tooltip graphic -->
+  <div id="tooltip"></div>
+  <div id="details_btn"></div>
+
+  <!-- ========================================================================================== -->
+  <!-- U N C O M M E N T   F O R   D O U B L E C L I C K   B A N N E R S  -->
+  <!-- ========================================================================================== -->
+  <!-- GSAP Imports. Note: do not remove call to GSAP Textplugin -->
+  <!-- ========================================================= -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.5/TweenMax.min.js"></script>
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/plugins/TextPlugin.min.js"></script>
+
+  <!-- Uncomment this line if your banner is to be a Doubleclick Dynamic banner -->
+  <!-- <script type="text/javascript" src="https://s0.2mdn.net/ads/studio/Enabler.js"></script> -->
+
+  <!-- ========================================================================================== -->
+  <!-- U N C O M M E N T   F O R   S I Z M E K   B A N N E R S  -->
+  <!-- ========================================================================================== -->
+
+  <!-- Uncomment this line if your banner is to be a Sizmek banner, standard or dynamic -->
+  <!-- ================================================================================ -->
+  <!-- <script type="text/javascript" src="https://secure-ds.serving-sys.com/BurstingScript/adKit/adkit.js"></script> -->
+
+  <!-- GSAP Imports. Note: do not remove call to GSAP Textplugin -->
+  <!-- ========================================================= -->
+  <!-- <script type="text/javascript" src="https://s0.2mdn.net/ads/studio/cached_libs/tweenmax_1.18.0_499ba64a23378545748ff12d372e59e9_min.js"></script> -->
+  <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/plugins/TextPlugin.min.js"></script> -->
+
+  <!-- ========================================================================================== -->
+  <!-- D O   N O T   E D I T   C O D E   B E L O W   T H I S   P O I N T  -->
+  <!-- ========================================================================================== -->
+  <!-- <script type="text/javascript" src="js/IEfallback.js"></script> -->
+  <script type="text/javascript" src="js/DrawSVGPlugin.min.js"></script>
+  <script type="text/javascript" src="js/frame_modules.js"></script>
+
+  <!-- This js script contains all the helper scripts that control the overall construction of the banner -->
+  <script type="text/javascript" src="js/banners.js"></script>
+
+  <!-- This js script contains all the frame build modules. This is needed for the template to function properly -->
+  <!--<script type="text/javascript" src="js/dynamic_data.js"></script>-->
+
+  <script type="text/javascript" src="js/index.js"></script>
+  <script type="text/javascript">
+    var clickTag = "https://google.com";
+    window.onload = function () {
+      initBanner();
+    };
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+.background-editor {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface-muted);
+  display: grid;
+  gap: 14px;
+  padding: 16px;
+}
+
+.background-editor h2 {
+  font-size: 16px;
+}
+
+.background-editor p {
+  color: var(--text-light);
+  font-size: 13px;
+  line-height: 1.5;
+  margin-top: 4px;
+}
+
+.background-editor__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.background-editor__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 10px;
+}
+
+@media (max-width: 720px) {
+  .background-editor__grid {
+    grid-template-columns: 1fr;
+  }
+}

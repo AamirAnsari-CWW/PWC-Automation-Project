@@ -1,0 +1,31 @@
+.size-selector {
+  display: grid;
+  gap: 8px;
+}
+
+.size-selector__option {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: #ffffff;
+  cursor: pointer;
+  display: grid;
+  gap: 4px;
+  padding: 12px;
+  text-align: left;
+  transition: border var(--transition), background var(--transition);
+}
+
+.size-selector__option:hover,
+.size-selector__option.is-active {
+  border-color: var(--primary);
+  background: var(--primary-soft);
+}
+
+.size-selector__option strong {
+  color: var(--text);
+}
+
+.size-selector__option span {
+  color: var(--text-light);
+  font-size: 12px;
+}

@@ -1,0 +1,26 @@
+.banner-editor {
+  display: grid;
+  gap: 18px;
+}
+
+.banner-editor__workspace {
+  display: grid;
+  gap: 18px;
+  align-items: start;
+}
+
+.banner-editor__timeline {
+  min-height: 86px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px;
+}
+
+.banner-editor__timeline span {
+  color: var(--text-light);
+}
