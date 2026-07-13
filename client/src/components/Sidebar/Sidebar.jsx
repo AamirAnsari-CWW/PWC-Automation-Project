@@ -15,7 +15,7 @@ const navigationItems = [
   { to: ROUTES.templates, label: "Templates", icon: FaImages },
   { to: ROUTES.projects, label: "Projects", icon: FaFolderOpen },
   { to: ROUTES.exports, label: "Exports", icon: FaFileExport },
-  { to: ROUTES.settings, label: "Settings", icon: FaCog },
+  // { to: ROUTES.settings, label: "Settings", icon: FaCog },
 ];
 
 function Sidebar() {
@@ -40,10 +40,10 @@ function Sidebar() {
 
       <div className="sidebar-footer">
         {/* <div className="avatar">A</div> */}
-        <div>
-          {/* <h4>Aamir</h4>
-          <p>Administrator</p> */}
-        </div>
+        {/* <div>
+          <h4>Aamir</h4>
+          <p>Administrator</p>
+        </div> */}
       </div>
     </aside>
   );
