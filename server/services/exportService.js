@@ -62,15 +62,22 @@ window.__BANNER_SHAPE_ADJUSTMENTS__=${shapeAdjustmentState};
   }
   function apply(target,s,key){
     if(!target||!target.layer||!s)return false;
-    if(Number(s.x||0)===0&&Number(s.y||0)===0&&Number(s.scale||1)===1)return false;
+    if(key!=="mainbg.jpg"&&Number(s.x||0)===0&&Number(s.y||0)===0&&Number(s.scale||1)===1)return false;
     var x=Number(s.x||0);
     var y=Number(s.y||0);
     var scale=Number(s.scale||1);
     if(key==="mainbg.jpg"&&target.image){
-      target.image.style.width="100%";
-      target.image.style.height="100%";
-      target.image.style.objectFit="cover";
-      target.image.style.transformOrigin="center center";
+      target.layer.style.overflow="hidden";
+      if(window.getComputedStyle(target.layer).position==="static"){target.layer.style.position="relative";}
+      target.image.style.position="absolute";
+      target.image.style.left="0";
+      target.image.style.top="0";
+      target.image.style.width=target.image.naturalWidth?target.image.naturalWidth+"px":"auto";
+      target.image.style.height=target.image.naturalHeight?target.image.naturalHeight+"px":"auto";
+      target.image.style.maxWidth="none";
+      target.image.style.maxHeight="none";
+      target.image.style.objectFit="initial";
+      target.image.style.transformOrigin="top left";
       target.image.style.transform="translate("+x+"px, "+y+"px) scale("+scale+")";
       return true;
     }

@@ -1,1 +1,178 @@
-[]
+[
+  {
+    "id": "83a03772-8606-4f47-b778-c588e2c102e5",
+    "name": "Untitled Banner Project",
+    "templateId": "energy-campaign",
+    "templateName": "Energy Campaign",
+    "size": "728x90",
+    "texts": {},
+    "images": {
+      "mainbg.jpg": "/uploads/projects/f75bc20a-2a93-413e-840d-6b795f2eafdd.png"
+    },
+    "background": {
+      "x": -162.60751953124952,
+      "y": -605.8960738968062,
+      "scale": 1.24279569892473
+    },
+    "hiddenImages": {},
+    "imageAdjustments": {
+      "mainbg.jpg": {
+        "x": -162.60751953124952,
+        "y": -605.8960738968062,
+        "scale": 1.24279569892473
+      }
+    },
+    "shapeAdjustments": {},
+    "shapeDefinitions": {
+      "orangeStrip": [
+        ".container.left-half",
+        ".container"
+      ]
+    },
+    "createdBy": "local-user",
+    "createdAt": "2026-07-13T07:01:31.674Z",
+    "updatedAt": "2026-07-13T07:01:37.243Z"
+  },
+  {
+    "id": "74e6cd69-c2f9-444d-a5cf-9bdd846ca18a",
+    "name": "Untitled Banner Project",
+    "templateId": "energy-campaign",
+    "templateName": "Energy Campaign",
+    "size": "970x250",
+    "texts": {},
+    "images": {
+      "mainbg.jpg": "/uploads/projects/24c34b3e-9693-434e-908d-54f00861c38b.png"
+    },
+    "background": {
+      "x": -454.34604047042126,
+      "y": -1060.6272625540662,
+      "scale": 2.20301075268817
+    },
+    "hiddenImages": {},
+    "imageAdjustments": {
+      "mainbg.jpg": {
+        "x": -454.34604047042126,
+        "y": -1060.6272625540662,
+        "scale": 2.20301075268817
+      }
+    },
+    "shapeAdjustments": {},
+    "shapeDefinitions": {
+      "orangeStrip": [
+        ".container.left-half",
+        ".container"
+      ]
+    },
+    "createdBy": "local-user",
+    "createdAt": "2026-07-13T06:54:33.043Z",
+    "updatedAt": "2026-07-13T06:58:24.716Z"
+  },
+  {
+    "id": "bc23a286-1cc9-4f79-9f5f-1ed273d5f118",
+    "name": "Untitled Banner Project",
+    "templateId": "energy-campaign",
+    "templateName": "Energy Campaign",
+    "size": "300x250",
+    "texts": {},
+    "images": {
+      "mainbg.jpg": "/uploads/projects/c9fefd75-c3db-43b9-bbf3-7da0fa3490bb.png"
+    },
+    "background": {
+      "x": -187.22479020181055,
+      "y": -201.97910800604507,
+      "scale": 0.6483797403980647
+    },
+    "hiddenImages": {},
+    "imageAdjustments": {
+      "mainbg.jpg": {
+        "x": -187.22479020181055,
+        "y": -201.97910800604507,
+        "scale": 0.6483797403980647
+      }
+    },
+    "shapeAdjustments": {},
+    "shapeDefinitions": {
+      "orangeStrip": [
+        ".container.left-half",
+        ".container"
+      ]
+    },
+    "createdBy": "local-user",
+    "createdAt": "2026-07-13T06:48:02.842Z",
+    "updatedAt": "2026-07-13T06:53:50.796Z"
+  },
+  {
+    "id": "2efa6484-d7d7-4be7-b338-822cf1b13ab6",
+    "name": "Untitled Banner Project",
+    "templateId": "energy-campaign",
+    "templateName": "Energy Campaign",
+    "size": "300x250",
+    "texts": {},
+    "images": {
+      "mainbg.jpg": "/uploads/projects/2b0d124b-7960-4fc4-8f8a-425752a2a637.png"
+    },
+    "background": {
+      "x": -899.9744581446396,
+      "y": -958.0484689419816,
+      "scale": 0.1370770430002721
+    },
+    "hiddenImages": {},
+    "imageAdjustments": {
+      "mainbg.jpg": {
+        "x": -899.9744581446396,
+        "y": -958.0484689419816,
+        "scale": 0.1370770430002721
+      }
+    },
+    "shapeAdjustments": {},
+    "shapeDefinitions": {
+      "orangeStrip": [
+        ".container.left-half",
+        ".container"
+      ]
+    },
+    "createdBy": "local-user",
+    "createdAt": "2026-07-13T06:39:48.373Z",
+    "updatedAt": "2026-07-13T06:40:30.208Z"
+  },
+  {
+    "id": "5d39e49c-9b5e-4bb6-adee-bc248b684a57",
+    "name": "Untitled Banner Project",
+    "templateId": "energy-campaign",
+    "templateName": "Energy Campaign",
+    "size": "300x250",
+    "texts": {
+      "d2": "Text Issue is resolved ",
+      "d3": "Monday is Boring and I",
+      "d5": "will be great how people",
+      "d7": "i wont be able to do more",
+      "d190": "Humans are AI generated"
+    },
+    "images": {
+      "mainbg.jpg": "/uploads/projects/2f711c9f-6066-4ed5-9f72-274536d28497.jpg"
+    },
+    "background": {
+      "x": -116.99804636385363,
+      "y": -382.8697558996934,
+      "scale": 0.46033315255590235
+    },
+    "hiddenImages": {},
+    "imageAdjustments": {
+      "mainbg.jpg": {
+        "x": -116.99804636385363,
+        "y": -382.8697558996934,
+        "scale": 0.46033315255590235
+      }
+    },
+    "shapeAdjustments": {},
+    "shapeDefinitions": {
+      "orangeStrip": [
+        ".container.left-half",
+        ".container"
+      ]
+    },
+    "createdBy": "local-user",
+    "createdAt": "2026-07-13T06:19:25.476Z",
+    "updatedAt": "2026-07-13T06:25:18.384Z"
+  }
+]

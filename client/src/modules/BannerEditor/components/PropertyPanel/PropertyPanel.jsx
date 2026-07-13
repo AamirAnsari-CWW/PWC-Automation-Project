@@ -131,6 +131,10 @@ function PropertyPanel({
                     disabled={!imageValues[imageName]}
                     onClick={(event) => {
                       event.preventDefault();
+                      if (imageName === MAIN_BACKGROUND_NAME) {
+                        return;
+                      }
+
                       setActiveImageName(imageName);
                     }}
                     size="sm"
@@ -139,7 +143,7 @@ function PropertyPanel({
                   >
                     <FaUpload aria-hidden="true" />
                     {imageName === MAIN_BACKGROUND_NAME
-                      ? "Edit Background"
+                      ? "Adjust in Preview"
                       : "Edit Image"}
                   </Button>
                   {imageName !== MAIN_BACKGROUND_NAME && (

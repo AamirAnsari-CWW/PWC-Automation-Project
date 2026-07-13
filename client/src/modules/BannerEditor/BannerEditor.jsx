@@ -16,7 +16,19 @@ import Toolbar from "./components/Toolbar/Toolbar";
 import { EditorProvider, useEditor } from "./context/EditorContext";
 import { useAutosave } from "./hooks/useAutosave";
 import { buildBackendUrl } from "./services/previewService";
+import { getInitialBackgroundTransform } from "./utils/imageTransform";
 import "./BannerEditor.css";
+
+const MAIN_BACKGROUND_NAME = "mainbg.jpg";
+
+const loadImageDimensions = (src) =>
+  new Promise((resolve, reject) => {
+    const image = new Image();
+
+    image.onload = () => resolve({ height: image.naturalHeight, width: image.naturalWidth });
+    image.onerror = reject;
+    image.src = src;
+  });
 
 function BannerEditor() {
   const { size, templateId } = useParams();
@@ -104,15 +116,30 @@ function BannerEditorWorkspace({ bannerSize, template }) {
     }
 
     const uploadedImage = await uploadProjectImage(file);
+    const previewUrl = buildBackendUrl(uploadedImage.publicUrl);
 
     dispatch({
       type: "SET_IMAGE",
       payload: {
         imageName,
-        previewUrl: buildBackendUrl(uploadedImage.publicUrl),
+        previewUrl,
         serverUrl: uploadedImage.publicUrl,
       },
     });
+
+    if (imageName === MAIN_BACKGROUND_NAME) {
+      const imageSize = await loadImageDimensions(previewUrl);
+
+      dispatch({
+        type: "SET_BACKGROUND",
+        payload: getInitialBackgroundTransform({
+          bannerHeight: bannerSize.height,
+          bannerWidth: bannerSize.width,
+          imageHeight: imageSize.height,
+          imageWidth: imageSize.width,
+        }),
+      });
+    }
   };
 
   const handleSave = async () => {
@@ -169,6 +196,7 @@ function BannerEditorWorkspace({ bannerSize, template }) {
           hiddenImages={state.hiddenImages}
           imageAdjustments={state.imageAdjustments}
           imageValues={state.imagePreviewUrls}
+          onBackgroundChange={(background) => dispatch({ type: "SET_BACKGROUND", payload: background })}
           shapeAdjustments={state.shapeAdjustments}
           shapeDefinitions={template.shapeDefinitions || {}}
           size={bannerSize}

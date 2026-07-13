@@ -21,6 +21,28 @@
   font-size: 13px;
 }
 
+.banner-preview__tools {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.banner-preview__zoom {
+  align-items: center;
+  color: var(--text-light);
+  display: flex;
+  font-size: 12px;
+  font-weight: 800;
+  gap: 8px;
+}
+
+.banner-preview__zoom input {
+  accent-color: var(--primary);
+  width: 132px;
+}
+
 .banner-preview__stage {
   display: grid;
   place-items: center;
@@ -47,6 +69,7 @@
 }
 
 .banner-preview__content {
+  position: relative;
   transform-origin: top left;
 }
 
@@ -60,6 +83,18 @@
 
 .banner-preview__iframe {
   display: block;
+}
+
+.banner-preview__background-controller {
+  cursor: grab;
+  inset: 0;
+  position: absolute;
+  touch-action: none;
+  z-index: 3;
+}
+
+.banner-preview__background-controller:active {
+  cursor: grabbing;
 }
 
 .banner-preview__empty {

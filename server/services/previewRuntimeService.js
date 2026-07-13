@@ -217,7 +217,7 @@ function updateText(payload) {
   }
 
   function applyAdjustment(target, adjustment, key) {
-    if (!target || !target.layer || !hasAdjustment(adjustment)) {
+    if (!target || !target.layer || !adjustment || (key !== "mainbg.jpg" && !hasAdjustment(adjustment))) {
       return;
     }
 
@@ -230,10 +230,19 @@ function updateText(payload) {
     if (key === "mainbg.jpg" && target.image) {
       var backgroundTransform = "translate(" + x + "px, " + y + "px) scale(" + scale + ")";
 
-      target.image.style.width = "100%";
-      target.image.style.height = "100%";
-      target.image.style.objectFit = "cover";
-      target.image.style.transformOrigin = "center center";
+      target.layer.style.overflow = "hidden";
+      if (window.getComputedStyle(target.layer).position === "static") {
+        target.layer.style.position = "relative";
+      }
+      target.image.style.position = "absolute";
+      target.image.style.left = "0";
+      target.image.style.top = "0";
+      target.image.style.width = target.image.naturalWidth ? target.image.naturalWidth + "px" : "auto";
+      target.image.style.height = target.image.naturalHeight ? target.image.naturalHeight + "px" : "auto";
+      target.image.style.maxWidth = "none";
+      target.image.style.maxHeight = "none";
+      target.image.style.objectFit = "initial";
+      target.image.style.transformOrigin = "top left";
       target.image.style.transform = backgroundTransform;
       return;
     }
