@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { Navigate, useParams, useSearchParams } from "react-router-dom";
 
 import Layout from "../../components/Layout/Layout";
@@ -16,10 +16,11 @@ import Toolbar from "./components/Toolbar/Toolbar";
 import { EditorProvider, useEditor } from "./context/EditorContext";
 import { useAutosave } from "./hooks/useAutosave";
 import { buildBackendUrl } from "./services/previewService";
-import { getInitialBackgroundTransform } from "./utils/imageTransform";
+import { getFitImageTransform } from "./utils/imageTransform";
 import "./BannerEditor.css";
 
 const MAIN_BACKGROUND_NAME = "mainbg.jpg";
+const SILO_IMAGE_NAME = "silo.png";
 
 const loadImageDimensions = (src) =>
   new Promise((resolve, reject) => {
@@ -66,6 +67,8 @@ function BannerEditor() {
 
 function BannerEditorWorkspace({ bannerSize, template }) {
   const { dispatch, state } = useEditor();
+  const [isImageAdjustmentMode, setIsImageAdjustmentMode] = useState(false);
+  const [selectedEditableImage, setSelectedEditableImage] = useState(null);
   const editableTexts = bannerSize.editableTexts || template.editableTexts;
   const bannerOrientation =
     bannerSize.height > bannerSize.width ? "portrait" : bannerSize.width > bannerSize.height ? "landscape" : "square";
@@ -73,6 +76,7 @@ function BannerEditorWorkspace({ bannerSize, template }) {
   const projectPayload = useMemo(
     () => ({
       background: state.background,
+      compositionTransform: state.compositionTransform,
       hiddenImages: state.hiddenImages,
       imageAdjustments: state.imageAdjustments,
       images: state.images,
@@ -87,6 +91,7 @@ function BannerEditorWorkspace({ bannerSize, template }) {
     [
       bannerSize.id,
       state.background,
+      state.compositionTransform,
       state.hiddenImages,
       state.imageAdjustments,
       state.images,
@@ -129,15 +134,34 @@ function BannerEditorWorkspace({ bannerSize, template }) {
 
     if (imageName === MAIN_BACKGROUND_NAME) {
       const imageSize = await loadImageDimensions(previewUrl);
+      const transform = getFitImageTransform({
+        bannerHeight: bannerSize.height,
+        bannerWidth: bannerSize.width,
+        imageHeight: imageSize.height,
+        imageWidth: imageSize.width,
+      });
 
       dispatch({
         type: "SET_BACKGROUND",
-        payload: getInitialBackgroundTransform({
-          bannerHeight: bannerSize.height,
-          bannerWidth: bannerSize.width,
-          imageHeight: imageSize.height,
-          imageWidth: imageSize.width,
-        }),
+        payload: transform,
+      });
+      return;
+    }
+
+    if ((template.editableImages || []).includes(imageName) && imageName !== SILO_IMAGE_NAME) {
+      const imageSize = await loadImageDimensions(previewUrl);
+
+      dispatch({
+        type: "SET_IMAGE_ADJUSTMENT",
+        payload: {
+          imageName,
+          adjustment: getFitImageTransform({
+            bannerHeight: bannerSize.height,
+            bannerWidth: bannerSize.width,
+            imageHeight: imageSize.height,
+            imageWidth: imageSize.width,
+          }),
+        },
       });
     }
   };
@@ -171,18 +195,20 @@ function BannerEditorWorkspace({ bannerSize, template }) {
       />
       <div className={`banner-editor__workspace banner-editor__workspace--${bannerOrientation}`}>
         <PropertyPanel
-          backgroundState={state.background}
+          backgroundState={state.compositionTransform}
           hiddenImages={state.hiddenImages}
           imageValues={state.imagePreviewUrls}
           imageAdjustments={state.imageAdjustments}
-          onBackgroundChange={(background) => dispatch({ type: "SET_BACKGROUND", payload: background })}
+          isImageAdjustmentMode={isImageAdjustmentMode}
+          onBackgroundChange={(background) => dispatch({ type: "SET_COMPOSITION_TRANSFORM", payload: background })}
           onImageAdjustmentChange={(imageName, adjustment) =>
             dispatch({ type: "SET_IMAGE_ADJUSTMENT", payload: { imageName, adjustment } })
           }
           onImageChange={handleImageChange}
-          onImageVisibilityChange={(imageName, isVisible) =>
-            dispatch({ type: "SET_IMAGE_VISIBILITY", payload: { imageName, isVisible } })
-          }
+          onImageAdjustmentModeStart={() => {
+            setIsImageAdjustmentMode(true);
+            setSelectedEditableImage(MAIN_BACKGROUND_NAME);
+          }}
           onShapeAdjustmentChange={(shapeName, adjustment) =>
             dispatch({ type: "SET_SHAPE_ADJUSTMENT", payload: { shapeName, adjustment } })
           }
@@ -192,11 +218,19 @@ function BannerEditorWorkspace({ bannerSize, template }) {
           textValues={state.texts}
         />
         <BannerPreview
-          backgroundState={state.background}
+          backgroundState={state.compositionTransform}
           hiddenImages={state.hiddenImages}
           imageAdjustments={state.imageAdjustments}
           imageValues={state.imagePreviewUrls}
-          onBackgroundChange={(background) => dispatch({ type: "SET_BACKGROUND", payload: background })}
+          isImageAdjustmentMode={isImageAdjustmentMode}
+          onBackgroundChange={(background) => dispatch({ type: "SET_COMPOSITION_TRANSFORM", payload: background })}
+          onImageAdjustmentCancel={() => setIsImageAdjustmentMode(false)}
+          onImageAdjustmentDone={() => setIsImageAdjustmentMode(false)}
+          onImageAdjustmentChange={(imageName, adjustment) =>
+            dispatch({ type: "SET_IMAGE_ADJUSTMENT", payload: { imageName, adjustment } })
+          }
+          onSelectedImageChange={setSelectedEditableImage}
+          selectedImageName={selectedEditableImage}
           shapeAdjustments={state.shapeAdjustments}
           shapeDefinitions={template.shapeDefinitions || {}}
           size={bannerSize}

@@ -12,14 +12,14 @@ const sanitizeFileName = (value) => {
   return value.replace(/[^a-z0-9-_]+/gi, "-").replace(/^-+|-+$/g, "") || "banner-export";
 };
 
-const injectAdjustmentState = (html, background, imageAdjustments, hiddenImages, shapeDefinitions, shapeAdjustments) => {
-  const backgroundState = JSON.stringify(background || { x: 0, y: 0, scale: 1 });
+const injectAdjustmentState = (html, compositionTransform, imageAdjustments, hiddenImages, shapeDefinitions, shapeAdjustments) => {
+  const compositionState = JSON.stringify(compositionTransform || { x: 0, y: 0, scale: 1, rotation: 0 });
   const imageAdjustmentState = JSON.stringify(imageAdjustments || {});
   const hiddenImageState = JSON.stringify(hiddenImages || {});
   const shapeDefinitionState = JSON.stringify(shapeDefinitions || {});
   const shapeAdjustmentState = JSON.stringify(shapeAdjustments || {});
   const script = `<script>
-window.__BANNER_BACKGROUND_STATE__=${backgroundState};
+window.__BANNER_COMPOSITION_TRANSFORM__=${compositionState};
 window.__BANNER_IMAGE_ADJUSTMENTS__=${imageAdjustmentState};
 window.__BANNER_HIDDEN_IMAGES__=${hiddenImageState};
 window.__BANNER_SHAPE_DEFINITIONS__=${shapeDefinitionState};
@@ -62,11 +62,13 @@ window.__BANNER_SHAPE_ADJUSTMENTS__=${shapeAdjustmentState};
   }
   function apply(target,s,key){
     if(!target||!target.layer||!s)return false;
-    if(key!=="mainbg.jpg"&&Number(s.x||0)===0&&Number(s.y||0)===0&&Number(s.scale||1)===1)return false;
+    if(key!=="mainbg.jpg"&&s.visible!==false&&Number(s.x||0)===0&&Number(s.y||0)===0&&Number(s.scale||1)===1&&Number(s.rotation||0)===0)return false;
     var x=Number(s.x||0);
     var y=Number(s.y||0);
     var scale=Number(s.scale||1);
-    if(key==="mainbg.jpg"&&target.image){
+    var rotation=Number(s.rotation||0);
+    if(target.image){
+      target.layer.style.display=s.visible===false?"none":baseDisplay(target.layer);
       target.layer.style.overflow="hidden";
       if(window.getComputedStyle(target.layer).position==="static"){target.layer.style.position="relative";}
       target.image.style.position="absolute";
@@ -78,15 +80,16 @@ window.__BANNER_SHAPE_ADJUSTMENTS__=${shapeAdjustmentState};
       target.image.style.maxHeight="none";
       target.image.style.objectFit="initial";
       target.image.style.transformOrigin="top left";
-      target.image.style.transform="translate("+x+"px, "+y+"px) scale("+scale+")";
+      target.image.style.transform="translate("+x+"px, "+y+"px) scale("+scale+") rotate("+rotation+"deg)";
       return true;
     }
     var layer=target.layer;
     var scaleEl=target.image||target.layer;
+    layer.style.display=s.visible===false?"none":baseDisplay(layer);
     layer.style.left=baseNumber(layer,"left")+x+"px";
     layer.style.top=baseNumber(layer,"top")+y+"px";
     scaleEl.style.transformOrigin="center center";
-    scaleEl.style.transform=baseTransform(scaleEl)+" scale("+scale+")";
+    scaleEl.style.transform=baseTransform(scaleEl)+" scale("+scale+") rotate("+rotation+"deg)";
     return true;
   }
   function normalizeShape(s){
@@ -119,8 +122,10 @@ window.__BANNER_SHAPE_ADJUSTMENTS__=${shapeAdjustmentState};
     return true;
   }
   function applyAll(){
-    apply(findTarget("mainbg.jpg"),window.__BANNER_BACKGROUND_STATE__,"mainbg.jpg");
+    apply(findTarget("mainbg.jpg"),window.__BANNER_COMPOSITION_TRANSFORM__,"mainbg.jpg");
+    apply(findTarget("silo.png"),window.__BANNER_COMPOSITION_TRANSFORM__,"silo.png");
     Object.keys(window.__BANNER_IMAGE_ADJUSTMENTS__||{}).forEach(function(key){
+      if(key==="mainbg.jpg"||key==="silo.png"){return;}
       apply(findTarget(key),window.__BANNER_IMAGE_ADJUSTMENTS__[key],key);
     });
     Object.keys(window.__BANNER_HIDDEN_IMAGES__||{}).forEach(function(key){
@@ -175,7 +180,7 @@ const createExport = async (project) => {
   const updatedTextHtml = textService.replaceEditableText(html, project.texts);
   const exportedHtml = injectAdjustmentState(
     updatedTextHtml,
-    project.background,
+    project.compositionTransform || project.background,
     project.imageAdjustments,
     project.hiddenImages,
     project.shapeDefinitions,

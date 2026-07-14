@@ -14,13 +14,13 @@ const DEFAULT_SHAPE_ADJUSTMENT = { x: 0, y: 0, scale: 1, visible: true };
 
 function PropertyPanel({
   backgroundState,
-  hiddenImages,
   imageAdjustments,
   imageValues,
+  isImageAdjustmentMode,
   onBackgroundChange,
   onImageAdjustmentChange,
+  onImageAdjustmentModeStart,
   onImageChange,
-  onImageVisibilityChange,
   onShapeAdjustmentChange,
   onTextChange,
   shapeAdjustments,
@@ -48,6 +48,7 @@ function PropertyPanel({
         ...(shapeAdjustments[activeShapeName] || {}),
       }
     : DEFAULT_SHAPE_ADJUSTMENT;
+  const canAdjustImages = (template.editableImages || []).every((imageName) => Boolean(imageValues[imageName]));
 
   const handleAdjustmentChange = (nextAdjustment) => {
     if (!activeImageName) {
@@ -117,7 +118,7 @@ function PropertyPanel({
           <div className="property-panel__images">
             {template.editableImages.map((imageName) => (
               <label className="property-panel__image-control" key={imageName}>
-                <span>{imageName === MAIN_BACKGROUND_NAME ? "Background" : imageName}</span>
+                <span>{imageName === MAIN_BACKGROUND_NAME ? "Background" : "Silo"}</span>
                 <input
                   accept="image/*"
                   onChange={(event) =>
@@ -126,46 +127,17 @@ function PropertyPanel({
                   type="file"
                 />
                 {imageValues[imageName] && <strong>Selected</strong>}
-                <div className="property-panel__image-actions">
-                  <Button
-                    disabled={!imageValues[imageName]}
-                    onClick={(event) => {
-                      event.preventDefault();
-                      if (imageName === MAIN_BACKGROUND_NAME) {
-                        return;
-                      }
-
-                      setActiveImageName(imageName);
-                    }}
-                    size="sm"
-                    type="button"
-                    variant="secondary"
-                  >
-                    <FaUpload aria-hidden="true" />
-                    {imageName === MAIN_BACKGROUND_NAME
-                      ? "Adjust in Preview"
-                      : "Edit Image"}
-                  </Button>
-                  {imageName !== MAIN_BACKGROUND_NAME && (
-                    <Button
-                      onClick={(event) => {
-                        event.preventDefault();
-                        onImageVisibilityChange(
-                          imageName,
-                          Boolean(hiddenImages[imageName]),
-                        );
-                      }}
-                      size="sm"
-                      type="button"
-                      variant="ghost"
-                    >
-                      {hiddenImages[imageName] ? <FaEye aria-hidden="true" /> : <FaEyeSlash aria-hidden="true" />}
-                      {hiddenImages[imageName] ? "Show" : "Hide"}
-                    </Button>
-                  )}
-                </div>
               </label>
             ))}
+            <Button
+              disabled={!canAdjustImages || isImageAdjustmentMode}
+              onClick={onImageAdjustmentModeStart}
+              type="button"
+              variant="secondary"
+            >
+              <FaUpload aria-hidden="true" />
+              Adjust in Preview
+            </Button>
             <article className="property-panel__image-control">
               <span>Logo</span>
               <small>Adjust logo position over the banner frame.</small>

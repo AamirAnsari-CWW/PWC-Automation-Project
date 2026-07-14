@@ -1,39 +1,63 @@
-const MIN_ZOOM_STEP = 0.05;
+export const MIN_IMAGE_ZOOM = 0.1;
+export const MAX_IMAGE_ZOOM = 8;
 
-export const getInitialBackgroundTransform = ({ bannerHeight, bannerWidth, imageHeight, imageWidth }) => {
+export const normalizeImageTransform = (transform = {}) => ({
+  x: Number(transform.x || 0),
+  y: Number(transform.y || 0),
+  scale: Number(transform.scale || 1),
+  rotation: Number(transform.rotation || 0),
+  visible: transform.visible !== false,
+});
+
+export const getFitImageTransform = ({ bannerHeight, bannerWidth, imageHeight, imageWidth }) => {
   if (!bannerWidth || !bannerHeight || !imageWidth || !imageHeight) {
-    return { x: 0, y: 0, scale: 1 };
+    return normalizeImageTransform();
   }
 
   const scale = Math.max(bannerWidth / imageWidth, bannerHeight / imageHeight);
 
-  return {
+  return normalizeImageTransform({
     x: (bannerWidth - imageWidth * scale) / 2,
     y: (bannerHeight - imageHeight * scale) / 2,
     scale,
-  };
+  });
 };
 
-export const clampBackgroundTransform = ({ bannerHeight, bannerWidth, imageHeight, imageWidth, transform }) => {
-  if (!bannerWidth || !bannerHeight || !imageWidth || !imageHeight) {
-    return transform;
-  }
-
-  const minScale = Math.max(bannerWidth / imageWidth, bannerHeight / imageHeight);
-  const scale = Math.max(Number(transform.scale || 1), minScale);
-  const scaledWidth = imageWidth * scale;
-  const scaledHeight = imageHeight * scale;
-  const minX = bannerWidth - scaledWidth;
-  const minY = bannerHeight - scaledHeight;
+export const getCenteredImageTransform = ({ bannerHeight, bannerWidth, imageHeight, imageWidth, transform }) => {
+  const nextTransform = normalizeImageTransform(transform);
 
   return {
-    x: scaledWidth <= bannerWidth ? (bannerWidth - scaledWidth) / 2 : Math.min(0, Math.max(minX, Number(transform.x || 0))),
-    y: scaledHeight <= bannerHeight ? (bannerHeight - scaledHeight) / 2 : Math.min(0, Math.max(minY, Number(transform.y || 0))),
-    scale,
+    ...nextTransform,
+    x: (bannerWidth - imageWidth * nextTransform.scale) / 2,
+    y: (bannerHeight - imageHeight * nextTransform.scale) / 2,
   };
 };
 
-export const zoomBackgroundTransform = ({
+export const getActualSizeImageTransform = ({ bannerHeight, bannerWidth, imageHeight, imageWidth, transform }) => {
+  return getCenteredImageTransform({
+    bannerHeight,
+    bannerWidth,
+    imageHeight,
+    imageWidth,
+    transform: {
+      ...normalizeImageTransform(transform),
+      scale: 1,
+    },
+  });
+};
+
+export const clampImageTransform = ({ transform }) => {
+  const nextTransform = normalizeImageTransform(transform);
+
+  return {
+    ...nextTransform,
+    scale: Math.min(MAX_IMAGE_ZOOM, Math.max(MIN_IMAGE_ZOOM, nextTransform.scale)),
+    x: Number(nextTransform.x || 0),
+    y: Number(nextTransform.y || 0),
+  };
+};
+
+export const zoomImageTransform = ({
   bannerHeight,
   bannerWidth,
   imageHeight,
@@ -41,20 +65,21 @@ export const zoomBackgroundTransform = ({
   nextScale,
   transform,
 }) => {
-  const currentScale = Number(transform.scale || 1);
-  const scale = Math.max(MIN_ZOOM_STEP, Number(nextScale || currentScale));
+  const currentTransform = normalizeImageTransform(transform);
+  const scale = Math.min(MAX_IMAGE_ZOOM, Math.max(MIN_IMAGE_ZOOM, Number(nextScale || currentTransform.scale)));
   const centerX = bannerWidth / 2;
   const centerY = bannerHeight / 2;
-  const ratio = scale / currentScale;
+  const ratio = scale / currentTransform.scale;
 
-  return clampBackgroundTransform({
+  return clampImageTransform({
     bannerHeight,
     bannerWidth,
     imageHeight,
     imageWidth,
     transform: {
-      x: centerX - (centerX - Number(transform.x || 0)) * ratio,
-      y: centerY - (centerY - Number(transform.y || 0)) * ratio,
+      ...currentTransform,
+      x: centerX - (centerX - currentTransform.x) * ratio,
+      y: centerY - (centerY - currentTransform.y) * ratio,
       scale,
     },
   });

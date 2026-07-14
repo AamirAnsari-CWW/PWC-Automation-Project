@@ -11,10 +11,11 @@ const toPreviewImageUrls = (images = {}) => {
   );
 };
 
-const DEFAULT_ADJUSTMENT = { x: 0, y: 0, scale: 1 };
+const DEFAULT_ADJUSTMENT = { x: 0, y: 0, scale: 1, rotation: 0, visible: true };
 
 const createInitialState = (project) => ({
   background: DEFAULT_ADJUSTMENT,
+  compositionTransform: DEFAULT_ADJUSTMENT,
   hiddenImages: {},
   imageAdjustments: {},
   images: {},
@@ -27,7 +28,8 @@ const createInitialState = (project) => ({
   texts: {},
   ...(project
     ? {
-        background: project.background || DEFAULT_ADJUSTMENT,
+        background: project.compositionTransform || project.background || DEFAULT_ADJUSTMENT,
+        compositionTransform: project.compositionTransform || project.background || DEFAULT_ADJUSTMENT,
         hiddenImages: project.hiddenImages || {},
         imageAdjustments: project.imageAdjustments || {},
         images: project.images || {},
@@ -70,6 +72,20 @@ const editorReducer = (state, action) => {
     return {
       ...state,
       background: action.payload,
+      compositionTransform: action.payload,
+      imageAdjustments: {
+        ...state.imageAdjustments,
+        "mainbg.jpg": action.payload,
+      },
+      isDirty: true,
+    };
+  }
+
+  if (action.type === "SET_COMPOSITION_TRANSFORM") {
+    return {
+      ...state,
+      background: action.payload,
+      compositionTransform: action.payload,
       imageAdjustments: {
         ...state.imageAdjustments,
         "mainbg.jpg": action.payload,

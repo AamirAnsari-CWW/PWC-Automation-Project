@@ -1,0 +1,109 @@
+.image-editor__toolbar {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 12px 34px rgba(15, 23, 42, 0.18);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+  padding: 8px;
+}
+
+.image-editor__toolbar .button {
+  min-width: 34px;
+}
+
+.image-editor__zoom {
+  align-items: center;
+  color: var(--text-light);
+  display: flex;
+  font-size: 12px;
+  font-weight: 800;
+  gap: 8px;
+}
+
+.image-editor__zoom input {
+  accent-color: var(--primary);
+  width: 150px;
+}
+
+.image-editor__selected {
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 900;
+  margin-right: 4px;
+}
+
+.image-editor__surface {
+  cursor: grab;
+  position: absolute;
+  touch-action: none;
+  z-index: 3;
+  transform-origin: top left;
+}
+
+.image-editor__surface:active {
+  cursor: grabbing;
+}
+
+.image-editor__surface.is-selected {
+  outline: 2px solid #2563eb;
+  outline-offset: 0;
+}
+
+.image-editor__handle {
+  background: #ffffff;
+  border: 2px solid #2563eb;
+  border-radius: 50%;
+  height: 12px;
+  position: absolute;
+  width: 12px;
+}
+
+.image-editor__handle--nw {
+  cursor: nwse-resize;
+  left: -7px;
+  top: -7px;
+}
+
+.image-editor__handle--ne {
+  cursor: nesw-resize;
+  right: -7px;
+  top: -7px;
+}
+
+.image-editor__handle--sw {
+  bottom: -7px;
+  cursor: nesw-resize;
+  left: -7px;
+}
+
+.image-editor__handle--se {
+  bottom: -7px;
+  cursor: nwse-resize;
+  right: -7px;
+}
+
+.image-editor__rotate {
+  background: #2563eb;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  cursor: grab;
+  height: 14px;
+  left: calc(50% - 7px);
+  position: absolute;
+  top: -34px;
+  width: 14px;
+}
+
+.image-editor__rotate::before {
+  background: #2563eb;
+  content: "";
+  height: 20px;
+  left: 5px;
+  position: absolute;
+  top: 12px;
+  width: 2px;
+}

@@ -72,14 +72,14 @@ function updateText(payload) {
       }
 
       image.onload = function () {
-        applyAdjustment(findImageTarget(key), state.imageAdjustments[key] || (key === "mainbg.jpg" && state.background), key);
+        applyAdjustment(findImageTarget(key), key === "mainbg.jpg" || key === "silo.png" ? state.background : state.imageAdjustments[key], key);
       };
 
       if (image.src !== state.images[key]) {
         image.src = state.images[key];
       }
 
-      applyAdjustment(findImageTarget(key), state.imageAdjustments[key] || (key === "mainbg.jpg" && state.background), key);
+      applyAdjustment(findImageTarget(key), key === "mainbg.jpg" || key === "silo.png" ? state.background : state.imageAdjustments[key], key);
     });
   }
 
@@ -139,7 +139,13 @@ function updateText(payload) {
       return false;
     }
 
-    return Number(adjustment.x || 0) !== 0 || Number(adjustment.y || 0) !== 0 || Number(adjustment.scale || 1) !== 1;
+    return (
+      adjustment.visible === false ||
+      Number(adjustment.x || 0) !== 0 ||
+      Number(adjustment.y || 0) !== 0 ||
+      Number(adjustment.scale || 1) !== 1 ||
+      Number(adjustment.rotation || 0) !== 0
+    );
   }
 
   function normalizeShapeAdjustment(adjustment) {
@@ -224,12 +230,14 @@ function updateText(payload) {
     var x = Number(adjustment.x || 0);
     var y = Number(adjustment.y || 0);
     var scale = Number(adjustment.scale || 1);
+    var rotation = Number(adjustment.rotation || 0);
     var layer = target.layer;
     var scaleElement = target.image || target.layer;
 
-    if (key === "mainbg.jpg" && target.image) {
-      var backgroundTransform = "translate(" + x + "px, " + y + "px) scale(" + scale + ")";
+    if (target.image) {
+      var imageTransform = "translate(" + x + "px, " + y + "px) scale(" + scale + ") rotate(" + rotation + "deg)";
 
+      target.layer.style.display = adjustment.visible === false ? "none" : getBaseDisplay(target.layer);
       target.layer.style.overflow = "hidden";
       if (window.getComputedStyle(target.layer).position === "static") {
         target.layer.style.position = "relative";
@@ -243,14 +251,15 @@ function updateText(payload) {
       target.image.style.maxHeight = "none";
       target.image.style.objectFit = "initial";
       target.image.style.transformOrigin = "top left";
-      target.image.style.transform = backgroundTransform;
+      target.image.style.transform = imageTransform;
       return;
     }
 
     var left = getBaseNumber(layer, "left") + x;
     var top = getBaseNumber(layer, "top") + y;
-    var transform = getBaseTransform(scaleElement) + " scale(" + scale + ")";
+    var transform = getBaseTransform(scaleElement) + " scale(" + scale + ") rotate(" + rotation + "deg)";
 
+    layer.style.display = adjustment.visible === false ? "none" : getBaseDisplay(layer);
     layer.style.left = left + "px";
     layer.style.top = top + "px";
     if (scaleElement.style.transformOrigin !== "center center") {
@@ -280,6 +289,10 @@ function updateText(payload) {
     state.imageAdjustments = Object.assign({}, state.imageAdjustments, payload || {});
 
     Object.keys(state.imageAdjustments).forEach(function (key) {
+      if (key === "mainbg.jpg" || key === "silo.png") {
+        return;
+      }
+
       applyAdjustment(findImageTarget(key), state.imageAdjustments[key], key);
     });
   }
@@ -301,12 +314,14 @@ function updateText(payload) {
     state.background = Object.assign({}, state.background || {}, payload || {});
 
     var background = findImageTarget("mainbg.jpg");
+    var silo = findImageTarget("silo.png");
 
-    if (!background.layer || !state.background) {
+    if (!state.background) {
       return;
     }
 
     applyAdjustment(background, state.background, "mainbg.jpg");
+    applyAdjustment(silo, state.background, "silo.png");
   }
 
   function applyState() {
