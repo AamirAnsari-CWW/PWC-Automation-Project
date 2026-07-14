@@ -1,5 +1,127 @@
 [
   {
+    "id": "50883cfc-7428-40f0-8c7f-7ee3c33e824a",
+    "name": "Untitled Banner Project",
+    "templateId": "energy-campaign",
+    "templateName": "Energy Campaign",
+    "size": "300x250",
+    "texts": {},
+    "images": {
+      "mainbg.jpg": "/uploads/projects/92aa361b-8cf4-4b55-8ffc-d07e3b47bc05.jpg",
+      "silo.png": "/uploads/projects/5013c95c-a990-471e-9b13-37a3bc8a7e84.png"
+    },
+    "background": {
+      "x": -690.3953629342964,
+      "y": -723.4550719031638,
+      "scale": 0.2158924997272789,
+      "rotation": 0,
+      "visible": true
+    },
+    "hiddenImages": {},
+    "imageAdjustments": {
+      "mainbg.jpg": {
+        "x": -690.3953629342964,
+        "y": -723.4550719031638,
+        "scale": 0.2158924997272789,
+        "rotation": 0,
+        "visible": true
+      }
+    },
+    "shapeAdjustments": {},
+    "shapeDefinitions": {
+      "orangeStrip": [
+        ".container.left-half",
+        ".container"
+      ]
+    },
+    "createdBy": "local-user",
+    "createdAt": "2026-07-14T11:45:47.731Z",
+    "updatedAt": "2026-07-14T11:46:13.953Z"
+  },
+  {
+    "id": "42a8566e-15ef-4492-ad86-9850deb66519",
+    "name": "Untitled Banner Project",
+    "templateId": "energy-campaign",
+    "templateName": "Energy Campaign",
+    "size": "160x600",
+    "texts": {},
+    "images": {
+      "mainbg.jpg": "/uploads/projects/a941af77-9c80-4715-ab46-f9efe91a3319.jpg",
+      "silo.png": "/uploads/projects/8d860ebb-e4bd-47af-8d62-fb41687830ec.png"
+    },
+    "background": {
+      "x": -397.16400304086557,
+      "y": -151.3844225525841,
+      "scale": 0.11664000000000002,
+      "rotation": 0,
+      "visible": true
+    },
+    "hiddenImages": {},
+    "imageAdjustments": {
+      "mainbg.jpg": {
+        "x": -397.16400304086557,
+        "y": -151.3844225525841,
+        "scale": 0.11664000000000002,
+        "rotation": 0,
+        "visible": true
+      }
+    },
+    "shapeAdjustments": {},
+    "shapeDefinitions": {
+      "orangeStrip": [
+        ".container.left-half",
+        ".container"
+      ]
+    },
+    "createdBy": "local-user",
+    "createdAt": "2026-07-14T11:44:04.471Z",
+    "updatedAt": "2026-07-14T11:44:54.808Z"
+  },
+  {
+    "id": "30985ffb-4d17-4ff2-93f9-60363121ba92",
+    "name": "Untitled Banner Project",
+    "templateId": "energy-campaign",
+    "templateName": "Energy Campaign",
+    "size": "160x600",
+    "texts": {},
+    "images": {
+      "mainbg.jpg": "/uploads/projects/5a68baf3-ac92-48bc-9bac-4b11b49ca4e5.jpg",
+      "silo.png": "/uploads/projects/b621afea-b5ed-4dc8-bdc3-c82b2c9a5142.png"
+    },
+    "background": {
+      "x": -338.9023215005079,
+      "y": -67.32964657664655,
+      "scale": 0.10800000000000001,
+      "rotation": 0,
+      "visible": true
+    },
+    "hiddenImages": {},
+    "imageAdjustments": {
+      "mainbg.jpg": {
+        "x": -338.9023215005079,
+        "y": -67.32964657664655,
+        "scale": 0.10800000000000001,
+        "rotation": 0,
+        "visible": true
+      },
+      "logo_white.svg": {
+        "x": -1,
+        "y": 0,
+        "scale": 1
+      }
+    },
+    "shapeAdjustments": {},
+    "shapeDefinitions": {
+      "orangeStrip": [
+        ".container.left-half",
+        ".container"
+      ]
+    },
+    "createdBy": "local-user",
+    "createdAt": "2026-07-14T11:31:57.408Z",
+    "updatedAt": "2026-07-14T11:33:58.046Z"
+  },
+  {
     "id": "6a4493d3-ce35-4ecf-93a5-b8d1a25a5cb8",
     "name": "Untitled Banner Project",
     "templateId": "energy-campaign",
