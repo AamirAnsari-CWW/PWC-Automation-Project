@@ -12,6 +12,7 @@ const toPreviewImageUrls = (images = {}) => {
 };
 
 const DEFAULT_ADJUSTMENT = { x: 0, y: 0, scale: 1, rotation: 0, visible: true };
+const DEFAULT_SILO_OFFSET = { x: 0, y: 0 };
 
 const createInitialState = (project) => ({
   background: DEFAULT_ADJUSTMENT,
@@ -25,6 +26,7 @@ const createInitialState = (project) => ({
   projectName: project?.name || "Untitled Banner Project",
   saveStatus: "idle",
   shapeAdjustments: {},
+  siloOffset: DEFAULT_SILO_OFFSET,
   texts: {},
   ...(project
     ? {
@@ -36,6 +38,7 @@ const createInitialState = (project) => ({
         imagePreviewUrls: toPreviewImageUrls(project.images),
         saveStatus: "saved",
         shapeAdjustments: project.shapeAdjustments || {},
+        siloOffset: project.siloOffset || DEFAULT_SILO_OFFSET,
         texts: project.texts || {},
       }
     : {}),
@@ -126,6 +129,14 @@ const editorReducer = (state, action) => {
         ...state.shapeAdjustments,
         [action.payload.shapeName]: action.payload.adjustment,
       },
+      isDirty: true,
+    };
+  }
+
+  if (action.type === "SET_SILO_OFFSET") {
+    return {
+      ...state,
+      siloOffset: action.payload,
       isDirty: true,
     };
   }

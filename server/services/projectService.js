@@ -13,10 +13,12 @@ const normalizeProjectPayload = (payload) => ({
   texts: payload.texts || {},
   images: payload.images || {},
   background: payload.background || { x: 0, y: 0, scale: 1 },
+  compositionTransform: payload.compositionTransform || payload.background || { x: 0, y: 0, scale: 1 },
   hiddenImages: payload.hiddenImages || {},
   imageAdjustments: payload.imageAdjustments || {},
   shapeAdjustments: payload.shapeAdjustments || {},
   shapeDefinitions: payload.shapeDefinitions || {},
+  siloOffset: payload.siloOffset || { x: 0, y: 0 },
   createdBy: payload.createdBy || "local-user",
 });
 

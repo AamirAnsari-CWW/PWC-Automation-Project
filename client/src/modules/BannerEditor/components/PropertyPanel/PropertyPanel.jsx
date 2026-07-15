@@ -22,6 +22,7 @@ function PropertyPanel({
   onImageAdjustmentModeStart,
   onImageChange,
   onShapeAdjustmentChange,
+  onSiloFineAdjustmentModeStart,
   onTextChange,
   shapeAdjustments,
   template,
@@ -138,6 +139,18 @@ function PropertyPanel({
               <FaUpload aria-hidden="true" />
               Adjust in Preview
             </Button>
+            <article className="property-panel__image-control">
+              <span>Silo Fine Adjustment</span>
+              <small>Nudge only the silo position after the grouped background and silo adjustment.</small>
+              <Button
+                disabled={!canAdjustImages}
+                onClick={onSiloFineAdjustmentModeStart}
+                type="button"
+                variant="secondary"
+              >
+                Fine Adjust Silo
+              </Button>
+            </article>
             <article className="property-panel__image-control">
               <span>Logo</span>
               <small>Adjust logo position over the banner frame.</small>

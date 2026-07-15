@@ -4,6 +4,7 @@ const MESSAGE_TYPES = Object.freeze({
   updateImageVisibility: "UPDATE_IMAGE_VISIBILITY",
   updateImage: "UPDATE_IMAGE",
   updateShapeAdjustments: "UPDATE_SHAPE_ADJUSTMENTS",
+  updateSiloOffset: "UPDATE_SILO_OFFSET",
   updateText: "UPDATE_TEXT",
 });
 
@@ -62,6 +63,10 @@ export const createImageVisibilityUpdateMessage = (hiddenImages) => {
 
 export const createShapeAdjustmentsUpdateMessage = (shapeState) => {
   return createPreviewMessage(MESSAGE_TYPES.updateShapeAdjustments, shapeState);
+};
+
+export const createSiloOffsetUpdateMessage = (siloOffset) => {
+  return createPreviewMessage(MESSAGE_TYPES.updateSiloOffset, siloOffset);
 };
 
 export { MESSAGE_TYPES };

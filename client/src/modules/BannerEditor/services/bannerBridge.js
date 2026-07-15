@@ -4,6 +4,7 @@ import {
   createImageVisibilityUpdateMessage,
   createImageUpdateMessage,
   createShapeAdjustmentsUpdateMessage,
+  createSiloOffsetUpdateMessage,
   createTextUpdateMessage,
   sendPreviewMessage,
 } from "./previewService";
@@ -28,6 +29,10 @@ export const createBannerBridge = (iframeElement) => {
 
     updateShapeAdjustments(shapeState) {
       sendPreviewMessage(iframeElement, createShapeAdjustmentsUpdateMessage(shapeState));
+    },
+
+    updateSiloOffset(siloOffset) {
+      sendPreviewMessage(iframeElement, createSiloOffsetUpdateMessage(siloOffset));
     },
 
     updateText(textValues) {

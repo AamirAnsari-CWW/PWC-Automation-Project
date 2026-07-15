@@ -12,18 +12,28 @@ const sanitizeFileName = (value) => {
   return value.replace(/[^a-z0-9-_]+/gi, "-").replace(/^-+|-+$/g, "") || "banner-export";
 };
 
-const injectAdjustmentState = (html, compositionTransform, imageAdjustments, hiddenImages, shapeDefinitions, shapeAdjustments) => {
+const injectAdjustmentState = (
+  html,
+  compositionTransform,
+  imageAdjustments,
+  hiddenImages,
+  shapeDefinitions,
+  shapeAdjustments,
+  siloOffset
+) => {
   const compositionState = JSON.stringify(compositionTransform || { x: 0, y: 0, scale: 1, rotation: 0 });
   const imageAdjustmentState = JSON.stringify(imageAdjustments || {});
   const hiddenImageState = JSON.stringify(hiddenImages || {});
   const shapeDefinitionState = JSON.stringify(shapeDefinitions || {});
   const shapeAdjustmentState = JSON.stringify(shapeAdjustments || {});
+  const siloOffsetState = JSON.stringify(siloOffset || { x: 0, y: 0 });
   const script = `<script>
 window.__BANNER_COMPOSITION_TRANSFORM__=${compositionState};
 window.__BANNER_IMAGE_ADJUSTMENTS__=${imageAdjustmentState};
 window.__BANNER_HIDDEN_IMAGES__=${hiddenImageState};
 window.__BANNER_SHAPE_DEFINITIONS__=${shapeDefinitionState};
 window.__BANNER_SHAPE_ADJUSTMENTS__=${shapeAdjustmentState};
+window.__BANNER_SILO_OFFSET__=${siloOffsetState};
 (function(){
   function findTarget(key){
     var imageName=key.indexOf(".")===-1?key:key.split(".")[0];
@@ -65,6 +75,10 @@ window.__BANNER_SHAPE_ADJUSTMENTS__=${shapeAdjustmentState};
     if(key!=="mainbg.jpg"&&s.visible!==false&&Number(s.x||0)===0&&Number(s.y||0)===0&&Number(s.scale||1)===1&&Number(s.rotation||0)===0)return false;
     var x=Number(s.x||0);
     var y=Number(s.y||0);
+    if(key==="silo.png"){
+      x+=Number((window.__BANNER_SILO_OFFSET__||{}).x||0);
+      y+=Number((window.__BANNER_SILO_OFFSET__||{}).y||0);
+    }
     var scale=Number(s.scale||1);
     var rotation=Number(s.rotation||0);
     if(target.image){
@@ -184,7 +198,8 @@ const createExport = async (project) => {
     project.imageAdjustments,
     project.hiddenImages,
     project.shapeDefinitions,
-    project.shapeAdjustments
+    project.shapeAdjustments,
+    project.siloOffset
   );
 
   await fs.writeFile(indexPath, exportedHtml);

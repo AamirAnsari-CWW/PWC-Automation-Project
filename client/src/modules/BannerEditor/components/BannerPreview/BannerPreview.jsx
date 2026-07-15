@@ -4,6 +4,7 @@ import Card from "../../../../components/Card/Card";
 import { createBannerBridge } from "../../services/bannerBridge";
 import { buildPreviewUrl } from "../../services/previewService";
 import ImageEditor from "../ImageEditor/ImageEditor";
+import SiloFineAdjustment from "../SiloFineAdjustment/SiloFineAdjustment";
 import "./BannerPreview.css";
 
 const MAIN_BACKGROUND_NAME = "mainbg.jpg";
@@ -15,14 +16,18 @@ function BannerPreview({
   imageAdjustments,
   imageValues,
   isImageAdjustmentMode,
+  isSiloFineAdjustmentMode,
   onBackgroundChange,
   onImageAdjustmentCancel,
   onImageAdjustmentDone,
   onSelectedImageChange,
+  onSiloFineAdjustmentDone,
+  onSiloOffsetChange,
   selectedImageName,
   shapeAdjustments,
   shapeDefinitions,
   size,
+  siloOffset,
   template,
   textValues,
 }) {
@@ -69,6 +74,42 @@ function BannerPreview({
   const hasCompositionImages = Boolean(imageValues[MAIN_BACKGROUND_NAME] && imageValues[SILO_IMAGE_NAME]);
   const activeImageUrl = hasCompositionImages ? imageValues[MAIN_BACKGROUND_NAME] : null;
   const activeTransform = backgroundState || { x: 0, y: 0, scale: 1, rotation: 0, visible: true };
+  const normalizedSiloOffset = {
+    x: Number(siloOffset?.x || 0),
+    y: Number(siloOffset?.y || 0),
+  };
+
+  useEffect(() => {
+    if (!isSiloFineAdjustmentMode) {
+      return undefined;
+    }
+
+    const handleKeyDown = (event) => {
+      const directions = {
+        ArrowDown: [0, 1],
+        ArrowLeft: [-1, 0],
+        ArrowRight: [1, 0],
+        ArrowUp: [0, -1],
+      };
+      const direction = directions[event.key];
+
+      if (!direction) {
+        return;
+      }
+
+      event.preventDefault();
+      const step = event.shiftKey ? 10 : 1;
+
+      onSiloOffsetChange({
+        x: Math.min(50, Math.max(-50, normalizedSiloOffset.x + direction[0] * step)),
+        y: Math.min(50, Math.max(-50, normalizedSiloOffset.y + direction[1] * step)),
+      });
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isSiloFineAdjustmentMode, normalizedSiloOffset.x, normalizedSiloOffset.y, onSiloOffsetChange]);
 
   useEffect(() => {
     const bridge = createBannerBridge(iframeRef.current);
@@ -78,8 +119,19 @@ function BannerPreview({
     bridge.updateImageAdjustments(imageAdjustments);
     bridge.updateImageVisibility(hiddenImages);
     bridge.updateShapeAdjustments({ adjustments: shapeAdjustments, definitions: shapeDefinitions });
+    bridge.updateSiloOffset(siloOffset);
     bridge.updateBackground(backgroundState);
-  }, [backgroundState, hiddenImages, imageAdjustments, imageValues, shapeAdjustments, shapeDefinitions, textValues, previewUrl]);
+  }, [
+    backgroundState,
+    hiddenImages,
+    imageAdjustments,
+    imageValues,
+    shapeAdjustments,
+    shapeDefinitions,
+    siloOffset,
+    textValues,
+    previewUrl,
+  ]);
 
   const handlePreviewLoad = () => {
     const bridge = createBannerBridge(iframeRef.current);
@@ -89,6 +141,7 @@ function BannerPreview({
     bridge.updateImageAdjustments(imageAdjustments);
     bridge.updateImageVisibility(hiddenImages);
     bridge.updateShapeAdjustments({ adjustments: shapeAdjustments, definitions: shapeDefinitions });
+    bridge.updateSiloOffset(siloOffset);
     bridge.updateBackground(backgroundState);
   };
 
@@ -118,7 +171,7 @@ function BannerPreview({
               selectedLabel="Composition"
             />
           )}
-          <span className="status-pill">{isImageAdjustmentMode ? "Adjusting" : "Live"}</span>
+          <span className="status-pill">{isImageAdjustmentMode || isSiloFineAdjustmentMode ? "Adjusting" : "Live"}</span>
         </div>
       </div>
       <div className="banner-preview__stage" ref={stageRef}>
@@ -151,6 +204,15 @@ function BannerPreview({
             )}
           </div>
         </div>
+        {isSiloFineAdjustmentMode && hasCompositionImages && (
+          <div className="banner-preview__silo-controls">
+            <SiloFineAdjustment
+              onChange={onSiloOffsetChange}
+              onClose={onSiloFineAdjustmentDone}
+              value={normalizedSiloOffset}
+            />
+          </div>
+        )}
       </div>
     </Card>
   );

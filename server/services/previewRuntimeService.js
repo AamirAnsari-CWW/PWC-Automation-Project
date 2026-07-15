@@ -11,6 +11,7 @@ ${RUNTIME_MARKER}
     updateImageVisibility: "UPDATE_IMAGE_VISIBILITY",
     updateImage: "UPDATE_IMAGE",
     updateShapeAdjustments: "UPDATE_SHAPE_ADJUSTMENTS",
+    updateSiloOffset: "UPDATE_SILO_OFFSET",
     updateText: "UPDATE_TEXT"
   };
   var state = {
@@ -20,6 +21,7 @@ ${RUNTIME_MARKER}
     images: {},
     shapeAdjustments: {},
     shapeDefinitions: {},
+    siloOffset: { x: 0, y: 0 },
     text: {}
   };
 
@@ -229,6 +231,10 @@ function updateText(payload) {
 
     var x = Number(adjustment.x || 0);
     var y = Number(adjustment.y || 0);
+    if (key === "silo.png") {
+      x += Number(state.siloOffset.x || 0);
+      y += Number(state.siloOffset.y || 0);
+    }
     var scale = Number(adjustment.scale || 1);
     var rotation = Number(adjustment.rotation || 0);
     var layer = target.layer;
@@ -324,12 +330,23 @@ function updateText(payload) {
     applyAdjustment(silo, state.background, "silo.png");
   }
 
+  function updateSiloOffset(payload) {
+    state.siloOffset = Object.assign({}, state.siloOffset || { x: 0, y: 0 }, payload || {});
+
+    if (!state.background) {
+      return;
+    }
+
+    applyAdjustment(findImageTarget("silo.png"), state.background, "silo.png");
+  }
+
   function applyState() {
     updateText({});
     updateImage({});
     updateImageVisibility({});
     updateImageAdjustments({});
     updateShapeAdjustments({});
+    updateSiloOffset({});
     updateBackground({});
   }
 
@@ -354,6 +371,10 @@ function updateText(payload) {
 
     if (message.type === MESSAGE_TYPES.updateShapeAdjustments) {
       updateShapeAdjustments(message.payload);
+    }
+
+    if (message.type === MESSAGE_TYPES.updateSiloOffset) {
+      updateSiloOffset(message.payload);
     }
 
     if (message.type === MESSAGE_TYPES.updateBackground) {

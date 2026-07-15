@@ -68,6 +68,7 @@ function BannerEditor() {
 function BannerEditorWorkspace({ bannerSize, template }) {
   const { dispatch, state } = useEditor();
   const [isImageAdjustmentMode, setIsImageAdjustmentMode] = useState(false);
+  const [isSiloFineAdjustmentMode, setIsSiloFineAdjustmentMode] = useState(false);
   const [selectedEditableImage, setSelectedEditableImage] = useState(null);
   const editableTexts = bannerSize.editableTexts || template.editableTexts;
   const bannerOrientation =
@@ -84,6 +85,7 @@ function BannerEditorWorkspace({ bannerSize, template }) {
       shapeAdjustments: state.shapeAdjustments,
       shapeDefinitions: template.shapeDefinitions || {},
       size: bannerSize.id,
+      siloOffset: state.siloOffset,
       templateId: template.id,
       templateName: template.name,
       texts: state.texts,
@@ -97,6 +99,7 @@ function BannerEditorWorkspace({ bannerSize, template }) {
       state.images,
       state.projectName,
       state.shapeAdjustments,
+      state.siloOffset,
       state.texts,
       template.id,
       template.name,
@@ -206,12 +209,17 @@ function BannerEditorWorkspace({ bannerSize, template }) {
           }
           onImageChange={handleImageChange}
           onImageAdjustmentModeStart={() => {
+            setIsSiloFineAdjustmentMode(false);
             setIsImageAdjustmentMode(true);
             setSelectedEditableImage(MAIN_BACKGROUND_NAME);
           }}
           onShapeAdjustmentChange={(shapeName, adjustment) =>
             dispatch({ type: "SET_SHAPE_ADJUSTMENT", payload: { shapeName, adjustment } })
           }
+          onSiloFineAdjustmentModeStart={() => {
+            setIsImageAdjustmentMode(false);
+            setIsSiloFineAdjustmentMode(true);
+          }}
           onTextChange={handleTextChange}
           shapeAdjustments={state.shapeAdjustments}
           template={{ ...template, editableTexts }}
@@ -223,6 +231,7 @@ function BannerEditorWorkspace({ bannerSize, template }) {
           imageAdjustments={state.imageAdjustments}
           imageValues={state.imagePreviewUrls}
           isImageAdjustmentMode={isImageAdjustmentMode}
+          isSiloFineAdjustmentMode={isSiloFineAdjustmentMode}
           onBackgroundChange={(background) => dispatch({ type: "SET_COMPOSITION_TRANSFORM", payload: background })}
           onImageAdjustmentCancel={() => setIsImageAdjustmentMode(false)}
           onImageAdjustmentDone={() => setIsImageAdjustmentMode(false)}
@@ -230,10 +239,13 @@ function BannerEditorWorkspace({ bannerSize, template }) {
             dispatch({ type: "SET_IMAGE_ADJUSTMENT", payload: { imageName, adjustment } })
           }
           onSelectedImageChange={setSelectedEditableImage}
+          onSiloFineAdjustmentDone={() => setIsSiloFineAdjustmentMode(false)}
+          onSiloOffsetChange={(siloOffset) => dispatch({ type: "SET_SILO_OFFSET", payload: siloOffset })}
           selectedImageName={selectedEditableImage}
           shapeAdjustments={state.shapeAdjustments}
           shapeDefinitions={template.shapeDefinitions || {}}
           size={bannerSize}
+          siloOffset={state.siloOffset}
           template={template}
           textValues={state.texts}
         />
