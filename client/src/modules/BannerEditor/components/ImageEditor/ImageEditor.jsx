@@ -265,13 +265,13 @@ function ImageEditor({
 
   const toolbar = (
       <div className="image-editor__toolbar" aria-label={`${imageType} image editor`}>
-        <span className="image-editor__selected">Selected: {selectedLabel || imageType}</span>
+        {/* <span className="image-editor__selected">Selected: {selectedLabel || imageType}</span> */}
         <Button disabled={!isReady} onClick={applyFit} size="sm" title="Fit to canvas" type="button" variant="secondary">
           <FaCompressArrowsAlt aria-hidden="true" />
         </Button>
-        <Button disabled={!isReady} onClick={applyActualSize} size="sm" title="Actual size" type="button" variant="secondary">
+        {/* <Button disabled={!isReady} onClick={applyActualSize} size="sm" title="Actual size" type="button" variant="secondary">
           100%
-        </Button>
+        </Button> */}
         <Button disabled={!isReady} onClick={applyCenter} size="sm" title="Center image" type="button" variant="secondary">
           <FaSyncAlt aria-hidden="true" />
         </Button>
@@ -295,12 +295,6 @@ function ImageEditor({
         </label>
         <Button disabled={!isReady} onClick={() => setZoom(transform.scale * 1.12)} size="sm" title="Zoom in" type="button" variant="secondary">
           <FaSearchPlus aria-hidden="true" />
-        </Button>
-        <Button disabled={!isReady} onClick={() => rotateBy(-15)} size="sm" title="Rotate left" type="button" variant="secondary">
-          <FaUndo aria-hidden="true" />
-        </Button>
-        <Button disabled={!isReady} onClick={() => rotateBy(15)} size="sm" title="Rotate right" type="button" variant="secondary">
-          <FaRedo aria-hidden="true" />
         </Button>
         <Button disabled={!isReady} onClick={toggleVisibility} size="sm" title="Hide or show" type="button" variant="secondary">
           {transform.visible ? <FaEyeSlash aria-hidden="true" /> : <FaEye aria-hidden="true" />}
