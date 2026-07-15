@@ -269,18 +269,19 @@ function ImageEditor({
         <Button disabled={!isReady} onClick={applyFit} size="sm" title="Fit to canvas" type="button" variant="secondary">
           <FaCompressArrowsAlt aria-hidden="true" />
         </Button>
-        {/* <Button disabled={!isReady} onClick={applyActualSize} size="sm" title="Actual size" type="button" variant="secondary">
-          100%
-        </Button> */}
+
         <Button disabled={!isReady} onClick={applyCenter} size="sm" title="Center image" type="button" variant="secondary">
           <FaSyncAlt aria-hidden="true" />
         </Button>
+
         <Button disabled={!isReady} onClick={applyFit} size="sm" title="Reset" type="button" variant="secondary">
           <FaRedo aria-hidden="true" />
         </Button>
+
         <Button disabled={!isReady} onClick={() => setZoom(transform.scale / 1.12)} size="sm" title="Zoom out" type="button" variant="secondary">
           <FaSearchMinus aria-hidden="true" />
         </Button>
+
         <label className="image-editor__zoom">
           <span>{transform.scale.toFixed(2)}x</span>
           <input
@@ -293,21 +294,15 @@ function ImageEditor({
             value={transform.scale}
           />
         </label>
+
         <Button disabled={!isReady} onClick={() => setZoom(transform.scale * 1.12)} size="sm" title="Zoom in" type="button" variant="secondary">
           <FaSearchPlus aria-hidden="true" />
         </Button>
-        <Button disabled={!isReady} onClick={toggleVisibility} size="sm" title="Hide or show" type="button" variant="secondary">
-          {transform.visible ? <FaEyeSlash aria-hidden="true" /> : <FaEye aria-hidden="true" />}
-        </Button>
-        <Button disabled size="sm" title="Bring forward" type="button" variant="secondary">
-          <FaLevelUpAlt aria-hidden="true" />
-        </Button>
-        <Button disabled size="sm" title="Send backward" type="button" variant="secondary">
-          <FaLevelDownAlt aria-hidden="true" />
-        </Button>
+
         <Button onClick={onCancel} size="sm" type="button" variant="ghost">
           Cancel
         </Button>
+        
         <Button onClick={onDone} size="sm" type="button">
           Done
         </Button>

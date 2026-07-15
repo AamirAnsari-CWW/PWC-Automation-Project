@@ -5,7 +5,21 @@ const MIN_OFFSET = -50;
 const MAX_OFFSET = 50;
 const STEP = 0.1;
 
-const clampOffset = (value) => Math.min(MAX_OFFSET, Math.max(MIN_OFFSET, Number(value) || 0));
+// Round to 1 decimal place and treat tiny values as zero
+const roundToStep = (value) => {
+  const rounded = Number(value.toFixed(1));
+  return Math.abs(rounded) < 0.05 ? 0 : rounded;
+};
+
+// Clamp and round values
+const clampOffset = (value) => {
+  const number = roundToStep(Number(value) || 0);
+
+  return Math.min(
+    MAX_OFFSET,
+    Math.max(MIN_OFFSET, number)
+  );
+};
 
 function SiloFineAdjustment({ onChange, onClose, value }) {
   const offset = {
@@ -24,25 +38,35 @@ function SiloFineAdjustment({ onChange, onClose, value }) {
     const step = event?.shiftKey ? 10 : STEP;
 
     updateOffset({
-      x: offset.x + xDirection * step,
-      y: offset.y + yDirection * step,
+      x: roundToStep(offset.x + xDirection * step),
+      y: roundToStep(offset.y + yDirection * step),
     });
   };
 
   return (
-    <div className="silo-fine-adjustment" aria-label="Silo fine adjustment controls">
+    <div
+      className="silo-fine-adjustment"
+      aria-label="Silo fine adjustment controls"
+    >
       <div className="silo-fine-adjustment__header">
         <div>
           <strong>Silo Offset</strong>
-          <span>X: {offset.x}px</span>
-          <span>Y: {offset.y}px</span>
+          <span>X: {offset.x.toFixed(1)}px</span>
+          <span>Y: {offset.y.toFixed(1)}px</span>
         </div>
+
         {onClose && (
-          <Button onClick={onClose} size="sm" type="button" variant="ghost">
+          <Button
+            onClick={onClose}
+            size="sm"
+            type="button"
+            variant="ghost"
+          >
             Done
           </Button>
         )}
       </div>
+
       <div className="silo-fine-adjustment__pad">
         <button
           aria-label="Move silo up"
@@ -54,6 +78,7 @@ function SiloFineAdjustment({ onChange, onClose, value }) {
         >
           ↑
         </button>
+
         <button
           aria-label="Move silo left"
           className="silo-fine-adjustment__button silo-fine-adjustment__button--left"
@@ -64,7 +89,12 @@ function SiloFineAdjustment({ onChange, onClose, value }) {
         >
           ←
         </button>
-        <span className="silo-fine-adjustment__center" aria-hidden="true" />
+
+        <span
+          className="silo-fine-adjustment__center"
+          aria-hidden="true"
+        />
+
         <button
           aria-label="Move silo right"
           className="silo-fine-adjustment__button silo-fine-adjustment__button--right"
@@ -75,6 +105,7 @@ function SiloFineAdjustment({ onChange, onClose, value }) {
         >
           →
         </button>
+
         <button
           aria-label="Move silo down"
           className="silo-fine-adjustment__button silo-fine-adjustment__button--down"
@@ -86,7 +117,13 @@ function SiloFineAdjustment({ onChange, onClose, value }) {
           ↓
         </button>
       </div>
-      <Button onClick={() => updateOffset({ x: 0, y: 0 })} size="sm" type="button" variant="secondary">
+
+      <Button
+        onClick={() => updateOffset({ x: 0, y: 0 })}
+        size="sm"
+        type="button"
+        variant="secondary"
+      >
         Reset Alignment
       </Button>
     </div>

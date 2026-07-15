@@ -141,17 +141,17 @@ function PropertyPanel({
             </Button>
             <article className="property-panel__image-control">
               <span>Silo Fine Adjustment</span>
-              <small>Nudge only the silo position after the grouped background and silo adjustment.</small>
+              <small>Adjust silo position after the grouped background and silo adjustment.</small>
               <Button
                 disabled={!canAdjustImages}
                 onClick={onSiloFineAdjustmentModeStart}
                 type="button"
                 variant="secondary"
               >
-                Fine Adjust Silo
+                Adjust Silo
               </Button>
             </article>
-            <article className="property-panel__image-control">
+            {/* <article className="property-panel__image-control">
               <span>Logo</span>
               <small>Adjust logo position over the banner frame.</small>
               <Button
@@ -163,7 +163,7 @@ function PropertyPanel({
                 <FaUpload aria-hidden="true" />
                 Edit Logo
               </Button>
-            </article>
+            </article> */}
           </div>
         )}
 

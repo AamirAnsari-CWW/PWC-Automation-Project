@@ -136,11 +136,6 @@ Automation Project/
     ├── exports/                     # Generated banner export output
     │   ├── Untitled-Banner-Project-1783319763412/
     │   ├── Untitled-Banner-Project-1783321676484/
-    │   ├── Untitled-Banner-Project-1783321776357/
-    │   ├── Untitled-Banner-Project-1783323709382/
-    │   ├── Untitled-Banner-Project-1783323711708/
-    │   ├── Untitled-Banner-Project-1783323713409/
-    │   ├── Untitled-Banner-Project-1783323713610/
     │   └── Untitled-Banner-Project-1783323717195/
     │       ├── Untitled-Banner-Project.zip
     │       └── package/
