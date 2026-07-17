@@ -10,6 +10,8 @@ export const useProjects = () => {
   useEffect(() => {
     let isMounted = true;
 
+    // Source: client service -> GET /api/projects -> server/data/projects.json.
+    // This powers Dashboard counts and the saved Projects view.
     const loadProjects = async () => {
       try {
         const projectList = await getProjects();

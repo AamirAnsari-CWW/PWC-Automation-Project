@@ -1,147 +1,47 @@
 [
   {
-    "id": "70df113c-a42f-4da2-866d-3f826f27f585",
-    "name": "Untitled Banner Project",
-    "templateId": "energy-campaign",
-    "templateName": "Energy Campaign",
-    "size": "970x250",
-    "texts": {},
-    "images": {
-      "mainbg.jpg": "/uploads/projects/99c3a3ae-c3bb-4887-818e-5661fafdaade.jpg",
-      "silo.png": "/uploads/projects/bd6213f0-e64e-482f-851a-e400dbee6052.png"
-    },
-    "background": {
-      "x": -499.8642027216937,
-      "y": -1123.1330861963381,
-      "scale": 0.3,
-      "rotation": 0,
-      "visible": true
-    },
-    "compositionTransform": {
-      "x": -499.8642027216937,
-      "y": -1123.1330861963381,
-      "scale": 0.3,
-      "rotation": 0,
-      "visible": true
-    },
-    "hiddenImages": {},
-    "imageAdjustments": {
-      "mainbg.jpg": {
-        "x": -499.8642027216937,
-        "y": -1123.1330861963381,
-        "scale": 0.3,
-        "rotation": 0,
-        "visible": true
-      }
-    },
-    "shapeAdjustments": {},
-    "shapeDefinitions": {
-      "orangeStrip": [
-        ".container.left-half",
-        ".container"
-      ]
-    },
-    "siloOffset": {
-      "x": 0,
-      "y": -0.6
-    },
-    "createdBy": "local-user",
-    "createdAt": "2026-07-15T11:18:39.230Z",
-    "updatedAt": "2026-07-15T11:29:17.332Z"
-  },
-  {
-    "id": "66bff200-fe66-423c-b8b9-7429e64bcb51",
-    "name": "Untitled Banner Project",
-    "templateId": "energy-campaign",
-    "templateName": "Energy Campaign",
-    "size": "300x600",
-    "texts": {},
-    "images": {
-      "mainbg.jpg": "/uploads/projects/975a9391-cde9-4256-b3ee-5bff12ca4b65.jpg",
-      "silo.png": "/uploads/projects/efc78cfc-fc6e-4dfe-ab91-f9007936b130.png"
-    },
-    "background": {
-      "x": -542.6316249763224,
-      "y": -326.9055844540833,
-      "scale": 0.1815307873641433,
-      "rotation": 0,
-      "visible": true
-    },
-    "compositionTransform": {
-      "x": -542.6316249763224,
-      "y": -326.9055844540833,
-      "scale": 0.1815307873641433,
-      "rotation": 0,
-      "visible": true
-    },
-    "hiddenImages": {},
-    "imageAdjustments": {
-      "mainbg.jpg": {
-        "x": -542.6316249763224,
-        "y": -326.9055844540833,
-        "scale": 0.1815307873641433,
-        "rotation": 0,
-        "visible": true
-      }
-    },
-    "shapeAdjustments": {},
-    "shapeDefinitions": {
-      "orangeStrip": [
-        ".container.left-half",
-        ".container"
-      ]
-    },
-    "siloOffset": {
-      "x": 0,
-      "y": 0
-    },
-    "createdBy": "local-user",
-    "createdAt": "2026-07-15T09:49:40.089Z",
-    "updatedAt": "2026-07-15T10:29:29.629Z"
-  },
-  {
-    "id": "6b112d9e-0c47-44b7-9060-05657a552b15",
+    "id": "505f6cb3-51ae-49be-a7e5-f83545eca8a1",
     "name": "Untitled Banner Project",
     "templateId": "energy-campaign",
     "templateName": "Energy Campaign",
     "size": "300x250",
     "texts": {},
     "images": {
-      "mainbg.jpg": "/uploads/projects/de740c0e-2b47-4993-a6a2-2f93c42f4c2c.jpg",
-      "silo.png": "/uploads/projects/5ab7854f-14db-4072-ba1e-fc9722892112.png"
+      "mainbg.jpg": "/uploads/projects/7a8dd741-0c16-4c7d-99f9-010a323bf4a3.jpg",
+      "silo.png": "/uploads/projects/c83669aa-ffa7-433d-b7be-19f8b41d577f.png"
     },
     "background": {
-      "x": -638.2006861957691,
-      "y": -682.1702573530084,
-      "scale": 0.20330154529214312,
+      "x": -579.3512138227983,
+      "y": -625.0027304354579,
+      "scale": 0.19,
       "rotation": 0,
       "visible": true
     },
     "compositionTransform": {
-      "x": -638.2006861957691,
-      "y": -682.1702573530084,
-      "scale": 0.20330154529214312,
+      "x": -579.3512138227983,
+      "y": -625.0027304354579,
+      "scale": 0.19,
+      "rotation": 0,
+      "visible": true
+    },
+    "frame1BackgroundTransform": {
+      "x": -1681.4511434519263,
+      "y": -1511.9067224719684,
+      "scale": 0.40696935627190917,
       "rotation": 0,
       "visible": true
     },
     "hiddenImages": {},
     "imageAdjustments": {
       "mainbg.jpg": {
-        "x": -638.2006861957691,
-        "y": -682.1702573530084,
-        "scale": 0.20330154529214312,
+        "x": -579.3512138227983,
+        "y": -625.0027304354579,
+        "scale": 0.19,
         "rotation": 0,
         "visible": true
       }
     },
-    "shapeAdjustments": {
-      "orangeStrip": {
-        "x": 0,
-        "y": -10,
-        "scale": 1,
-        "visible": true
-      }
-    },
+    "shapeAdjustments": {},
     "shapeDefinitions": {
       "orangeStrip": [
         ".container.left-half",
@@ -150,10 +50,10 @@
     },
     "siloOffset": {
       "x": 0,
-      "y": -0.8999999999999986
+      "y": -0.7
     },
     "createdBy": "local-user",
-    "createdAt": "2026-07-15T09:10:48.251Z",
-    "updatedAt": "2026-07-15T09:25:40.855Z"
+    "createdAt": "2026-07-16T12:04:35.471Z",
+    "updatedAt": "2026-07-16T12:06:23.519Z"
   }
 ]

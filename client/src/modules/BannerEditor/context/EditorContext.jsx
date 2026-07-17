@@ -6,6 +6,8 @@ import { buildBackendUrl } from "../services/previewService";
 const EditorContext = createContext(null);
 
 const toPreviewImageUrls = (images = {}) => {
+  // Projects store backend-relative image URLs. The preview/editor needs full
+  // browser URLs so iframe messages and image dimension checks can load them.
   return Object.fromEntries(
     Object.entries(images).map(([key, value]) => [key, value.startsWith("blob:") ? value : buildBackendUrl(value)])
   );
@@ -14,9 +16,18 @@ const toPreviewImageUrls = (images = {}) => {
 const DEFAULT_ADJUSTMENT = { x: 0, y: 0, scale: 1, rotation: 0, visible: true };
 const DEFAULT_SILO_OFFSET = { x: 0, y: 0 };
 
-const createInitialState = (project) => ({
-  background: DEFAULT_ADJUSTMENT,
-  compositionTransform: DEFAULT_ADJUSTMENT,
+const normalizeAdjustment = (adjustment = DEFAULT_ADJUSTMENT) => ({
+  ...DEFAULT_ADJUSTMENT,
+  ...adjustment,
+});
+
+// Initial editor state is built from two sources:
+// 1. template defaults discovered from the banner source files;
+// 2. saved project data from server/data/projects.json when editing a project.
+const createInitialState = ({ project, templateBackgroundDefaults } = {}) => ({
+  background: normalizeAdjustment(templateBackgroundDefaults?.final),
+  compositionTransform: normalizeAdjustment(templateBackgroundDefaults?.final),
+  frame1BackgroundTransform: normalizeAdjustment(templateBackgroundDefaults?.frame1),
   hiddenImages: {},
   imageAdjustments: {},
   images: {},
@@ -30,8 +41,11 @@ const createInitialState = (project) => ({
   texts: {},
   ...(project
     ? {
-        background: project.compositionTransform || project.background || DEFAULT_ADJUSTMENT,
-        compositionTransform: project.compositionTransform || project.background || DEFAULT_ADJUSTMENT,
+        background: normalizeAdjustment(project.compositionTransform || project.background || templateBackgroundDefaults?.final),
+        compositionTransform: normalizeAdjustment(project.compositionTransform || project.background || templateBackgroundDefaults?.final),
+        frame1BackgroundTransform: normalizeAdjustment(
+          project.frame1BackgroundTransform || templateBackgroundDefaults?.frame1
+        ),
         hiddenImages: project.hiddenImages || {},
         imageAdjustments: project.imageAdjustments || {},
         images: project.images || {},
@@ -45,6 +59,9 @@ const createInitialState = (project) => ({
 });
 
 const editorReducer = (state, action) => {
+  // Each action updates the local editor state and marks it dirty when the
+  // change should be saved/exported. Add new feature state here, then include it
+  // in BannerEditor's projectPayload and backend normalization.
   if (action.type === "SET_TEXT") {
     return {
       ...state,
@@ -93,6 +110,14 @@ const editorReducer = (state, action) => {
         ...state.imageAdjustments,
         "mainbg.jpg": action.payload,
       },
+      isDirty: true,
+    };
+  }
+
+  if (action.type === "SET_FRAME1_BACKGROUND_TRANSFORM") {
+    return {
+      ...state,
+      frame1BackgroundTransform: action.payload,
       isDirty: true,
     };
   }
@@ -162,6 +187,7 @@ const editorReducer = (state, action) => {
     return {
       ...createInitialState(),
       ...action.payload,
+      frame1BackgroundTransform: normalizeAdjustment(action.payload.frame1BackgroundTransform),
       imagePreviewUrls: action.payload.images || {},
       isDirty: false,
       saveStatus: "saved",
@@ -171,8 +197,8 @@ const editorReducer = (state, action) => {
   return state;
 };
 
-export function EditorProvider({ children, project }) {
-  const [state, dispatch] = useReducer(editorReducer, project, createInitialState);
+export function EditorProvider({ children, project, templateBackgroundDefaults }) {
+  const [state, dispatch] = useReducer(editorReducer, { project, templateBackgroundDefaults }, createInitialState);
 
   const value = useMemo(() => ({ dispatch, state }), [state]);
 

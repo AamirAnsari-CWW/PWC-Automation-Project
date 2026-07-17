@@ -16,6 +16,8 @@ export const useProject = (projectId) => {
       };
     }
 
+    // Source: query string project id -> GET /api/projects/:id -> saved editor
+    // state that is passed into EditorProvider.
     const loadProject = async () => {
       setIsLoading(true);
       setError("");

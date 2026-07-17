@@ -12,7 +12,11 @@ const DEFAULT_EDITABLE_TEXTS = ["d2", "d3", "d5", "d7"];
 const DEFAULT_EDITABLE_IMAGES = ["mainbg.jpg", "silo.png"];
 const DEFAULT_SHAPE_DEFINITIONS = {};
 const DEFAULT_ANIMATION_FILE = "src/js/main.js";
+const DEFAULT_BACKGROUND_TRANSFORM = { x: 0, y: 0, scale: 1 };
 
+// Template metadata is file-system backed. The service supports the current
+// root-level template.json layout and a nested future layout where each template
+// has its own metadata file and size folders.
 const toTemplateId = (name) => {
   return name
     .toLowerCase()
@@ -49,7 +53,43 @@ const readJsonIfExists = async (filePath) => {
   return fs.readJson(filePath);
 };
 
+const parseNumberProperty = (objectSource, propertyName, fallback) => {
+  const match = objectSource.match(new RegExp(`${propertyName}\\s*:\\s*(-?\\d+(?:\\.\\d+)?)`));
+
+  return match ? Number(match[1]) : fallback;
+};
+
+const parseTransformFromObjectSource = (objectSource) => ({
+  x: parseNumberProperty(objectSource, "x", DEFAULT_BACKGROUND_TRANSFORM.x),
+  y: parseNumberProperty(objectSource, "y", DEFAULT_BACKGROUND_TRANSFORM.y),
+  scale: parseNumberProperty(objectSource, "scale", DEFAULT_BACKGROUND_TRANSFORM.scale),
+});
+
+const getBackgroundDefaults = async (sizeDirectoryPath) => {
+  // The editor uses these values to match the original animation's first/final
+  // background positions before a developer adds manual adjustments.
+  const bannerSourcePath = path.join(sizeDirectoryPath, "src", "js", "banners.js");
+
+  if (!(await fs.pathExists(bannerSourcePath))) {
+    return {
+      final: DEFAULT_BACKGROUND_TRANSFORM,
+      frame1: DEFAULT_BACKGROUND_TRANSFORM,
+    };
+  }
+
+  const source = await fs.readFile(bannerSourcePath, "utf8");
+  const frame1Match = source.match(/\.set\(\s*d1\s*,\s*\{([^}]*(?:scale|x|y)[^}]*)\}/);
+  const finalMatch = source.match(/\.to\(\s*\[[^\]]*d1[^\]]*\]\s*,\s*[^,]+,\s*\{([^}]*(?:scale|x|y)[^}]*)\}/);
+
+  return {
+    final: finalMatch ? parseTransformFromObjectSource(finalMatch[1]) : DEFAULT_BACKGROUND_TRANSFORM,
+    frame1: frame1Match ? parseTransformFromObjectSource(frame1Match[1]) : DEFAULT_BACKGROUND_TRANSFORM,
+  };
+};
+
 const getSizeInfo = async (sizeDirectoryPath, templateId, size, metadata) => {
+  // This object is sent to the frontend as sizeDetails. Add fields here when a
+  // UI feature needs per-size template data.
   const distIndexPath = path.join(sizeDirectoryPath, "dist", "index.html");
   const sourceIndexPath = path.join(sizeDirectoryPath, "src", "index.html");
   const previewImagePath = path.join(sizeDirectoryPath, `${size}.jpg`);
@@ -64,10 +104,13 @@ const getSizeInfo = async (sizeDirectoryPath, templateId, size, metadata) => {
     hasSourceIndex: await fs.pathExists(sourceIndexPath),
     previewImageUrl: (await fs.pathExists(previewImagePath)) ? `/templates/${size}/${size}.jpg` : null,
     previewUrl: (await fs.pathExists(distIndexPath)) ? `/templates/${templateId}/${size}/index.html` : null,
+    backgroundDefaults: await getBackgroundDefaults(sizeDirectoryPath),
   };
 };
 
 const normalizeTemplateMetadata = async ({ metadata, templateDirectoryPath, templateId, sizeDirectoryNames }) => {
+  // The frontend expects a consistent shape regardless of how complete the
+  // template.json file is, so defaults are applied in one place here.
   const sizes = metadata?.sizes?.length ? metadata.sizes : sizeDirectoryNames;
 
   return {

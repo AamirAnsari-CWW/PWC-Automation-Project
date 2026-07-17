@@ -1,5 +1,8 @@
 const RUNTIME_MARKER = "<!-- Banner Automation Preview Runtime -->";
 
+// Static banner templates do not know about the React editor. This runtime is
+// injected into preview HTML so postMessage events can patch text, images,
+// transforms, and shape visibility without changing the original template code.
 const getPreviewRuntimeScript = () => {
   return `
 ${RUNTIME_MARKER}
@@ -225,6 +228,8 @@ function updateText(payload) {
   }
 
   function applyAdjustment(target, adjustment, key) {
+    // mainbg.jpg and silo.png share the background transform so art direction can
+    // move as a grouped composition, with siloOffset layered on top for fine tuning.
     if (!target || !target.layer || !adjustment || (key !== "mainbg.jpg" && !hasAdjustment(adjustment))) {
       return;
     }
@@ -393,6 +398,8 @@ function updateText(payload) {
 };
 
 const injectPreviewRuntime = (html) => {
+  // Avoid double injection when a preview is rebuilt from HTML that already
+  // contains the bridge script.
   if (html.includes(RUNTIME_MARKER)) {
     return html;
   }

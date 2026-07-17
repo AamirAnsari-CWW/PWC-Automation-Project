@@ -10,6 +10,9 @@ import {
 } from "./previewService";
 
 export const createBannerBridge = (iframeElement) => {
+  // Thin adapter between React state and the preview iframe runtime. Add a new
+  // preview feature by creating a message type, a bridge method, and a runtime
+  // handler in server/services/previewRuntimeService.js.
   return {
     updateBackground(backgroundState) {
       sendPreviewMessage(iframeElement, createBackgroundUpdateMessage(backgroundState));

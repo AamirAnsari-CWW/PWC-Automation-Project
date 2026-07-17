@@ -16,6 +16,8 @@ export const useTemplate = (templateId) => {
       };
     }
 
+    // Source: route templateId -> GET /api/templates/:id -> selected template
+    // metadata, including editable text/image fields and per-size preview URLs.
     const loadTemplate = async () => {
       setIsLoading(true);
       setError("");

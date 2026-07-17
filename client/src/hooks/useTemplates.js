@@ -10,6 +10,8 @@ export const useTemplates = () => {
   useEffect(() => {
     let isMounted = true;
 
+    // Source: client service -> GET /api/templates -> backend scans server/templates/.
+    // Consumers get UI-ready metadata such as supportedSizes and sizeDetails.
     const loadTemplates = async () => {
       try {
         const templateList = await getTemplates();

@@ -16,6 +16,9 @@ function Dashboard() {
   const navigate = useNavigate();
   const { error, isLoading, templates } = useTemplates();
   const projectsState = useProjects();
+
+  // The dashboard waits for both template metadata and saved project data before
+  // rendering summary cards, because each card pulls from a different API source.
   const hasError = error || projectsState.error;
   const isDashboardLoading = isLoading || projectsState.isLoading;
 

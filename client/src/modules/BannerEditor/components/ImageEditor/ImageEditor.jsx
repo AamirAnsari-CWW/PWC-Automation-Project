@@ -1,15 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import {
   FaCompressArrowsAlt,
-  FaEye,
-  FaEyeSlash,
   FaRedo,
   FaSearchMinus,
   FaSearchPlus,
   FaSyncAlt,
-  FaUndo,
-  FaLevelUpAlt,
-  FaLevelDownAlt,
 } from "react-icons/fa";
 
 import Button from "../../../../components/Button/Button";
@@ -17,7 +12,6 @@ import {
   MAX_IMAGE_ZOOM,
   MIN_IMAGE_ZOOM,
   clampImageTransform,
-  getActualSizeImageTransform,
   getCenteredImageTransform,
   getFitImageTransform,
   normalizeImageTransform,
@@ -37,7 +31,6 @@ function ImageEditor({
   onSelect,
   onTransformChange,
   previewScale,
-  selectedLabel,
 }) {
   const dragRef = useRef(null);
   const resizeRef = useRef(null);
@@ -46,6 +39,8 @@ function ImageEditor({
   const transform = normalizeImageTransform(currentTransform);
   const isReady = Boolean(imageUrl && imageSize);
 
+  // Load natural dimensions once the preview image changes; transform helpers
+  // need the source asset size to calculate fit, zoom, and clamp boundaries.
   useEffect(() => {
     if (!imageUrl) {
       return undefined;
@@ -99,6 +94,8 @@ function ImageEditor({
   };
 
   const handlePointerMove = (event) => {
+    // The same preview surface owns drag, resize, and rotate gestures. Refs keep
+    // the active pointer state outside React render cycles for smoother movement.
     if (resizeRef.current && resizeRef.current.pointerId === event.pointerId) {
       const delta = Math.max(event.clientX - resizeRef.current.startX, event.clientY - resizeRef.current.startY) / previewScale;
       const baseSize = Math.max(imageSize.width, imageSize.height);
@@ -201,36 +198,6 @@ function ImageEditor({
         transform,
       }),
     );
-  };
-
-  const applyActualSize = () => {
-    if (!imageSize) {
-      return;
-    }
-
-    onTransformChange(
-      getActualSizeImageTransform({
-        bannerHeight: bannerSize.height,
-        bannerWidth: bannerSize.width,
-        imageHeight: imageSize.height,
-        imageWidth: imageSize.width,
-        transform,
-      }),
-    );
-  };
-
-  const rotateBy = (degrees) => {
-    commitTransform({
-      ...transform,
-      rotation: transform.rotation + degrees,
-    });
-  };
-
-  const toggleVisibility = () => {
-    onTransformChange({
-      ...transform,
-      visible: !transform.visible,
-    });
   };
 
   const startResize = (event) => {

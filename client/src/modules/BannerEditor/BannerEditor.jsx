@@ -22,6 +22,8 @@ import "./BannerEditor.css";
 const MAIN_BACKGROUND_NAME = "mainbg.jpg";
 const SILO_IMAGE_NAME = "silo.png";
 
+// Used after uploads so the editor can initialize scale/position from the real
+// asset dimensions rather than guessing from the file name or banner size.
 const loadImageDimensions = (src) =>
   new Promise((resolve, reject) => {
     const image = new Image();
@@ -58,7 +60,12 @@ function BannerEditor() {
 
   return (
     <Layout>
-      <EditorProvider key={`${template.id}-${bannerSize.id}-${projectId || "new"}`} project={projectState.project}>
+      {/* Keying the provider resets editor state when switching template, size, or loaded project. */}
+      <EditorProvider
+        key={`${template.id}-${bannerSize.id}-${projectId || "new"}`}
+        project={projectState.project}
+        templateBackgroundDefaults={bannerSize.backgroundDefaults}
+      >
         <BannerEditorWorkspace bannerSize={bannerSize} template={template} />
       </EditorProvider>
     </Layout>
@@ -68,16 +75,20 @@ function BannerEditor() {
 function BannerEditorWorkspace({ bannerSize, template }) {
   const { dispatch, state } = useEditor();
   const [isImageAdjustmentMode, setIsImageAdjustmentMode] = useState(false);
+  const [backgroundAdjustmentMode, setBackgroundAdjustmentMode] = useState("final");
   const [isSiloFineAdjustmentMode, setIsSiloFineAdjustmentMode] = useState(false);
   const [selectedEditableImage, setSelectedEditableImage] = useState(null);
   const editableTexts = bannerSize.editableTexts || template.editableTexts;
   const bannerOrientation =
     bannerSize.height > bannerSize.width ? "portrait" : bannerSize.width > bannerSize.height ? "landscape" : "square";
 
+  // This is the canonical save/export shape shared by autosave, manual save,
+  // and backend export generation. Add new editable fields here first.
   const projectPayload = useMemo(
     () => ({
       background: state.background,
       compositionTransform: state.compositionTransform,
+      frame1BackgroundTransform: state.frame1BackgroundTransform,
       hiddenImages: state.hiddenImages,
       imageAdjustments: state.imageAdjustments,
       images: state.images,
@@ -94,6 +105,7 @@ function BannerEditorWorkspace({ bannerSize, template }) {
       bannerSize.id,
       state.background,
       state.compositionTransform,
+      state.frame1BackgroundTransform,
       state.hiddenImages,
       state.imageAdjustments,
       state.images,
@@ -135,6 +147,8 @@ function BannerEditorWorkspace({ bannerSize, template }) {
       },
     });
 
+    // Background and silo are adjusted as one composition layer so the original
+    // animation can stay locked while the uploaded artwork is repositioned.
     if (imageName === MAIN_BACKGROUND_NAME) {
       const imageSize = await loadImageDimensions(previewUrl);
       const transform = getFitImageTransform({
@@ -151,6 +165,8 @@ function BannerEditorWorkspace({ bannerSize, template }) {
       return;
     }
 
+    // Other editable images keep their own transform so the preview runtime can
+    // patch only that DOM layer inside the static banner template.
     if ((template.editableImages || []).includes(imageName) && imageName !== SILO_IMAGE_NAME) {
       const imageSize = await loadImageDimensions(previewUrl);
 
@@ -198,17 +214,29 @@ function BannerEditorWorkspace({ bannerSize, template }) {
       />
       <div className={`banner-editor__workspace banner-editor__workspace--${bannerOrientation}`}>
         <PropertyPanel
+          backgroundAdjustmentMode={backgroundAdjustmentMode}
           backgroundState={state.compositionTransform}
+          frame1BackgroundState={state.frame1BackgroundTransform}
           hiddenImages={state.hiddenImages}
           imageValues={state.imagePreviewUrls}
           imageAdjustments={state.imageAdjustments}
           isImageAdjustmentMode={isImageAdjustmentMode}
           onBackgroundChange={(background) => dispatch({ type: "SET_COMPOSITION_TRANSFORM", payload: background })}
+          onFrame1BackgroundChange={(background) =>
+            dispatch({ type: "SET_FRAME1_BACKGROUND_TRANSFORM", payload: background })
+          }
           onImageAdjustmentChange={(imageName, adjustment) =>
             dispatch({ type: "SET_IMAGE_ADJUSTMENT", payload: { imageName, adjustment } })
           }
           onImageChange={handleImageChange}
           onImageAdjustmentModeStart={() => {
+            setBackgroundAdjustmentMode("final");
+            setIsSiloFineAdjustmentMode(false);
+            setIsImageAdjustmentMode(true);
+            setSelectedEditableImage(MAIN_BACKGROUND_NAME);
+          }}
+          onFrame1BackgroundAdjustmentModeStart={() => {
+            setBackgroundAdjustmentMode("frame1");
             setIsSiloFineAdjustmentMode(false);
             setIsImageAdjustmentMode(true);
             setSelectedEditableImage(MAIN_BACKGROUND_NAME);
@@ -226,13 +254,21 @@ function BannerEditorWorkspace({ bannerSize, template }) {
           textValues={state.texts}
         />
         <BannerPreview
-          backgroundState={state.compositionTransform}
+          backgroundState={backgroundAdjustmentMode === "frame1" ? state.frame1BackgroundTransform : state.compositionTransform}
           hiddenImages={state.hiddenImages}
           imageAdjustments={state.imageAdjustments}
           imageValues={state.imagePreviewUrls}
           isImageAdjustmentMode={isImageAdjustmentMode}
           isSiloFineAdjustmentMode={isSiloFineAdjustmentMode}
-          onBackgroundChange={(background) => dispatch({ type: "SET_COMPOSITION_TRANSFORM", payload: background })}
+          onBackgroundChange={(background) =>
+            dispatch({
+              type:
+                backgroundAdjustmentMode === "frame1"
+                  ? "SET_FRAME1_BACKGROUND_TRANSFORM"
+                  : "SET_COMPOSITION_TRANSFORM",
+              payload: background,
+            })
+          }
           onImageAdjustmentCancel={() => setIsImageAdjustmentMode(false)}
           onImageAdjustmentDone={() => setIsImageAdjustmentMode(false)}
           onImageAdjustmentChange={(imageName, adjustment) =>

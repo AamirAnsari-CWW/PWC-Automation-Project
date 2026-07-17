@@ -3,6 +3,8 @@ import axios from "axios";
 import { API_BASE_URL } from "../constants/api";
 
 export const exportBannerPackage = async (payload) => {
+  // The export endpoint receives the same payload used for saving projects,
+  // applies it to the selected template, and returns a zip file blob.
   const response = await axios.post(`${API_BASE_URL}/exports`, payload, {
     responseType: "blob",
   });

@@ -5,6 +5,8 @@ const projectStoreService = require("./projectStoreService");
 
 const createTimestamp = () => new Date().toISOString();
 
+// This is the backend contract for saved editor state. When adding a feature,
+// include the field here, in EditorContext, and in BannerEditor projectPayload.
 const normalizeProjectPayload = (payload) => ({
   name: payload.name?.trim() || "Untitled Banner Project",
   templateId: payload.templateId,
@@ -14,6 +16,7 @@ const normalizeProjectPayload = (payload) => ({
   images: payload.images || {},
   background: payload.background || { x: 0, y: 0, scale: 1 },
   compositionTransform: payload.compositionTransform || payload.background || { x: 0, y: 0, scale: 1 },
+  frame1BackgroundTransform: payload.frame1BackgroundTransform || { x: 0, y: 0, scale: 1 },
   hiddenImages: payload.hiddenImages || {},
   imageAdjustments: payload.imageAdjustments || {},
   shapeAdjustments: payload.shapeAdjustments || {},
@@ -38,6 +41,8 @@ const getProjectById = async (projectId) => {
 };
 
 const createProject = async (payload) => {
+  // New projects are inserted first so dashboards/project lists naturally show
+  // the most recent work at the top.
   const projects = await getProjects();
   const timestamp = createTimestamp();
   const project = {
@@ -54,6 +59,8 @@ const createProject = async (payload) => {
 };
 
 const updateProject = async (projectId, payload) => {
+  // Merge with the existing record so partial client updates do not drop fields
+  // introduced by future editor features.
   const projects = await getProjects();
   const projectIndex = projects.findIndex((item) => item.id === projectId);
 

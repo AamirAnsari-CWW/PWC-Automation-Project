@@ -1,118 +1,79 @@
-# Project Folder Structure
+# Project Structure
 
-This project is split into two main applications:
-
-- `client/` - React + Vite frontend.
-- `server/` - Express backend, template storage, uploads, previews, and exports.
-
-Generated folders such as `node_modules/`, `dist/`, `exports/`, and runtime uploads are noted but not expanded fully.
+The project is split into a React frontend and an Express backend. Generated folders such as `node_modules/`, `dist/`, `exports/`, and runtime uploads are listed in the notes section instead of being expanded.
 
 ```text
-Automation Project/
+PWC Automation Project/
+├── README.md
 ├── PROJECT_STRUCTURE.md
 ├── client/
 │   ├── README.md
-│   ├── eslint.config.js
 │   ├── index.html
 │   ├── package.json
 │   ├── package-lock.json
 │   ├── vite.config.js
-│   ├── dist/                         # Generated Vite production build
-│   ├── node_modules/                 # Installed frontend dependencies
+│   ├── eslint.config.js
 │   └── src/
-│       ├── App.jsx                   # Main app component and routing shell
-│       ├── main.jsx                  # React entry point
-│       ├── components/               # Reusable UI components
+│       ├── main.jsx                         # React entry point
+│       ├── App.jsx                          # Route definitions
+│       ├── components/                      # Shared UI primitives
 │       │   ├── Button/
-│       │   │   ├── Button.jsx
-│       │   │   └── Button.css
 │       │   ├── Card/
-│       │   │   ├── Card.jsx
-│       │   │   └── Card.css
 │       │   ├── Input/
-│       │   │   ├── Input.jsx
-│       │   │   └── Input.css
 │       │   ├── Layout/
-│       │   │   ├── Layout.jsx
-│       │   │   └── Layout.css
 │       │   ├── Loader/
-│       │   │   ├── Loader.jsx
-│       │   │   └── Loader.css
 │       │   ├── Navbar/
-│       │   │   ├── Navbar.jsx
-│       │   │   └── Navbar.css
 │       │   └── Sidebar/
-│       │       ├── Sidebar.jsx
-│       │       └── Sidebar.css
-│       ├── constants/                # Shared frontend constants
-│       │   ├── api.js
-│       │   └── routes.js
-│       ├── hooks/                    # Shared React data hooks
+│       ├── constants/
+│       │   ├── api.js                       # API base URL
+│       │   └── routes.js                    # Frontend route constants
+│       ├── hooks/                           # Shared API-backed React hooks
 │       │   ├── useProject.js
 │       │   ├── useProjects.js
 │       │   ├── useTemplate.js
 │       │   └── useTemplates.js
-│       ├── modules/                  # Feature-level frontend modules
+│       ├── modules/
 │       │   ├── BannerEditor/
-│       │   │   ├── BannerEditor.jsx
+│       │   │   ├── BannerEditor.jsx         # Editor orchestration, save/export flow
 │       │   │   ├── BannerEditor.css
 │       │   │   ├── components/
-│       │   │   │   ├── BackgroundEditor/
-│       │   │   │   │   ├── BackgroundEditor.jsx
-│       │   │   │   │   └── BackgroundEditor.css
-│       │   │   │   ├── BannerPreview/
-│       │   │   │   │   ├── BannerPreview.jsx
-│       │   │   │   │   └── BannerPreview.css
-│       │   │   │   ├── PropertyPanel/
-│       │   │   │   │   ├── PropertyPanel.jsx
-│       │   │   │   │   └── PropertyPanel.css
-│       │   │   │   ├── TextEditor/
-│       │   │   │   │   ├── TextEditor.jsx
-│       │   │   │   │   └── TextEditor.css
-│       │   │   │   └── Toolbar/
-│       │   │   │       ├── Toolbar.jsx
-│       │   │   │       └── Toolbar.css
+│       │   │   │   ├── BackgroundEditor/    # Numeric transform controls
+│       │   │   │   ├── BannerPreview/       # Preview iframe and edit overlays
+│       │   │   │   ├── ImageEditor/         # Drag, resize, rotate, zoom interactions
+│       │   │   │   ├── PropertyPanel/       # Text, image, and shape controls
+│       │   │   │   ├── SiloFineAdjustment/  # Fine position controls for silo layer
+│       │   │   │   ├── TextEditor/          # Editable text fields
+│       │   │   │   └── Toolbar/             # Save/export/status actions
 │       │   │   ├── context/
-│       │   │   │   └── EditorContext.jsx
+│       │   │   │   └── EditorContext.jsx    # Central editor reducer/state
 │       │   │   ├── hooks/
-│       │   │   │   └── useAutosave.js
-│       │   │   └── services/
-│       │   │       ├── bannerBridge.js
-│       │   │       └── previewService.js
+│       │   │   │   └── useAutosave.js       # Debounced project persistence
+│       │   │   ├── services/
+│       │   │   │   ├── bannerBridge.js      # postMessage bridge to preview iframe
+│       │   │   │   └── previewService.js    # Preview URL helpers
+│       │   │   └── utils/
+│       │   │       └── imageTransform.js    # Fit, clamp, zoom, normalize helpers
 │       │   ├── Dashboard/
-│       │   │   ├── Dashboard.jsx
+│       │   │   ├── Dashboard.jsx            # Workspace landing page
 │       │   │   ├── Dashboard.css
 │       │   │   └── components/
 │       │   │       ├── RecentProjects/
-│       │   │       │   ├── RecentProjects.jsx
-│       │   │       │   └── RecentProjects.css
 │       │   │       ├── RecentTemplates/
-│       │   │       │   ├── RecentTemplates.jsx
-│       │   │       │   └── RecentTemplates.css
 │       │   │       └── StatsCard/
-│       │   │           ├── StatsCard.jsx
-│       │   │           └── StatsCard.css
 │       │   ├── Projects/
-│       │   │   └── Projects.jsx
 │       │   ├── Settings/
-│       │   │   └── Settings.jsx
 │       │   └── TemplateLibrary/
-│       │       ├── TemplateLibrary.jsx
+│       │       ├── TemplateLibrary.jsx       # Template and size selection
 │       │       ├── TemplateLibrary.css
 │       │       └── components/
 │       │           ├── SizeSelector/
-│       │           │   ├── SizeSelector.jsx
-│       │           │   └── SizeSelector.css
 │       │           └── TemplateCard/
-│       │               ├── TemplateCard.jsx
-│       │               └── TemplateCard.css
-│  
-│       ├── services/                 # API client services
+│       ├── services/                         # Frontend API wrappers
 │       │   ├── exportService.js
 │       │   ├── projectService.js
 │       │   ├── templateService.js
 │       │   └── uploadService.js
-│       ├── styles/                   # Global styles and design variables
+│       ├── styles/
 │       │   ├── global.css
 │       │   └── variables.css
 │       └── utils/
@@ -120,103 +81,53 @@ Automation Project/
 └── server/
     ├── package.json
     ├── package-lock.json
-    ├── server.js                    # Backend entry point
-    ├── node_modules/                # Installed backend dependencies
-    ├── config/                      # Backend path/config helpers
-    │   ├── storagePaths.js
-    │   └── templatePaths.js
-    ├── controllers/                 # Request handlers
+    ├── server.js                         # Express app entry point
+    ├── config/
+    │   ├── storagePaths.js                # Upload/export paths
+    │   └── templatePaths.js               # Template root paths
+    ├── controllers/                       # HTTP request handlers
     │   ├── exportController.js
     │   ├── previewController.js
     │   ├── projectController.js
     │   ├── templateController.js
     │   └── uploadController.js
     ├── data/
-    │   └── projects.json            # Project metadata store
-    ├── exports/                     # Generated banner export output
-    │   ├── Untitled-Banner-Project-1783319763412/
-    │   ├── Untitled-Banner-Project-1783321676484/
-    │   └── Untitled-Banner-Project-1783323717195/
-    │       ├── Untitled-Banner-Project.zip
-    │       └── package/
-    │           ├── index.html
-    │           ├── config.js
-    │           ├── mainbg.jpg
-    │           ├── silo.png
-    │           ├── cta.png
-    │           ├── logo_white.svg
-    │           └── ITCCharterCom-Bold.woff2
+    │   └── projects.json                  # JSON project metadata store
     ├── middleware/
     │   └── errorHandler.js
-    ├── routes/                      # Express route definitions
+    ├── routes/                            # API and preview routes
     │   ├── exportRoutes.js
     │   ├── previewRoutes.js
     │   ├── projectRoutes.js
     │   ├── templateRoutes.js
     │   └── uploadRoutes.js
-    ├── services/                    # Backend business logic
-    │   ├── exportService.js
-    │   ├── imageService.js
-    │   ├── previewRuntimeService.js
-    │   ├── previewService.js
-    │   ├── projectService.js
-    │   ├── projectStoreService.js
-    │   ├── templateService.js
-    │   ├── textService.js
-    │   └── zipService.js
-    ├── templates/                   # Banner template source files
-    │   ├── template.json            # Template index/metadata
+    ├── services/                          # Backend business logic
+    │   ├── exportService.js               # Export package generation
+    │   ├── imageService.js                # Image upload/file helpers
+    │   ├── previewRuntimeService.js       # Injected DOM update runtime
+    │   ├── previewService.js              # Preview HTML generation
+    │   ├── projectService.js              # Project CRUD behavior
+    │   ├── projectStoreService.js         # JSON store reads/writes
+    │   ├── templateService.js             # Template metadata and lookup
+    │   ├── textService.js                 # Text replacement helpers
+    │   └── zipService.js                  # Zip archive creation
+    ├── templates/
+    │   ├── template.json                  # Template catalog and edit metadata
     │   ├── 160x600/
     │   ├── 300x250/
     │   ├── 300x600/
     │   ├── 728x90/
     │   └── 970x250/
-    │       ├── README.md
-    │       ├── env.json
-    │       ├── gulpfile.js
-    │       ├── package.json
-    │       ├── package-lock.json
-    │       ├── 970x250.jpg
-    │       ├── 970x250.zip
-    │       ├── dist/                # Generated template build output
-    │       ├── sass/
-    │       │   ├── reset.scss
-    │       │   └── styles.scss
-    │       ├── src/
-    │       │   ├── index.html
-    │       │   ├── config.js
-    │       │   ├── css/
-    │       │   │   ├── reset.css
-    │       │   │   └── styles.css
-    │       │   ├── fonts/
-    │       │   │   └── ITCCharterCom-Bold.woff2
-    │       │   ├── img/
-    │       │   │   ├── cta.png
-    │       │   │   ├── logo_white.svg
-    │       │   │   ├── mainbg.jpg
-    │       │   │   └── silo.png
-    │       │   ├── js/
-    │       │   │   ├── DrawSVGPlugin.min.js
-    │       │   │   ├── banners.js
-    │       │   │   ├── dynamic_data.js
-    │       │   │   ├── frame_modules.js
-    │       │   │   └── index.js
-    │       │   └── overlays/
-    │       │       ├── 1.jpg
-    │       │       ├── 1-1.jpg
-    │       │       └── 2.jpg
-    │       └── tests/
-    │           └── test.js
     ├── uploads/
-    │   └── projects/                # Runtime uploaded project assets
-    │       └── 133b0cc8-c5a9-4f24-a120-869e9adfa0e2.png
+    │   └── projects/                      # Uploaded project assets
+    ├── exports/                           # Generated export folders and zip files
     └── utils/
         └── httpError.js
 ```
 
-## Template Folder Pattern
+## Banner Template Folder Pattern
 
-Each banner size folder under `server/templates/` follows the same general shape:
+Each size folder under `server/templates/` follows this general layout:
 
 ```text
 server/templates/<size>/
@@ -227,7 +138,7 @@ server/templates/<size>/
 ├── package-lock.json
 ├── <size>.jpg
 ├── <size>.zip
-├── dist/
+├── dist/                 # Generated template build
 ├── sass/
 ├── src/
 │   ├── index.html
@@ -240,7 +151,7 @@ server/templates/<size>/
 └── tests/
 ```
 
-Available template sizes currently found:
+Current sizes:
 
 - `160x600`
 - `300x250`
@@ -248,23 +159,22 @@ Available template sizes currently found:
 - `728x90`
 - `970x250`
 
-## Runtime / Generated Folders
+## Runtime And Generated Folders
 
-- `client/node_modules/` - frontend dependencies installed by npm.
+- `client/node_modules/` - installed frontend dependencies.
 - `client/dist/` - generated frontend production build.
-- `server/node_modules/` - backend dependencies installed by npm.
-- `server/templates/*/dist/` - generated build output for individual banner templates.
+- `server/node_modules/` - installed backend dependencies.
 - `server/templates/*/node_modules/` - template-specific dependencies, present in some template folders.
-- `server/exports/` - generated banner export packages and zip files.
-- `server/uploads/projects/` - uploaded project assets.
+- `server/templates/*/dist/` - generated build output for individual banner templates.
+- `server/uploads/projects/` - uploaded user/project images.
+- `server/exports/` - generated export package folders and zip files.
 
-## High-Level Responsibilities
+## Responsibility Map
 
-- Frontend pages and feature modules live under `client/src/modules/`.
-- Shared frontend UI components live under `client/src/components/`.
-- Frontend API wrappers live under `client/src/services/`.
-- Backend HTTP routing starts in `server/routes/`.
-- Backend request handling lives in `server/controllers/`.
-- Backend business logic lives in `server/services/`.
-- Banner template source and assets live in `server/templates/`.
-- Exported banner packages are written to `server/exports/`.
+- Frontend pages and feature modules live in `client/src/modules/`.
+- Shared frontend components live in `client/src/components/`.
+- Frontend API calls live in `client/src/services/`.
+- Backend route definitions live in `server/routes/`.
+- Backend controllers translate HTTP requests into service calls.
+- Backend services own template lookup, preview generation, project storage, uploads, exports, and zip creation.
+- Template editability is configured in `server/templates/template.json`.

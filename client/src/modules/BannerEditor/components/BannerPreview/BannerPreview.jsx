@@ -37,6 +37,8 @@ function BannerPreview({
   const [previewScale, setPreviewScale] = useState(1);
 
   useLayoutEffect(() => {
+    // Preview size comes from backend template metadata. The visual stage scales
+    // it for the editor while the iframe still renders at the real banner pixels.
     const stageElement = stageRef.current;
 
     if (!stageElement || !size?.width || !size?.height) {
@@ -112,6 +114,8 @@ function BannerPreview({
   }, [isSiloFineAdjustmentMode, normalizedSiloOffset.x, normalizedSiloOffset.y, onSiloOffsetChange]);
 
   useEffect(() => {
+    // Every editor state change is mirrored into the iframe through postMessage.
+    // The iframe runtime then finds matching DOM nodes in the static template.
     const bridge = createBannerBridge(iframeRef.current);
 
     bridge.updateText(textValues);
@@ -134,6 +138,8 @@ function BannerPreview({
   ]);
 
   const handlePreviewLoad = () => {
+    // Re-send the full state after iframe reloads because postMessage state is
+    // not retained by the static banner document.
     const bridge = createBannerBridge(iframeRef.current);
 
     bridge.updateText(textValues);

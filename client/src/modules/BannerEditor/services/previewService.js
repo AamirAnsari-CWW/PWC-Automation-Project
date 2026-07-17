@@ -11,6 +11,8 @@ const MESSAGE_TYPES = Object.freeze({
 const API_ORIGIN = import.meta.env.VITE_API_ORIGIN || "http://localhost:5001";
 
 export const buildBackendUrl = (path) => {
+  // Backend responses usually use public paths like /templates/... or /uploads/...
+  // Convert them to absolute URLs so images and iframes load from the API host.
   if (!path) {
     return "";
   }
@@ -34,6 +36,8 @@ export const createPreviewMessage = (type, payload) => {
 };
 
 export const sendPreviewMessage = (iframeElement, message) => {
+  // React never mutates the banner DOM directly. It sends typed messages to the
+  // runtime injected by server/services/previewRuntimeService.js.
   if (!iframeElement?.contentWindow || !message?.type) {
     return;
   }

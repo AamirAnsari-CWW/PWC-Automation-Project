@@ -13,11 +13,15 @@ const DEFAULT_ADJUSTMENT = { x: 0, y: 0, scale: 1 };
 const DEFAULT_SHAPE_ADJUSTMENT = { x: 0, y: 0, scale: 1, visible: true };
 
 function PropertyPanel({
+  backgroundAdjustmentMode,
   backgroundState,
+  frame1BackgroundState,
   imageAdjustments,
   imageValues,
   isImageAdjustmentMode,
   onBackgroundChange,
+  onFrame1BackgroundAdjustmentModeStart,
+  onFrame1BackgroundChange,
   onImageAdjustmentChange,
   onImageAdjustmentModeStart,
   onImageChange,
@@ -32,6 +36,8 @@ function PropertyPanel({
   const [activeImageName, setActiveImageName] = useState(null);
   const [activeShapeName, setActiveShapeName] = useState(null);
 
+  // The logo is not always listed in template metadata, but keeping it in the
+  // editable set lets future controls reuse the same adjustment modal.
   const editableImageNames = useMemo(() => {
     return Array.from(
       new Set([...(template.editableImages || []), LOGO_IMAGE_NAME]),
@@ -40,7 +46,9 @@ function PropertyPanel({
 
   const activeAdjustment =
     activeImageName === MAIN_BACKGROUND_NAME
-      ? backgroundState
+      ? backgroundAdjustmentMode === "frame1"
+        ? frame1BackgroundState
+        : backgroundState
       : imageAdjustments[activeImageName] || DEFAULT_ADJUSTMENT;
   const shapeDefinitions = template.shapeDefinitions || {};
   const activeShapeAdjustment = activeShapeName
@@ -51,12 +59,19 @@ function PropertyPanel({
     : DEFAULT_SHAPE_ADJUSTMENT;
   const canAdjustImages = (template.editableImages || []).every((imageName) => Boolean(imageValues[imageName]));
 
+  // Background controls can target either the final composition or the first
+  // animation frame; non-background images are routed to image adjustments.
   const handleAdjustmentChange = (nextAdjustment) => {
     if (!activeImageName) {
       return;
     }
 
     if (activeImageName === MAIN_BACKGROUND_NAME) {
+      if (backgroundAdjustmentMode === "frame1") {
+        onFrame1BackgroundChange(nextAdjustment);
+        return;
+      }
+
       onBackgroundChange(nextAdjustment);
       return;
     }
@@ -137,7 +152,16 @@ function PropertyPanel({
               variant="secondary"
             >
               <FaUpload aria-hidden="true" />
-              Adjust in Preview
+              Final Background
+            </Button>
+            <Button
+              disabled={!canAdjustImages || isImageAdjustmentMode}
+              onClick={onFrame1BackgroundAdjustmentModeStart}
+              type="button"
+              variant="secondary"
+            >
+              <FaUpload aria-hidden="true" />
+              Frame 1 Background
             </Button>
             <article className="property-panel__image-control">
               <span>Silo Fine Adjustment</span>
@@ -231,7 +255,9 @@ function PropertyPanel({
           onClose={() => setActiveImageName(null)}
           title={
             activeImageName === MAIN_BACKGROUND_NAME
-              ? "Edit Background"
+              ? backgroundAdjustmentMode === "frame1"
+                ? "Edit Frame 1 Background"
+                : "Edit Final Background"
               : `Edit ${activeImageName}`
           }
           value={activeAdjustment}
